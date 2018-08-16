@@ -1,21 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-primary mb-5">
-  <a class="navbar-brand ml-3" id="logo" href="#">Tenacious Task</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary mb-5 px-5">
+  <a class="navbar-brand " id="logo" href="#">Tenacious Track</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mx-auto">
-      <li class="nav-item dropdown mx-4 span2">
-        <button class="btn btn-sm btn-outline-secondary dropdown-toggle px-4" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown">
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle nav-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Workouts
         </button>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Log workout</a>
         </div>
       </li>
-      <li class="nav-item dropdown px-2 mx-4">
-        <button class="btn btn-sm btn-outline-secondary dropdown-toggle px-4" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="mx-5">&nbsp;</li>
+      <li class="nav-item dropdown">
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle nav-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Clients
         </button>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -23,8 +24,9 @@
           <a class="dropdown-item" href="#">Workout Review</a>
         </div>
       </li>
-      <li class="nav-item dropdown mr-5 mx-4">
-        <button class="btn btn-sm btn-outline-secondary dropdown-toggle px-4" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="mx-5">&nbsp;</li>
+      <li class="nav-item dropdown">
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle nav-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Exercise
         </button>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -33,19 +35,26 @@
         </div>
       </li>
     </ul>
-    <ul class="navbar-nav mr-5 my-2 my-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pic</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Account
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Dashboard</a>
-          <a class="dropdown-item" href="#">All Trainers</a>
-        </div>
-      </li>
+    <div class="spacer">&nbsp;</div>
+    <ul class="navbar-nav last_drop my-2 my-lg-0">
+      <% if logged_in? %>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pic</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Dashboard", current_user, class: "dropdown-item" %>
+            <a class="dropdown-item" href="#">All Trainers</a>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Log out", logout_path, class: "dropdown-item", method: :delete %>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item mx-4"><%= link_to "Log in", login_path, class: "text-secondary" %></li>
+      <% end %>
     </ul>
   </div>
 </nav>
