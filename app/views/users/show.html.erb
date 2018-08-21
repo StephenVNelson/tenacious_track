@@ -1,5 +1,21 @@
 <% provide(:title, @user.name) %>
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
+<div class="container">
+  <div class="row justify-content-md-center mb-5">
+    <div class="col-md-auto">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+      <h6>
+        <%= link_to "Edit Profile", edit_user_path(current_user), class: "badge badge-primary" %>
+      </h6>
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+    <div class="col">
+      <%= render :layout => 'shared/card_container', :locals => {:title => "Today's Clients"} do %>
+      <h4>Clients will be listed here</h4>
+      <% end %>
+    </div>
+  </div>
+</div>

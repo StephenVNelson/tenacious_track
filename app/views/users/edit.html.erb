@@ -1,3 +1,10 @@
 <% provide(:title, 'Edit User') %>
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<% provide(:button_text, 'Save changes') %>
+
+<%= render :layout => 'shared/card_container', :locals => {:title => 'Sign Up'} do %>
+  <%= render 'form' %>
+  <div class="gravatar_edit">
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails" target="_blank">change</a>
+  </div>
+<% end %>
