@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'users#new'
 
   resources :users
+  resources :account_activations, only: [:edit]
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
