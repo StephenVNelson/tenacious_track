@@ -3,6 +3,7 @@ stephen:
   email: stephenvnelson@gmail.com
   password_digest: <%= User.digest('password') %>
   hire_date: <%= Date.today %>
+  admin: true
 
 archer:
   name: Sterling Archer

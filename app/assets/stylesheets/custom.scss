@@ -5,6 +5,8 @@ $success: #95A472;
 $card-cap-bg: #95A472;
 $navbar-light-hover-color: #ffffff;
 $card-border-width: 3px;
+$table-dark-bg: #95A472;
+$table-dark-border-color: #95A472;
 @import "pagination.css";
 @import "pagination.sass";
 @import "bootstrap";
@@ -47,7 +49,10 @@ input {
   margin-left: 0;
 }
 
-
+// General
+h1 {
+  color: #636D73;
+}
 
 // Header
 #logo {

@@ -1,10 +1,17 @@
 <% provide(:title, 'All users') %>
-<h1>All trainers</h1>
+<h1>Trainers</h1>
 
 <%= will_paginate @user,:class => 'digg_pagination my-4' %>
 
-<ul class="users">
-  <%= render @users %>
-</ul>
+<table class="table">
+  <thead class="thead-dark">
+    <th scope="col"></th>
+    <th scope="col">Name</th>
+    <th scope="col"></th>
+  </thead>
+  <tbody>
+    <%= render @users %>
+  </tbody>
+</table>
 
 <%= will_paginate @user,:class => 'digg_pagination my-4' %>
