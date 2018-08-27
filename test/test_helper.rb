@@ -16,6 +16,12 @@ class ActiveSupport::TestCase
   def log_in_as(user)
     session[:user_id] = user.id
   end
+
+  def random_date(years_ago)
+    today = Date.today.to_time.to_f
+    min_date = (Date.today - (years_ago*365)).to_time.to_f
+    date = Time.at(rand(min_date..today)).to_date
+  end
 end
 
 class ActionDispatch::IntegrationTest

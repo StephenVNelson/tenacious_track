@@ -5,7 +5,10 @@ $success: #95A472;
 $card-cap-bg: #95A472;
 $navbar-light-hover-color: #ffffff;
 $card-border-width: 3px;
+@import "pagination.css";
+@import "pagination.sass";
 @import "bootstrap";
+
 
 // Mixins, variables, etc.
 
