@@ -1,5 +1,6 @@
 class ElementsController < ApplicationController
   before_action :logged_in_user, only: [:index, :import, :new, :edit]
+  before_action :admin_user,     only: [:create, :edit, :update, :new, :destroy]
 
   def index
     @series = params[:series] || ""

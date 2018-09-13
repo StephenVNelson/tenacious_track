@@ -1,6 +1,7 @@
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require "minitest/reporters"
+require 'pry'
 Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
@@ -15,6 +16,10 @@ class ActiveSupport::TestCase
   # Log in as a particular user.
   def log_in_as(user)
     session[:user_id] = user.id
+  end
+
+  def current_user?(user)
+    session[:user_id] == user.id
   end
 
   def random_date(years_ago)

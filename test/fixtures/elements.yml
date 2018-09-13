@@ -1,5 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+
 one:
   series_name: Body Position
   name: Prone
@@ -7,3 +8,9 @@ one:
 two:
   series_name: Angle
   name: Incline
+
+<% 30.times do |n|%>
+element_<%= n %>:
+  series_name: <%= ["Body Position", "Angle", "Distraction", "Support Tool", "Resistance Type", "Accessory Movement Description", "Mode of Movement", "Test"].sample %>
+  name: <%= "name_#{n}" %>
+<% end %>

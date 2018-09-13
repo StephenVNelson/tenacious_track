@@ -1,3 +1,5 @@
+require 'sessions_helper.rb'
+
 module ApplicationHelper
   def full_title(page_title)
     subtitle = "Tenacious Track"
@@ -11,4 +13,6 @@ module ApplicationHelper
   def user_or_login
     current_user ? user_path(current_user) : login_path
   end
+
+
 end

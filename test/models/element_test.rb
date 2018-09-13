@@ -1,9 +1,10 @@
 require 'test_helper'
+require 'pry'
 
 class ElementTest < ActiveSupport::TestCase
 
   def setup
-    @element = Element.new(series_name: "Body Position", name: "Not Prone")
+    @element = Element.create(series_name: "Body Position", name: "Not Prone")
   end
 
   test "should be valid" do
@@ -30,6 +31,9 @@ class ElementTest < ActiveSupport::TestCase
     assert_not @element.valid?
   end
 
-
+  test "element name should be unique" do
+    element2 = Element.new(@element.attributes)
+    assert_not element2.valid?
+  end
 
 end
