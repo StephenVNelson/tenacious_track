@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  root 'users#new'
+  root 'sessions#new'
 
   resources :users
   resources :account_activations, only: [:edit]

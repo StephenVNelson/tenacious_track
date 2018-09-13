@@ -7,4 +7,8 @@ module ApplicationHelper
       "#{page_title} | #{subtitle}"
     end
   end
+
+  def user_or_login
+    current_user ? user_path(current_user) : login_path
+  end
 end
