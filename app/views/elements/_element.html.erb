@@ -1,0 +1,8 @@
+<tr>
+  <td><%= element.series_name %></th>
+  <td><%= element.name %></th>
+  <% if current_user.admin?%>
+    <td><%= link_to "edit", edit_element_path(element), class: 'edit-link' %></td>
+    <td><%= link_to "delete", element_path(element.id, series: @series), method: :delete, data: { confirm: "You sure?", }  %></td>
+  <% end %>
+</tr>

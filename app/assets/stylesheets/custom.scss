@@ -44,6 +44,14 @@ input {
   }
 }
 
+.btn-success {
+  color: white;
+}
+
+.fun-thing {
+  background-color: red;
+}
+
 #session_remember_me {
   width: auto;
   margin-left: 0;
@@ -53,6 +61,7 @@ input {
 h1 {
   color: #636D73;
 }
+
 
 // Header
 #logo {
@@ -78,7 +87,11 @@ h1 {
   width: 100px;
 }
 
+//Links
 
+.edit-link {
+  color: #009AFF;
+}
 
 //Miscelaneous
 .debug_dump {

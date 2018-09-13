@@ -1,0 +1,13 @@
+<% provide(:title, 'New element') %>
+<%= flash[:notice] %>
+
+<div class="container">
+  <h1>Add Exercise Element</h1>
+  <%= render 'form' %>
+
+  <div class="row">
+    <div class="col-2 mt-4">
+      <%= button_to :Back, elements_path, method: :get, class: "btn btn-small btn-outline-primary" %>
+    </div>
+  </div>
+</div>
