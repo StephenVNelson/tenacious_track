@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180906172144) do
+ActiveRecord::Schema.define(version: 20180917215513) do
 
   create_table "elements", force: :cascade do |t|
     t.string "series_name"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_elements_on_name", unique: true
+    t.index ["series_name", "name"], name: "index_elements_on_series_name_and_name", unique: true
+    t.index ["series_name"], name: "index_elements_on_series_name"
   end
 
   create_table "users", force: :cascade do |t|
