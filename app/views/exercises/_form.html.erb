@@ -1,0 +1,62 @@
+<%= form_with(model: exercise, local: true) do |form| %>
+  <% if exercise.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+
+      <ul>
+      <% exercise.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Elements -->
+  <div class="my-5">
+    <div class="row">
+      <div class="col">
+        <%= form.select(:series_name, Element.select(:series_name).distinct.map(&:series_name), {prompt: "Select Series"}, id: :exercise_element_series,class: "form-control") %>
+      </div>
+      <div class="col">
+        <%# form.select(:name, Element.where(series_name: 'Angle').map(&:name), {prompt: "Select Element"}, class: "form-control") %>
+        <%= form.select :element_name,
+        grouped_options_for_select( @names_grouped_by_series, selected_key = nil, prompt: "Select Element"),{}, id: :exercise_element_name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+
+
+  <table class="table" id="card">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Reps</th>
+        <th scope="col">(R+L)</th>
+        <th scope="col">Resistance</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Work/Rest</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-light">
+        <td>
+          <%= check_box_tag("exercise[reps_bool]", value = "true", checked = false) %>
+        </td>
+        <td>
+          <%= check_box_tag("exercise[right_left_bool]", value = "true", checked = false) %>
+        </td>
+        <td>
+          <%= check_box_tag("exercise[resistance_bool]", value = "true", checked = false) %>
+        </td>
+        <td>
+          <%= check_box_tag("exercise[duration_bool]", value = "true", checked = false) %>
+        </td>
+        <td>
+          <%= check_box_tag("exercise[work_rest_bool]", value = "true", checked = false) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <%= form.submit :Submit, class: "btn btn-primary" %>
+
+<% end %>

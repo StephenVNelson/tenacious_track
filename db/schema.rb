@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180917215513) do
+ActiveRecord::Schema.define(version: 20180922162538) do
 
   create_table "elements", force: :cascade do |t|
     t.string "series_name"
@@ -20,6 +20,27 @@ ActiveRecord::Schema.define(version: 20180917215513) do
     t.index ["name"], name: "index_elements_on_name", unique: true
     t.index ["series_name", "name"], name: "index_elements_on_series_name_and_name", unique: true
     t.index ["series_name"], name: "index_elements_on_series_name"
+  end
+
+  create_table "exercise_elements", force: :cascade do |t|
+    t.integer "exercise_id"
+    t.integer "element_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["element_id"], name: "index_exercise_elements_on_element_id"
+    t.index ["exercise_id", "element_id"], name: "index_exercise_elements_on_exercise_id_and_element_id", unique: true
+    t.index ["exercise_id"], name: "index_exercise_elements_on_exercise_id"
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.boolean "right_left_bool"
+    t.boolean "reps_bool"
+    t.boolean "resistance_bool"
+    t.boolean "duration_bool"
+    t.string "gif_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "work_rest_bool"
   end
 
   create_table "users", force: :cascade do |t|

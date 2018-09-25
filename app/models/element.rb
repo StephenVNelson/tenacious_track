@@ -1,6 +1,9 @@
 class Element < ApplicationRecord
   require 'csv'
 
+  has_many :exercise_elements
+  has_many :exercises, through: :exercise_elements
+
   validates :series_name, presence: true, length: {maximum: 50}
   validates :name, presence: true, length: {maximum: 50}, uniqueness: { case_sensitive: false }
 

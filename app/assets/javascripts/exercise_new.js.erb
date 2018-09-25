@@ -1,0 +1,39 @@
+document.addEventListener("turbolinks:load", function() {
+  $(function(){
+    // changing check boxes
+    var checkboxs = $('input[type=checkbox]');
+    var work_rest = $('input[type=checkbox]#exercise_work_rest');
+    var work = $('input[type=checkbox]#exercise_work');
+    var rest = $('input[type=checkbox]#exercise_rest');
+
+    checkboxs.each(function(){
+      $(this).wrap('<div class="customCheckbox"></div>');
+      $(this).before('<span>&#10004;</span>');
+    });
+
+    checkboxs.change(function(){
+      if($(this).is(':checked')){
+        $(this).parent().addClass('customCheckboxChecked');
+      } else {
+        $(this).parent().removeClass('customCheckboxChecked');
+      }
+    });
+    // Auto update
+    var element_name;
+    element_name = $('#exercise_element_name').html();
+    console.log(element_name);
+    return $('#exercise_element_series').change(function() {
+      var element_series_name, options;
+      element_series_name = $('#exercise_element_series :selected').text();
+      options = $(element_name).filter("optgroup[label=\"" + element_series_name + "\"]").html();
+      console.log(options);
+      if (options) {
+        return $('#exercise_element_name').html(options);
+      } else {
+        return $('#exercise_element_name').empty();
+      }
+    });
+
+
+  })
+});
