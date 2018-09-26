@@ -12,15 +12,18 @@
   <% end %>
 
   <!-- Elements -->
-  <div class="my-5">
-    <div class="row">
+  <div id="dropdowns" class="my-5">
+    <div id="row-1" class="row">
       <div class="col">
-        <%= form.select(:series_name, Element.select(:series_name).distinct.map(&:series_name), {prompt: "Select Series"}, id: :exercise_element_series,class: "form-control") %>
+        <%= form.select(:series_name, Element.select(:series_name).distinct.map(&:series_name), {prompt: "Select Series"}, id: :exercise_element_series_1,class: "form-control series-filter") %>
       </div>
       <div class="col">
         <%# form.select(:name, Element.where(series_name: 'Angle').map(&:name), {prompt: "Select Element"}, class: "form-control") %>
         <%= form.select :element_name,
-        grouped_options_for_select( @names_grouped_by_series, selected_key = nil, prompt: "Select Element"),{}, id: :exercise_element_name, class: 'form-control' %>
+        grouped_options_for_select( @names_grouped_by_series, selected_key = nil, prompt: "Select Element"),{}, id: :exercise_element_name_1, class: 'form-control name-filtered' %>
+      </div>
+      <div class="col">
+        <span class="jquery-add">+</span>
       </div>
     </div>
   </div>
