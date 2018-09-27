@@ -43,7 +43,7 @@ document.addEventListener("turbolinks:load", function() {
     $('.name-filtered option:selected').each(function(){
       new_h1 += " " + $(this).text();
     })
-    $('h1').text(new_h1)
+    $('h1#updated_title').text(new_h1)
   });
 
 

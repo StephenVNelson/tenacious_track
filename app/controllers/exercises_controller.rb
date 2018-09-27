@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
   # GET /exercises
   # GET /exercises.json
   def index
-    @exercises = Exercise.all
+    elements_filtered
   end
 
   # GET /exercises/1
@@ -15,7 +15,8 @@ class ExercisesController < ApplicationController
   # GET /exercises/new
   def new
     @exercise = Exercise.new
-    @names_grouped_by_series = Element.group(:series_name).map{|p| [p.series_name.prepend(""), Element.where(series_name: p.series_name).map{|thing| [thing.name, thing.id]}.prepend("Select Element")] }
+    names_grouped_by_series
+
   end
 
   # GET /exercises/1/edit
@@ -32,7 +33,8 @@ class ExercisesController < ApplicationController
 
     respond_to do |format|
       if @exercise.save
-        format.html { redirect_to exercises_path, notice: 'Exercise was successfully created.' }
+        flash[:info] = 'Exercise was successfully created.'
+        format.html { redirect_to exercises_path }
         format.json { render :show, status: :created, location: @exercise }
       else
         format.html { render :new }
@@ -46,7 +48,8 @@ class ExercisesController < ApplicationController
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
-        format.html { redirect_to @exercise, notice: 'Exercise was successfully updated.' }
+        flash[:info] = 'Exercise was successfully updated.'
+        format.html { redirect_to @exercise}
         format.json { render :show, status: :ok, location: @exercise }
       else
         format.html { render :edit }
@@ -60,12 +63,35 @@ class ExercisesController < ApplicationController
   def destroy
     @exercise.destroy
     respond_to do |format|
-      format.html { redirect_to exercises_url, notice: 'Exercise was successfully destroyed.' }
+      flash[:success] = 'Exercise was successfully destroyed.'
+      format.html { redirect_to exercises_url}
       format.json { head :no_content }
     end
   end
 
   private
+
+    def elements_filtered
+      names_grouped_by_series
+      if params[:element_n] && params[:element_n][:name].length > 0
+        query_by_elements
+      else
+        @exercises = Exercise.all.paginate(page: params[:page], :per_page => 30)
+      end
+    end
+
+    def query_by_elements(element_ids = params[:element_n])
+      id_hash = {}
+      element_ids.each do |name, id|
+        id_hash[:id] = id
+      end
+      @exercises = Exercise.joins(:elements).where(:elements => id_hash).paginate(page: params[:page], :per_page => 30)
+    end
+
+    def names_grouped_by_series
+      @names_grouped_by_series = Element.group(:series_name).map{|p| [p.series_name.prepend(""), Element.where(series_name: p.series_name).map{|thing| [thing.name, thing.id]}.prepend("Select Element")] }
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_exercise
       @exercise = Exercise.find(params[:id])

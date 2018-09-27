@@ -11,23 +11,9 @@
     </div>
   <% end %>
 
-  <!-- Elements -->
-  <div id="dropdowns" class="my-5">
-    <div id="row-1" class="row">
-      <div class="col">
-        <%= form.select("element_s[series_name]", Element.select(:series_name).distinct.map(&:series_name), {prompt: "Select Series"}, id: :exercise_element_series_1,class: "form-control series-filter") %>
-      </div>
-      <div class="col">
-        <%= form.select "element_n[name]",
-        grouped_options_for_select( @names_grouped_by_series, selected_key = nil, prompt: "Select Element"),{}, id: :exercise_element_name_1, class: 'form-control name-filtered' %>
-      </div>
-      <div class="col">
-        <span class="jquery-add">+</span>
-      </div>
-    </div>
+  <div class="my-5">    
+    <%= render 'element_filter', form: form %>
   </div>
-
-
 
   <table class="table" id="card">
     <thead class="thead-dark">
