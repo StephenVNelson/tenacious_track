@@ -41,6 +41,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '~> 1.1', '>= 1.1.3'
+  gem 'rails_12factor'
+  gem 'pg'
   gem 'fog', '1.42'
 end
