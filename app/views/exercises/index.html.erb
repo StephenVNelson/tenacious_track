@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Exercises</h1>
 
@@ -15,7 +14,7 @@
   <tbody>
     <% @exercises.each do |exercise| %>
       <tr>
-        <th scope="row"><%= exercise.name %></td>
+        <th scope="row"><%= exercise.full_name %></td>
         <td><%= link_to 'Show', exercise %></td>
         <td><%= link_to 'Edit', edit_exercise_path(exercise) %></td>
         <td><%= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %></td>

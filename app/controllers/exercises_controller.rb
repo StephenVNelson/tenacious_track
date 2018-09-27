@@ -15,7 +15,7 @@ class ExercisesController < ApplicationController
   # GET /exercises/new
   def new
     @exercise = Exercise.new
-    @names_grouped_by_series = Element.group(:series_name).map{|p| [p.series_name, Element.where(series_name: p.series_name).map(&:name)] }
+    @names_grouped_by_series = Element.group(:series_name).map{|p| [p.series_name.prepend(""), Element.where(series_name: p.series_name).map{|thing| [thing.name, thing.id]}.prepend("Select Element")] }
   end
 
   # GET /exercises/1/edit
@@ -26,10 +26,13 @@ class ExercisesController < ApplicationController
   # POST /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
+    params[:exercise][:element_n].each do |key, val|
+      @exercise.elements<<Element.find(val)
+    end
 
     respond_to do |format|
       if @exercise.save
-        format.html { redirect_to @exercise, notice: 'Exercise was successfully created.' }
+        format.html { redirect_to exercises_path, notice: 'Exercise was successfully created.' }
         format.json { render :show, status: :created, location: @exercise }
       else
         format.html { render :new }

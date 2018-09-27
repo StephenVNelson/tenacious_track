@@ -24,7 +24,7 @@ document.addEventListener("turbolinks:load", function() {
     element_name = $('#exercise_element_name_1').html();
     return $('#dropdowns').on('change','.series-filter',function() {
       var element_series_name, options, target_id, exercise_element_name;
-      target_id = (event.target.id)
+      target_id = (event.target.id);
       exercise_element_name = $('#'+target_id).parent().parent().find(".name-filtered");
       element_series_name = $('#' + target_id + ' :selected').text();
       options = $(element_name).filter("optgroup[label=\"" + element_series_name + "\"]").html();
@@ -35,6 +35,15 @@ document.addEventListener("turbolinks:load", function() {
       }
     });
 
+
+  });
+
+  $('#dropdowns').on('change','.name-filtered',function() {
+    var new_h1 = "New Exercise:"
+    $('.name-filtered option:selected').each(function(){
+      new_h1 += " " + $(this).text();
+    })
+    $('h1').text(new_h1)
   });
 
 
@@ -49,10 +58,23 @@ document.addEventListener("turbolinks:load", function() {
         $(this).attr('id', 'row-'+increment);
         $(this).find('.series-filter').attr('id', 'exercise_element_series_'+increment)
         $(this).find('.name-filtered').attr('id', 'exercise_element_name_'+increment)
+        var old_series_name = $(this).find('.series-filter').attr('name')
+        var old_name = $(this).find('.name-filtered').attr('name')
+        $(this).find('.series-filter').attr('name',iterate_name(old_series_name,index))
+        $(this).find('.name-filtered').attr('name',iterate_name(old_name,index))
 
       })
-
     });
+    function iterate_name(string,index){
+      var index_string = index.toString()
+      if (string.includes('element_s')){
+        return string.replace(/\[series_name.*\]/,'[series_name_' + index_string + ']' )
+      } else if (string.includes('element_n')) {
+        return string.replace(/\[name.*\]/,'[name_' + index_string + ']')
+      } else {
+        return string + index_string
+      }
+    }
   });
 
 
