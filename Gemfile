@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails',                   '5.1.4'
+# Use postgresql as the database for Active Record
+gem 'pg',                      '0.18'
 gem 'bcrypt',                  '3.1.12'
 gem 'faker',                   '1.7.3'
 gem 'carrierwave',             '1.2.2'
@@ -19,7 +21,6 @@ gem 'jbuilder',                '2.7.0'
 gem 'bootstrap', '~> 4.1.3'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri
 end
 
@@ -41,7 +42,5 @@ group :test do
 end
 
 group :production do
-  gem 'rails_12factor'
-  gem 'pg'
   gem 'fog', '1.42'
 end

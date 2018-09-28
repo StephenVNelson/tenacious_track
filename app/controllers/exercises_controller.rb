@@ -89,6 +89,7 @@ class ExercisesController < ApplicationController
     end
 
     def names_grouped_by_series
+      
       @names_grouped_by_series = Element.group(:series_name).map{|p| [p.series_name.prepend(""), Element.where(series_name: p.series_name).map{|thing| [thing.name, thing.id]}.prepend("Select Element")] }
     end
 
