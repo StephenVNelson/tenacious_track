@@ -1,0 +1,14 @@
+<%= simple_form_for(@notice) do |form| %>
+  <%= form.input :title %>
+
+  <%= form.simple_fields_for(:entity_roles) do |roles_form| %>
+    <% role = roles_form.object.name.titleize %>
+    <%= roles_form.input :name, as: :hidden %>
+    <%= roles_form.simple_fields_for(:entity) do |entity_form| %>
+      <%= entity_form.input :name, label: "#{role} Name" %>
+      <%= entity_form.input :address, label: "#{role} Address" %>
+    <% end %>
+  <% end %>
+
+  <%= form.submit "Submit" %>
+<% end %>

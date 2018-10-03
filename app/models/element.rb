@@ -7,6 +7,10 @@ class Element < ApplicationRecord
   validates :series_name, presence: true, length: {maximum: 50}
   validates :name, presence: true, length: {maximum: 50}, uniqueness: { case_sensitive: false }
 
+  def self.by_name(element_name)
+    Element.find_by(name: element_name)
+  end
+
   #a class method import, with file passed through as an argument
   def self.import(file)
     # a block that runs through a loop in our CSV data

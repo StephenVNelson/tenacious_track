@@ -25,13 +25,13 @@
 
   <tbody>
     <tr>
-      <td><%= link_to 'Add new exercise', new_exercise_path %></td>
+      <td><%= link_to 'Add new exercise', new_exercise_path, class: "edit-link" %></td>
     </tr>
     <% @exercises.each do |exercise| %>
       <tr>
         <th scope="row"><%= exercise.full_name %></td>
-        <td><%= link_to 'Edit', edit_exercise_path(exercise) %></td>
-        <td><%= link_to 'Delete', exercise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_exercise_path(exercise), class: "edit-link" %></td>
+        <td><%= link_to '–', exercise, method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-link" %></td>
       </tr>
     <% end %>
   </tbody>

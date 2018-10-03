@@ -1,17 +1,8 @@
 <%= form_with(model: exercise, local: true) do |form| %>
-  <% if exercise.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+  <%= render 'shared/error_messages', object: @exercise %>
 
-      <ul>
-      <% exercise.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="my-5">    
+  <div class="my-5">
     <%= render 'element_filter', form: form %>
   </div>
 
