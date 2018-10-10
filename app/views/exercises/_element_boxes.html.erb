@@ -1,0 +1,19 @@
+<div id="<%= series_name %> Card" class="card border-primary all-edges-rounded my-3" style="flex: 1 1 auto; max-width: <%= card_width %>;">
+  <div class="card-header bg-primary text-white text-center p-0 top-edges-rounded">
+    <h5 class="my-2">
+      <%= series_name %>
+    </h5>
+  </div>
+  <div class="card-body py-1">
+    <% Element.where(series_name: series_name).each do |element_name| %>
+      <%= form.fields_for :exercise_elements do |element| %>
+        <div class="btn-group-toggle d-inline" data-toggle="buttons">
+          <label class="btn btn-outline-primary m-2 element-checkboxes">
+            <%= element.check_box :element_id, {}, checked_value = element_name.id, unchecked_value = nil  %>
+            <%= element_name.name %>
+          </label>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

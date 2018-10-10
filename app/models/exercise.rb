@@ -3,8 +3,6 @@ class Exercise < ApplicationRecord
   has_many :elements, through: :exercise_elements
   accepts_nested_attributes_for :exercise_elements
 
-  validates :elements, :length => { :minimum => 1 , :message => "must be added to create exercise" }
-
   validate :measurement_presence
 
   def measurement_presence

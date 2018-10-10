@@ -1,10 +1,7 @@
 document.addEventListener("turbolinks:load", function() {
   $(function(){
     // changing check boxes
-    var checkboxs = $('input[type=checkbox]');
-    var work_rest = $('input[type=checkbox]#exercise_work_rest');
-    var work = $('input[type=checkbox]#exercise_work');
-    var rest = $('input[type=checkbox]#exercise_rest');
+    var checkboxs = $('input[type=checkbox].check-change');
 
     checkboxs.each(function(){
       $(this).wrap('<div class="customCheckbox"></div>');
@@ -19,67 +16,33 @@ document.addEventListener("turbolinks:load", function() {
       }
     });
 
-    // Auto update
-    var element_name;
-    element_name = $('#exercise_element_name_1').html();
-    return $('#dropdowns').on('change','.series-filter',function() {
-      var element_series_name, options, target_id, exercise_element_name;
-      target_id = (event.target.id);
-      exercise_element_name = $('#'+target_id).parent().parent().find(".name-filtered");
-      element_series_name = $('#' + target_id + ' :selected').text();
-      options = $(element_name).filter("optgroup[label=\"" + element_series_name + "\"]").html();
-      if (options) {
-        return $(exercise_element_name).html(options);
-      } else {
-        return $(exercise_element_name).empty();
-      }
+
+  });
+
+
+  // Change font size for series elements
+  $(function(){
+    $('.resizer').textfill({
+      maxFontPixels: 17
     });
-
-
   });
 
-  $('#dropdowns').on('change','.name-filtered',function() {
-    var new_h1 = "New Exercise:"
-    $('.name-filtered option:selected').each(function(){
-      new_h1 += " " + $(this).text();
-    })
-    $('h1#updated_title').text(new_h1)
-  });
-
-
-  // adding another set of dropdowns
-  $(document).ready(function(){
-    original_row = $("#dropdowns").html();
-    $("#dropdowns").on('click', '.jquery-add', function(){
-      // alert("The paragraph was clicked.");
-      $(this).parents(".row").after(original_row);
-      $("div.row").each(function(index){
-        increment = (index + 1).toString();
-        $(this).attr('id', 'row-'+increment);
-        $(this).find('.series-filter').attr('id', 'exercise_element_series_'+increment)
-        $(this).find('.name-filtered').attr('id', 'exercise_element_name_'+increment)
-        var old_series_name = $(this).find('.series-filter').attr('name')
-        var old_name = $(this).find('.name-filtered').attr('name')
-        $(this).find('.series-filter').attr('name',iterate_name(old_series_name,index))
-        $(this).find('.name-filtered').attr('name',iterate_name(old_name,index))
-
-      })
-    });
-    function iterate_name(string,index){
-      var index_string = index.toString()
-      if (string.includes('element_s')){
-        return string.replace(/\[series_name.*\]/,'[series_name_' + index_string + ']' )
-      } else if (string.includes('element_n')) {
-        return string.replace(/\[name.*\]/,'[name_' + index_string + ']')
-      } else {
-        return string + index_string
-      }
-    }
-  });
-
-
-
-  // console.log(create_and_change_dropdowns())
+  // $(function(){
+  //   $('div#element-choices').click(function(){
+  //     var element_choices, serie
+  //     , series, series_card
+  //     element_choices = $('div#element-choices');
+  //     series_active = element_choices.children('label').hasClass('active');
+  //     series = element_choices.children('label').attr('id');
+  //     series_card = $("div[id='"+series+" Card']");
+  //     if (series_active != true) {
+  //       series_card.hide()
+  //     }else{
+  //       series_card.show()
+  //     };
+  //
+  //   });
+  // });
 
 
 });

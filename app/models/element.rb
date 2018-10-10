@@ -11,6 +11,14 @@ class Element < ApplicationRecord
     Element.find_by(name: element_name)
   end
 
+  def self.series_list
+    Element.distinct.pluck(:series_name)
+  end
+
+  def self.series_list_items(series_name)
+    Element.where(series_name: series_name)
+  end
+
   #a class method import, with file passed through as an argument
   def self.import(file)
     # a block that runs through a loop in our CSV data

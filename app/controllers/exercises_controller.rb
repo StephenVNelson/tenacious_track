@@ -16,6 +16,7 @@ class ExercisesController < ApplicationController
   # GET /exercises/new
   def new
     @exercise = Exercise.new
+    @exercise.exercise_elements.build
     names_grouped_by_series
   end
 
@@ -108,7 +109,7 @@ class ExercisesController < ApplicationController
 
     def names_grouped_by_series
       group_series_element = Element.group('elements.id').group('elements.series_name')
-      
+
       @names_grouped_by_series = group_series_element.map{|p| [p.series_name.prepend(""), Element.where(series_name: p.series_name).map{|element| [element.name, element.id]}.prepend("Select Element")] }
     end
 
@@ -119,6 +120,11 @@ class ExercisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exercise_params
-      params.require(:exercise).permit(:reps_bool,:right_left_bool, :resistance_bool, :duration_bool, :work_rest_bool)
+      params.require(:exercise).permit(:reps_bool,
+                                      :right_left_bool,
+                                      :resistance_bool,
+                                      :duration_bool,
+                                      :work_rest_bool,
+                                      exercise_elements_attributes: [:element_id])
     end
 end

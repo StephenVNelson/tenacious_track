@@ -23,7 +23,9 @@ $gray-medium-light: #eaeaea;
 }
 
 //CHECKBOXES
-input[type=checkbox]
+
+// Check change
+input[type=checkbox].check-change
 {
   /* Double-sized Checkboxes */
   -ms-transform: scale(4); /* IE */
@@ -83,9 +85,24 @@ input[type=checkbox]
   background: #9AABB1;
 }
 
-table#card {
-  text-align: center;
-  border: 2px solid #95A472;
+.element-checkboxes{
+  border: 2.5px solid;
+  // white-space:normal !important;
+  //   width: 160px;
+    // max-height: 50px;
+}
+
+.series-checkboxes {
+  border: 4px solid;
+  // display: flex;
+  // align-items: center;
+  white-space:normal !important;
+    width: 160px;
+    height: 50px;
+
+    line-height: 110%;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 
@@ -177,6 +194,54 @@ h1 {
   width: 100%;
   margin-top: 45px;
   @include box-sizing;
+}
+
+// TABLES
+
+.table .thead-dark.primary-color th {
+  background-color: #636D73;
+  border: solid 2px;
+  border-color: white;
+  // border-collapse:separate;
+  // border-top-left-radius:30px;
+  // border-top-right-radius: 30px;
+}
+
+.all-edges-rounded {
+  border-radius: 30px;
+}
+
+table.all-edges-rounded {
+    border-collapse:separate;
+    border-top-left-radius:30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius:0px;
+    border-bottom-right-radius: 0px;
+}
+
+.card-header.top-edges-rounded {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.top-edges-rounded {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.table.top-edges-rounded {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+table.table-card-style-green {
+  text-align: center;
+  border: 2px solid #95A472;
+}
+
+table.table-card-style-primary {
+  text-align: center;
+  border: 5px solid #636D73;
 }
 
 //TEXT CHECKBOX

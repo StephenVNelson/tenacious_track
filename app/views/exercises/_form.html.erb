@@ -1,41 +1,79 @@
-<%= form_with(model: exercise, local: true) do |form| %>
-  <%= render 'shared/error_messages', object: @exercise %>
 
 
-  <div class="my-5">
-    <%= render 'element_filter', form: form %>
-  </div>
+<div class="container my-5">
+  <%= form_with(model: exercise, local: true) do |form| %>
+    <%= render 'shared/error_messages', object: @exercise %>
 
-  <table class="table" id="card">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Reps</th>
-        <th scope="col">(R+L)</th>
-        <th scope="col">Resistance</th>
-        <th scope="col">Duration</th>
-        <th scope="col">Work/Rest</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="table-light">
-        <td>
-          <%= check_box_tag("exercise[reps_bool]", value = "true", checked = false) %>
-        </td>
-        <td>
-          <%= check_box_tag("exercise[right_left_bool]", value = "true", checked = false) %>
-        </td>
-        <td>
-          <%= check_box_tag("exercise[resistance_bool]", value = "true", checked = false) %>
-        </td>
-        <td>
-          <%= check_box_tag("exercise[duration_bool]", value = "true", checked = false) %>
-        </td>
-        <td>
-          <%= check_box_tag("exercise[work_rest_bool]", value = "true", checked = false) %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <%= form.submit :Submit, class: "btn btn-primary" %>
+      <!-- Series selectors -->
+      <table class="table table-card-style-primary all-edges-rounded">
+        <thead class="thead-dark primary-color" >
+          <tr>
+            <th class="pl-5 top-edges-rounded"colspan="4">
+              <h3>Select all applicable element themes</h3>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Element.series_list.each_slice(4) do |slice| %>
+            <tr>
+              <% slice.each do |series| %>
+                <td style="text-align: center;">
+                  <div id="element-choices" class="btn-group-toggle d-inline" data-toggle="buttons">
+                    <label id="<%= series %>" class="btn btn-outline-primary series-checkboxes resizer p-1">
+                      <%= check_box_tag :series_name, {class: ""} %>
+                      <span>
+                        <%= series %>
+                      </span>
+                    </label>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<% end %>
+
+    <!-- Element Selectors -->
+    <% Element.series_list.each_slice(2) do |slice| %>
+      <div class="card-deck">
+        <% slice.each do |series| %>
+              <%= render 'element_boxes', form: form, series_name: series, card_width: set_element_card_display_width(slice) %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <table class="table table-card-style-green">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Reps</th>
+          <th scope="col">(R+L)</th>
+          <th scope="col">Resistance</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Work/Rest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-light">
+          <td>
+            <%= check_box_tag("exercise[reps_bool]", value = "true", checked = false, class: "check-change") %>
+          </td>
+          <td>
+            <%= check_box_tag("exercise[right_left_bool]", value = "true", checked = false, class: "check-change") %>
+          </td>
+          <td>
+            <%= check_box_tag("exercise[resistance_bool]", value = "true", checked = false, class: "check-change") %>
+          </td>
+          <td>
+            <%= check_box_tag("exercise[duration_bool]", value = "true", checked = false, class: "check-change") %>
+          </td>
+          <td>
+            <%= check_box_tag("exercise[work_rest_bool]", value = "true", checked = false, class: "check-change") %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <%= form.submit :Submit, class: "btn btn-primary" %>
+
+  <% end %>
+</div>

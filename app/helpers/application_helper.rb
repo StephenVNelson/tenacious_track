@@ -1,4 +1,5 @@
 require 'sessions_helper.rb'
+require 'exercises_helper.rb'
 
 module ApplicationHelper
   def full_title(page_title)
