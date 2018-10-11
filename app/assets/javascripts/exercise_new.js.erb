@@ -27,22 +27,23 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 
-  // $(function(){
-  //   $('div#element-choices').click(function(){
-  //     var element_choices, serie
-  //     , series, series_card
-  //     element_choices = $('div#element-choices');
-  //     series_active = element_choices.children('label').hasClass('active');
-  //     series = element_choices.children('label').attr('id');
-  //     series_card = $("div[id='"+series+" Card']");
-  //     if (series_active != true) {
-  //       series_card.hide()
-  //     }else{
-  //       series_card.show()
-  //     };
-  //
-  //   });
-  // });
+  $(function(){
+    $('div.element-picker').click(function(){
+      var element_picker, series_active
+      , series, series_card
+      element_picker = $(this);
+      series = element_picker.children('label').attr('id');
+      series_active = element_picker.children('label').hasClass('active');
+      series_card = $("div[id='"+series+" Card']");
+      // debugger
+      if (series_active != true) {
+        series_card.show()
+      }else{
+        series_card.hide()
+      };
+
+    });
+  });
 
 
 });

@@ -18,7 +18,7 @@
             <tr>
               <% slice.each do |series| %>
                 <td style="text-align: center;">
-                  <div id="element-choices" class="btn-group-toggle d-inline" data-toggle="buttons">
+                  <div class="btn-group-toggle d-inline element-picker" data-toggle="buttons">
                     <label id="<%= series %>" class="btn btn-outline-primary series-checkboxes resizer p-1">
                       <%= check_box_tag :series_name, {class: ""} %>
                       <span>
