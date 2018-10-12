@@ -30,11 +30,7 @@ class ExercisesController < ApplicationController
   # POST /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
-    if elements_present?
-      params[:exercise][:element_n].each do |key, val|
-        @exercise.elements<<Element.find(val)
-      end
-    end
+
 
     respond_to do |format|
       if @exercise.save
@@ -77,24 +73,10 @@ class ExercisesController < ApplicationController
 
   private
 
-    def elements_present?
-      element_n = params.dig(:element_n)
-      element_name_length = element_n.to_unsafe_h.all?{ |k,v| v.to_i > 0} if element_n
-      exercise_element_n = params.dig(:exercise, :element_n)
-      exercise_element_name_length = exercise_element_n.to_unsafe_h.all?{ |k,v| v.to_i > 0} if exercise_element_n
-      element_and_length_test = element_n && element_name_length
-      exercise_element_and_length_test = exercise_element_n && exercise_element_name_length
-      (element_and_length_test) || ( exercise_element_and_length_test) ? true : false
-    end
-
     def elements_filtered
       names_grouped_by_series
-      if elements_present?
-        query_by_elements
-      else
-        sorted = Exercise.all.sort_by {|p| p.full_name}
-        @exercises = sorted.paginate(page: params[:page], :per_page => 30)
-      end
+      sorted = Exercise.all.sort_by {|p| p.full_name}
+      @exercises = sorted.paginate(page: params[:page], :per_page => 30)
     end
 
     def query_by_elements(element_ids = params[:element_n])
@@ -120,7 +102,8 @@ class ExercisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exercise_params
-      params.require(:exercise).permit(:reps_bool,
+      params.require(:exercise).permit(
+                                      :reps_bool,
                                       :right_left_bool,
                                       :resistance_bool,
                                       :duration_bool,
