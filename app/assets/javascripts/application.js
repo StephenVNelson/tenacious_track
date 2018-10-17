@@ -9,10 +9,19 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//= require turbolinks
+
 //= require jquery3
-// = require jquery.textfill
+//= require jquery.textfill
 //= require rails-ujs
+//= require jquery-ui/widgets/sortable
+//= require rails_sortable
 //= require popper
 //= require bootstrap-sprockets
+//= require turbolinks
 //= require_tree .
+
+$( document ).ready(function() {
+  $(function() {
+    $('.sortable').railsSortable();
+  });
+});

@@ -7,9 +7,11 @@ $navbar-light-hover-color: #ffffff;
 $card-border-width: 3px;
 $table-dark-bg: #95A472;
 $table-dark-border-color: #95A472;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, Lucida Sans, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 @import "pagination.css";
 @import "pagination.sass";
 @import "bootstrap";
+@import "font-awesome";
 
 
 // Mixins, variables, etc.
@@ -105,8 +107,29 @@ input[type=checkbox].check-change
     vertical-align: middle;
 }
 
+// ELEMENT CATEGORIES
+.element_categories {
+  border: solid gray .3rem;
+  text-align: center;
+  font-size: 2rem;
+  color: #636D73;
+}
 
-// Forms
+.category-card {
+  padding: 0px;
+}
+
+.card-header {
+  padding: 0px;
+  text-align: center;
+}
+
+h4 {
+  padding: 0px;
+}
+
+
+// FORMS
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;

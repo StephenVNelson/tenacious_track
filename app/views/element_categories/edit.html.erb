@@ -1,0 +1,15 @@
+<h1></h1>
+
+<div class="row justify-content-md-center">
+  <div class="card m-5 justify-center" style="width: 35rem;">
+    <div class="card-header text-white bg-primary p-1">
+      <h4 class="p-1 m-0">
+        Edit: <%= @name %>
+      </h4>
+    </div>
+    <div class="card-body category-card m-4">
+      <%= render 'form', object:  @element_category, sort: @element_category.sort, submiter: "Update \"#{@name}\"" %>
+      <%= link_to "<button class=\"btn btn-secondary my-3\" type=\"button\">Delete \"#{@name}\"</button>".html_safe, element_category_path(@element_category), method: :delete, data: { confirm: "Are You sure you want to delete #{@name}?", }  %>
+    </div>
+  </div>
+</div>

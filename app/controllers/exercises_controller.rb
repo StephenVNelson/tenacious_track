@@ -30,8 +30,6 @@ class ExercisesController < ApplicationController
   # POST /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
-
-
     respond_to do |format|
       if @exercise.save
         flash[:info] = 'Exercise was successfully created.'

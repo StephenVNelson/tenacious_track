@@ -1,0 +1,6 @@
+<%= form_for object do |f| %>
+  <%= f.text_field  :category_name, class: 'form-control m-0', placeholder: "Create New Category"%>
+  <%= f.number_field :sort, hidden: true, value: sort%>
+
+  <%= f.submit submiter, class: "btn btn-primary m-0"%>
+<% end %>

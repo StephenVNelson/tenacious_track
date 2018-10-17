@@ -1,0 +1,34 @@
+<h1 style="font-size: 3rem;">Exercise Element Categories</h1>
+<%= render 'shared/error_messages', object: @new_category %>
+
+
+
+<div class="row justify-content-md-center">
+  <div class="card m-5 justify-center" style="width: 35rem;">
+    <div class="card-header text-white bg-primary p-1">
+      <h4 class="p-1 m-0">
+        Drag and drop to change order of categories
+      </h4>
+    </div>
+    <div class="card-body category-card">
+      <ol class="sortable list-group">
+        <% @element_categories.each_with_index do |category, idx| %>
+          <li id="<%= category.sortable_id %>" class="element_categories list-group-item">
+            <div class="row">
+              <div class="col-1 m-0 p-0">
+                <%= idx+1 %>
+              </div>
+              <div class="col">
+                <%= link_to category.category_name, edit_element_category_path(category.id) %>
+              </div>
+              <div class="col-1">
+                <i class="fas fa-grip-vertical"></i>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+      <%= render 'form', object: @new_category, sort: ElementCategory.max_position+1, submiter: 'Create' %>
+    </div>
+  </div>
+</div>
