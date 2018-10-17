@@ -1,10 +1,13 @@
 class ElementCategoriesController < ApplicationController
+  before_action :logged_in_user
+  before_action :admin_user
+
 
   def index
     @element_categories = ElementCategory.order(:sort).all
     @new_category = ElementCategory.new
   end
-  
+
   def create
     @element_categories = ElementCategory.order(:sort).all
     @new_category = ElementCategory.new(category_params)

@@ -3,37 +3,25 @@ require 'test_helper'
 class ElementsControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @admin = User.create(
-                         name: "Stephen Nelson",
-                         email: "mituseye@gmail.com",
-                         password_digest: User.digest("password"),
-                         admin: true,
-                         activated: true
-                       )
-    @non_admin = User.create(
-                        name: "Gilbert Godfrey",
-                        email: "example@example.com",
-                        password_digest: User.digest("password"),
-                        admin: false,
-                        activated: true
-                      )
+    @admin = users(:stephen)
+    @non_admin = users(:archer)
     @element1 = elements(:one)
     @element2 = elements(:two)
   end
 
 
   test "should redirect index when not logged in" do
-    get elements_index_url
+    get elements_path
     assert_redirected_to login_url
   end
 
   test "should redirect new when not logged in" do
-    get elements_new_url
+    get new_element_path
     assert_redirected_to login_url
   end
 
   test "should redirect edit when not logged in" do
-    get elements_edit_url
+    get edit_element_path(@admin)
     assert_redirected_to login_url
   end
 

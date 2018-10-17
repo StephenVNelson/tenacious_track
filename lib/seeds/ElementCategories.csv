@@ -1,11 +1,11 @@
-index,category_name,position_number
-1,Accessory Movement,8
-2,Angle,2
+index,category_name,sort
 3,Body Position,1
-4,Distraction,7
-5,Mode of Movement,9
-6,R+L,10
-7,Resistance,11
-8,Resistance Type,6
-9,Support,4
+2,Angle,2
 10,Tool,3
+9,Support,4
+8,Resistance Type,5
+4,Distraction,6
+1,Accessory Movement,7
+5,Mode of Movement,8
+6,R+L,9
+7,Resistance,10

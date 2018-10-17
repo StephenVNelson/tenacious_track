@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'elements/index'
-
-  get 'elements/new'
-
-  get 'elements/edit'
 
   get 'password_resets/new'
 
@@ -19,7 +14,8 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :exercises
-  resources :element_categories
+  resources :elements
+  resources :element_categories,  only: [:index, :create, :edit, :update, :destroy]
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
