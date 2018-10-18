@@ -1,6 +1,21 @@
-<% provide(:title, 'New element') %>
+<% provide(:title, 'Edit element') %>
 
-<div class="container">
-  <h1>Edit Exercise Element</h1>
-  <%= render 'form' %>
+<div class="card border-primary all-edges-rounded my-5">
+  <div class="card-header bg-primary text-white p-0 top-edges-rounded">
+    <h3 class="m-0">
+      <div class="d-flex flex-row">
+        <div class="px-5">
+          Category: <%= element_category(@new_element.element_category_id) %>
+        </div>
+        <div class="px-5">
+          Element: <%= @new_element.name %>
+        </div>
+      </div>
+    </h3>
+  </div>
+  <div class="card-body py-1 mt-2 my-4">
+    <%= render 'form', submiter: "Update" %>
+
+  </div>
 </div>
+<%= link_to "Back", elements_path, class: "edit-link" %>

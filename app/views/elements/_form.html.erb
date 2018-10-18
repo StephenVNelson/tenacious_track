@@ -1,18 +1,14 @@
-<%= form_for(@element) do |f| %>
-  <%= render 'shared/error_messages', object: @element %>
-
-  <%= f.label :series_name %>
-  <%= f.select(:series_name, Element.select(:series_name).distinct.map(&:series_name), {prompt: "--- Select from previous series ---"}, class: "form-control") %>
-    <div class="mb-4">
-      <button type="button" class="btn btn-sm btn-outline-primary">or click here to create new series</button>
-      <div id="new-series" class="mt-3" style="display:none;">
-        <%= render 'add_series', f: f %>
-      </div>
+<%= form_for(@new_element) do |f| %>
+  <div class="form-row m-0" style="<%= display %>;" id="add-element-form">
+    <div class="form-group col-md-3 m-0">
+      <%= f.select :element_category_id, ElementCategory.all.collect {|p| [p.category_name, p.id]}, {prompt: "Category"}, class: 'form-control m-0' %>
+    </div>
+    <div class="form-group col-md-7 m-0">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-2 m-0">
+      <%= f.submit submiter, class: 'btn btn-secondary' %>
     </div>
 
-
-  <%= f.label :element_name %>
-  <%= f.text_field :name, class: 'form-control' %>
-
-  <%= f.submit "Create Element", class: 'btn btn-success' %>
+  </div>
 <% end %>

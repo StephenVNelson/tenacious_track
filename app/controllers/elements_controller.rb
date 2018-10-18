@@ -3,6 +3,7 @@ class ElementsController < ApplicationController
   before_action :admin_user,     only: [:create, :edit, :update, :new, :destroy]
 
   def index
+    @new_element = Element.new
     @series = params[:series] || ""
     filter_results
   end
@@ -18,17 +19,18 @@ class ElementsController < ApplicationController
   end
 
   def create
-    @element = Element.new(element_params)
-    if @element.save
+    filter_results
+    @new_element = Element.new(element_params)
+    if @new_element.save
       flash[:info] = "Exercise element successfully added"
       redirect_to elements_path
     else
-      render 'new'
+      render 'index'
     end
   end
 
   def edit
-    @element = Element.find(params[:id])
+    @new_element = Element.find(params[:id])
   end
 
   def update
@@ -51,7 +53,7 @@ class ElementsController < ApplicationController
   private
 
     def element_params
-      params.require(:element).permit(:series_name, :name)
+      params.require(:element).permit(:element_category_id, :name)
     end
 
     def filter_results

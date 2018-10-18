@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181015204910) do
+ActiveRecord::Schema.define(version: 20181017222044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20181015204910) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"
+    t.bigint "element_category_id"
+    t.index ["element_category_id"], name: "index_elements_on_element_category_id"
     t.index ["name"], name: "index_elements_on_name", unique: true
     t.index ["series_name", "name"], name: "index_elements_on_series_name_and_name", unique: true
     t.index ["series_name"], name: "index_elements_on_series_name"
@@ -72,4 +74,5 @@ ActiveRecord::Schema.define(version: 20181015204910) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "elements", "element_categories"
 end

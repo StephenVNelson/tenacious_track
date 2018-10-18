@@ -1,5 +1,6 @@
 <% provide(:title, 'All elements') %>
 <%= flash[:notice] %>
+<%= render 'shared/error_messages', object: @new_element %>
 
 <div class="container">
   <h1>Exercise Elements</h1>
@@ -23,28 +24,20 @@
 
 <table class="table">
   <thead class="thead-dark">
-    <th scope="col">Series</th>
+    <th scope="col">Category</th>
     <th scope="col">Element</th>
     <th scope="col"></th>
     <th scope="col"></th>
   </thead>
   <tbody>
     <tr>
-      <td><%= link_to "Add Element", new_element_path, class: "edit-link" %></td>
+      <td colspan="4">
+        <span class="edit-link" id="add-element">Add Element</span>
+        <%= render 'form', display: "display: none", submiter: "Create Element" %>
+      </td>
     </tr>
     <%= render @elements %>
   </tbody>
 </table>
 
 <%= will_paginate @element %>
-
-<% if current_user.admin?%>
-  <div class="container mt-5 pt-5">
-    <%= render :layout => 'shared/card_container', :locals => {:title => 'Upload CSV data'} do %>
-      <%= form_tag import_elements_path, multipart: true do %>
-        <%= file_field_tag :file %>
-        <%= submit_tag "Import CSV" %>
-      <% end %>
-    <% end %>
-  </div>
-<% end %>

@@ -1,7 +1,7 @@
 
 document.addEventListener("turbolinks:load", function() {
-  $("button").click(function(){
-      $("div#new-series").toggle();
-      $(".reveal").prop("disabled") ? $(".reveal").prop("disabled", false) : $(".reveal").prop("disabled", true) ;
+  $("#add-element").click(function(){
+      $("#add-element").hide();
+      $("#add-element-form").show();
   });
 });
