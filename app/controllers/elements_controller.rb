@@ -1,4 +1,5 @@
 class ElementsController < ApplicationController
+  require 'will_paginate/array'
   before_action :logged_in_user, only: [:index, :import, :new, :edit]
   before_action :admin_user,     only: [:create, :edit, :update, :new, :destroy]
 
@@ -46,7 +47,7 @@ class ElementsController < ApplicationController
   def destroy
     @series = params[:series]
     Element.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "Element deleted"
     redirect_to elements_path(series: @series)
   end
 
@@ -57,10 +58,6 @@ class ElementsController < ApplicationController
     end
 
     def filter_results
-      if params[:series] && params[:series].length > 0
-        @elements = Element.where(series_name: params[:series]).paginate(page: params[:page], :per_page => 15)
-      else
-        @elements = Element.paginate(page: params[:page], :per_page => 15)
-      end
+      @elements = Element.text_search(params[:query]).paginate(page: params[:page], :per_page => 15)
     end
 end

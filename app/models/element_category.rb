@@ -5,7 +5,7 @@ class ElementCategory < ApplicationRecord
   has_many :elements
 
   validates :category_name, presence: true, uniqueness: { case_sensitive: false }, length: {maximum: 50}
-  validates :sort, presence: true, uniqueness: true
+  # validates :sort, presence: true, uniqueness: true
 
   def self.by_position
     order(:sort).all

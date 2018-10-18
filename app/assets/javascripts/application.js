@@ -20,7 +20,7 @@
 //= require turbolinks
 //= require_tree .
 
-$( document ).ready(function() {
+document.addEventListener("turbolinks:load", function() {
   $(function() {
     $('.sortable').railsSortable();
   });

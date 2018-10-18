@@ -1,13 +1,22 @@
 require 'csv'
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'ElementCategories.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
+categories = File.read(Rails.root.join('lib', 'seeds', 'Categories.csv'))
+parse_categories = CSV.parse(categories, :headers => true, :encoding => 'ISO-8859-1')
+parse_categories.each do |row|
   t = ElementCategory.new
   t.category_name = row['category_name']
-  t.sort = row['sort']
   t.save
   puts "#{t.category_name} saved"
+end
+
+elements = File.read(Rails.root.join('lib', 'seeds', 'Elements.csv'))
+parse_elements = CSV.parse(elements, :headers => true, :encoding => 'ISO-8859-1')
+parse_elements.each do |row|
+  t = Element.new
+  t.name = row['name']
+  t.element_category_id = row['element_category_id']
+  t.save
+  puts "#{t.name} saved"
 end
 
 
