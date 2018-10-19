@@ -23,6 +23,7 @@ gem 'turbolinks',              '5.0.1'
 gem 'jbuilder',                '2.7.0'
 gem 'bootstrap', '~> 4.1.3'
 gem 'pg_search'
+gem "select2-rails"
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri

@@ -20,6 +20,9 @@ class Element < ApplicationRecord
     end
   end
 
+  def self.names
+    Element.all.map(&:name)
+  end
 
   def self.by_name(element_name)
     Element.find_by(name: element_name)
@@ -32,4 +35,25 @@ class Element < ApplicationRecord
   def self.series_list_items(series_name)
     Element.where(series_name: series_name)
   end
+
+  def self.elements_of_category(category)
+    category_id = ElementCategory.find_by(category_name: category).id
+    element_array = Element.all.where(element_category_id: category_id)
+    name_array = element_array.map(&:name)
+    blank_array = []
+    name_array.each do |name|
+      blank_array. << [name, {class: 'select-element'}]
+    end
+    blank_array
+  end
+
+  def self.categories_and_elements
+    categories = ElementCategory.all.map(&:category_name)
+    options = []
+    categories.each do |category|
+      options.concat(Element.elements_of_category(category).prepend([category, {class: 'select-category'}]))
+    end
+    options
+  end
+
 end

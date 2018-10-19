@@ -4,15 +4,10 @@ class ElementsController < ApplicationController
   before_action :admin_user,     only: [:create, :edit, :update, :new, :destroy]
 
   def index
+    @all_elements = Element.all
     @new_element = Element.new
     @series = params[:series] || ""
     filter_results
-  end
-
-  def import
-    Element.import(params[:file])
-    # after the import, redirect and let us know the method worked!
-    redirect_to root_url, notice: "Activity Data imported!"
   end
 
   def new

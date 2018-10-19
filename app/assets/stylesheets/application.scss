@@ -13,6 +13,8 @@
 
  *= require_self
  *= require font-awesome
+ *= require select2
+ *= require select2-bootstrap
  */
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "custom";

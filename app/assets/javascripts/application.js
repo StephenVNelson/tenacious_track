@@ -15,6 +15,7 @@
 //= require rails-ujs
 //= require jquery-ui/widgets/sortable
 //= require rails_sortable
+//= require select2
 //= require popper
 //= require bootstrap-sprockets
 //= require turbolinks
