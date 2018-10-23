@@ -28,32 +28,31 @@ class Element < ApplicationRecord
     Element.find_by(name: element_name)
   end
 
-  def self.series_list
-    Element.distinct.pluck(:series_name)
+  def self.sorted_categories
+    ElementCategory.all.sort_by {|p| p.sort}
   end
 
-  def self.series_list_items(series_name)
-    Element.where(series_name: series_name)
+  def self.category_list
+    Element.sorted_categories.map(&:category_name)
   end
 
-  def self.elements_of_category(category)
-    category_id = ElementCategory.find_by(category_name: category).id
-    element_array = Element.all.where(element_category_id: category_id)
-    name_array = element_array.map(&:name)
-    blank_array = []
-    name_array.each do |name|
-      blank_array. << [name, {class: 'select-element'}]
-    end
-    blank_array
+  def self.category_elements(category_name)
+    ElementCategory.find_by(category_name: category_name).elements
   end
 
-  def self.categories_and_elements
-    categories = ElementCategory.all.map(&:category_name)
-    options = []
-    categories.each do |category|
-      options.concat(Element.elements_of_category(category).prepend([category, {class: 'select-category'}]))
-    end
-    options
+  def self.category_element_names(category_name)
+    element_objects = Element.category_elements(category_name)
+    element_objects.map(&:name)
+  end
+
+  def self.category_element_names_and_ids(category_name)
+    element_names = Element.category_elements(category_name)
+    element_names.map {|element| [element.name , element.id]}
+  end
+
+  def self.elements_grouped_by_categories
+    categories = Element.category_list
+    categories.map {|category| [category, Element.category_element_names_and_ids(category)]}
   end
 
 end

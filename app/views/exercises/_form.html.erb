@@ -1,8 +1,8 @@
 
 
 <div class="container my-5">
-  <%= form_for(@exercise) do |form| %>
-    <%= render 'shared/error_messages', object: @exercise %>
+  <%= form_for(exercise) do |form| %>
+    <%= render 'shared/error_messages', object: exercise %>
 
     <!-- Series selectors -->
     <table class="table table-card-style-primary all-edges-rounded">
@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <% Element.series_list.each_slice(4) do |slice| %>
+        <% Element.category_list.each_slice(4) do |slice| %>
           <tr>
             <% slice.each do |series| %>
               <td style="text-align: center;">
@@ -35,10 +35,10 @@
 
 
     <!-- Element Selectors -->
-    <% Element.series_list.each_slice(2) do |slice| %>
+    <% Element.category_list.each_slice(2) do |slice| %>
       <div class="card-deck">
-        <% slice.each do |series| %>
-          <%= render 'element_boxes', form: form, series_name: series, card_width: set_element_card_display_width(slice) %>
+        <% slice.each do |category| %>
+          <%= render 'element_boxes', form: form, category_name: category, card_width: set_element_card_display_width(slice) %>
         <% end %>
       </div>
     <% end %>

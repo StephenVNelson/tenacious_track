@@ -1,16 +1,9 @@
 <%= flash[:notice] %>
 <h1>Exercises</h1>
 
-<div class="my-5">
-  <%= form_with url: exercises_path, method: 'get', local: true do |form| %>
-    <%= render 'element_filter', form: form %>
-    <div class="row">
-      <div class="col-8">
-        <%= form.submit "Filter", class: "btn btn-secondary" %>
-      </div>
-  </div>
-  <% end %>
-</div>
+<%= button_tag type: 'button', class: 'btn btn-secondary my-3' do %>
+  <%= link_to 'Create new exercise', new_exercise_path %>
+<% end %>
 
 <%= will_paginate @exercises %>
 
@@ -25,7 +18,12 @@
 
   <tbody>
     <tr>
-      <td><%= link_to 'Add new exercise', new_exercise_path, class: "edit-link" %></td>
+      <td colspan="3">
+        <p class="edit-link" id="add-element">
+          Quick add exercise
+        </p>
+        <%= render 'small_form', new_exercise: @new_exercise %>
+      </td>
     </tr>
     <% @exercises.each do |exercise| %>
       <tr>

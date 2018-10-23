@@ -1,6 +1,46 @@
 <h1>Editing Exercise</h1>
+<%= render 'shared/error_messages', object: @exercise %>
 
 <%= render 'form', exercise: @exercise %>
+
+
+<% if false %>
+  <%= form_for @exercise do |f| %>
+    <% Exercise.booleans.each do |bool| %>
+      <div class="d-inline-block">
+        <%= f.label bool%>
+        <%= f.check_box bool, {}, true, false %>
+      </div>
+    <% end %>
+    <br>
+    <div class="field">
+      <%= f.label :elements %>
+
+      <% @elements.each do |element| %>
+        <% association = @exercise.exercise_elements.find { |m| m.element_id == element.id } %>
+
+        <% if association %>
+          <% existing = true %>
+        <% else %>
+          <% association = @exercise.exercise_elements.build(element: element) %>
+          <% existing = false %>
+        <% end %>
+
+        <%= f.fields_for :exercise_elements, association do |association_fields| %>
+          <%= association_fields.hidden_field :element_id %>
+
+          <div class="field">
+            <%= association_fields.label :_destroy do %>
+              <%= association_fields.check_box :_destroy, {checked: existing}, '0', '1' %>
+              <%= element.name %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%= f.submit %>
+  <% end %>
+<% end %>
 
 <%= link_to 'Show', @exercise %> |
 <%= link_to 'Back', exercises_path %>

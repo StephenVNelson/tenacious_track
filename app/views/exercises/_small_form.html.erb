@@ -1,0 +1,28 @@
+<%= form_for(new_exercise) do |f| %>
+  <div class="form-row m-0" style="display: none;" id="add-element-form">
+    <div class="form-group col-md-6 m-0">
+      <%= f.fields_for :exercise_elements do |elements|%>
+        <%=
+          elements.select :element_id,
+            grouped_options_for_select(Element.elements_grouped_by_categories),
+            {},
+            class: 'js-example-basic-multiple',
+            multiple: true
+        %>
+      <% end %>
+    </div>
+    <div class="form-group col-md-5">
+      <% Exercise.booleans.each do |boolean| %>
+        <div class="btn-group-toggle d-inline" data-toggle="buttons">
+          <%= label_tag '', class:'btn btn-secondary btn-sm m-1' do %>
+          <input type="checkbox" value="true" name=<%= "exercise[#{boolean}]" %> id=<%= "exercise_#{boolean}" %>>
+          <%= boolean.gsub('_',' ').gsub(' bool','').titleize %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="form-group col-md-1 m-0">
+      <%= f.submit 'Create', class: 'btn btn-primary button-width' %>
+    </div>
+  </div>
+<% end %>

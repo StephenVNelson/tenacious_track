@@ -1,19 +1,17 @@
 class Exercise < ApplicationRecord
-  has_many :exercise_elements
+  has_many :exercise_elements, dependent: :destroy
   has_many :elements, through: :exercise_elements
-  accepts_nested_attributes_for :exercise_elements
+  accepts_nested_attributes_for :exercise_elements, allow_destroy: true
 
-  validate :measurement_presence
-
-  def measurement_presence
-    accept_array = [reps_bool , right_left_bool , resistance_bool , duration_bool , work_rest_bool]
-    if accept_array.all?{|attr| attr.nil?}
-      errors.add("You", "must select a measurement method")
-    end
-  end
+  validates_with MeasurementValidator
 
   def self.with_elements(element_name)
     Exercise.joins(:elements).where(:elements => {name: element_name})
+  end
+
+  def self.booleans
+    booleans = Exercise.columns_hash.select {|k,v| v.type == :boolean}
+    booleans.keys
   end
 
   #Creates string of element names

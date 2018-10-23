@@ -1,11 +1,14 @@
 require 'will_paginate/array'
 class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
+  before_action :set_elements, only: [:show, :edit, :update, :destroy]
 
   # GET /exercises
   # GET /exercises.json
   def index
     elements_filtered
+    @new_exercise = Exercise.new
+    @new_exercise.exercise_elements.build
   end
 
   # GET /exercises/1
@@ -15,30 +18,27 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/new
   def new
-    @exercise = Exercise.new
-    @exercise.exercise_elements.build
-    names_grouped_by_series
+    @new_exercise = Exercise.new
+    @new_exercise.exercise_elements.build
   end
 
   # GET /exercises/1/edit
   def edit
-    set_exercise
-    @elements = @exercise.elements
   end
 
   # POST /exercises
   # POST /exercises.json
   def create
-    @exercise = Exercise.new(exercise_params)
+    @new_exercise = Exercise.new(exercise_params)
+
     respond_to do |format|
-      if @exercise.save
+      if @new_exercise.save
         flash[:info] = 'Exercise was successfully created.'
         format.html { redirect_to exercises_path }
         format.json { render :index, status: :created }
       else
-        names_grouped_by_series
         format.html { render :new }
-        format.json { render json: @exercise.errors }
+        format.json { render json: @new_exercise.errors }
       end
     end
   end
@@ -49,8 +49,8 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.update(exercise_params)
         flash[:info] = 'Exercise was successfully updated.'
-        format.html { redirect_to @exercise}
-        format.json { render :show, status: :ok, location: @exercise }
+        format.html { redirect_to exercises_path}
+        format.json { render :index, status: :created }
       else
         format.html { render :edit }
         format.json { render json: @exercise.errors, status: :unprocessable_entity }
@@ -72,40 +72,47 @@ class ExercisesController < ApplicationController
   private
 
     def elements_filtered
-      names_grouped_by_series
-      sorted = Exercise.all.sort_by {|p| p.full_name}
-      @exercises = sorted.paginate(page: params[:page], :per_page => 30)
+      @exercises = Exercise.all.paginate(page: params[:page], :per_page => 30)
     end
 
-    def query_by_elements(element_ids = params[:element_n])
-      id_hash = {}
-      element_ids.each do |name, id|
-        id_hash[:id] = id
-      end
-      filtered_exercises = Exercise.joins(:elements).where(:elements => id_hash)
-      filtered_and_sorted_exercises = filtered_exercises.sort_by {|p| p.full_name}
-      @exercises = filtered_and_sorted_exercises.paginate(page: params[:page], :per_page => 30)
-    end
-
-    def names_grouped_by_series
-      group_series_element = Element.group('elements.id').group('elements.series_name')
-
-      @names_grouped_by_series = group_series_element.map{|p| [p.series_name.prepend(""), Element.where(series_name: p.series_name).map{|element| [element.name, element.id]}.prepend("Select Element")] }
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_exercise
       @exercise = Exercise.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_elements
+      @elements = Element.all
+    end
+
+    def multiselect_present?
+      if params[:exercise].key?(:exercise_elements_attributes)
+        current_params = params[:exercise][:exercise_elements_attributes]["0"][:element_id]
+        current_params.class == Array
+      else
+        false
+      end
+    end
+
+    #changes params layout in case multiselect is used
+    def reformat_militselect_params_format
+      current_params = params[:exercise][:exercise_elements_attributes]
+      current_params["0"][:element_id].each_with_index do |element, idx|
+        if !element.empty?
+          current_params["#{idx+1}"] = {element_id: element}
+        end
+      end
+      current_params.delete("0")
+    end
+
     def exercise_params
+      reformat_militselect_params_format unless !multiselect_present?
       params.require(:exercise).permit(
                                       :reps_bool,
                                       :right_left_bool,
                                       :resistance_bool,
                                       :duration_bool,
                                       :work_rest_bool,
-                                      exercise_elements_attributes: [:element_id])
+                                      exercise_elements_attributes: [:element_id, :id, :_destroy])
     end
 end
