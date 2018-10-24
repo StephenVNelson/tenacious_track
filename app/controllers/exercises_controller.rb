@@ -34,11 +34,11 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @new_exercise.save
         flash[:info] = 'Exercise was successfully created.'
-        format.html { redirect_to exercises_path }
-        format.json { render :index, status: :created }
+        format.html {redirect_to exercises_path}
+        format.json {render :index, status: :created}
       else
-        format.html { render :new }
-        format.json { render json: @new_exercise.errors }
+        format.html {render :new}
+        format.json {render json: @new_exercise.errors}
       end
     end
   end
@@ -49,11 +49,11 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.update(exercise_params)
         flash[:info] = 'Exercise was successfully updated.'
-        format.html { redirect_to exercises_path}
-        format.json { render :index, status: :created }
+        format.html {redirect_to exercises_path}
+        format.json {render :index, status: :created}
       else
-        format.html { render :edit }
-        format.json { render json: @exercise.errors, status: :unprocessable_entity }
+        format.html {render :edit}
+        format.json {render json: @exercise.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -64,55 +64,61 @@ class ExercisesController < ApplicationController
     @exercise.destroy
     respond_to do |format|
       flash[:success] = 'Exercise was successfully destroyed.'
-      format.html { redirect_to exercises_url}
+      format.html { redirect_to exercises_url }
       format.json { head :no_content }
     end
   end
 
   private
 
-    def elements_filtered
-      @exercises = Exercise.all.paginate(page: params[:page], :per_page => 30)
-    end
+  def elements_filtered
+    @exercises = Exercise.all.paginate(page: params[:page], per_page: 30)
+  end
 
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_exercise
-      @exercise = Exercise.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_exercise
+    @exercise = Exercise.find(params[:id])
+  end
 
-    def set_elements
-      @elements = Element.all
-    end
+  def set_elements
+    @elements = Element.all
+  end
 
-    def multiselect_present?
-      if params[:exercise].key?(:exercise_elements_attributes)
-        current_params = params[:exercise][:exercise_elements_attributes]["0"][:element_id]
-        current_params.class == Array
-      else
-        false
+  def multiselect_present?
+    params[:exercise].key?(:exercise_elements_attributes) &&
+      exercise_elements_params["0"][:element_id].is_a?(Array)
+  end
+
+  # changes params layout in case multiselect is used
+  def reformat_multiselect_params_format
+    # you might be able to just map exercise_elements_params["0"][:element_id]
+    # reformatted_params = {}
+    # exercise_elements_params["0"][:element_id].map |a|
+    #   reformatted_params << { element_id: id }
+    # end
+    # exercise_elements_params = reformatted_params
+    exercise_elements_params["0"][:element_id].each_with_index do |id, idx|
+      if id.present?
+        exercise_elements_params[(idx + 1).to_s] = { element_id: id }
       end
     end
+    exercise_elements_params.delete("0")
+  end
 
-    #changes params layout in case multiselect is used
-    def reformat_militselect_params_format
-      current_params = params[:exercise][:exercise_elements_attributes]
-      current_params["0"][:element_id].each_with_index do |element, idx|
-        if !element.empty?
-          current_params["#{idx+1}"] = {element_id: element}
-        end
-      end
-      current_params.delete("0")
-    end
+  def exercise_params
+    reformat_multiselect_params_format if multiselect_present?
+    params.require(:exercise).permit(
+      :reps_bool,
+      :right_left_bool,
+      :resistance_bool,
+      :duration_bool,
+      :work_rest_bool,
+      exercise_elements_attributes: [:element_id, :id, :_destroy]
+    )
+  end
 
-    def exercise_params
-      reformat_militselect_params_format unless !multiselect_present?
-      params.require(:exercise).permit(
-                                      :reps_bool,
-                                      :right_left_bool,
-                                      :resistance_bool,
-                                      :duration_bool,
-                                      :work_rest_bool,
-                                      exercise_elements_attributes: [:element_id, :id, :_destroy])
-    end
+  def exercise_elements_params
+    params[:exercise][:exercise_elements_attributes]
+  end
 end

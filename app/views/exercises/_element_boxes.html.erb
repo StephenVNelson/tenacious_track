@@ -23,7 +23,6 @@
         <%= association_fields.hidden_field :_destroy, value: 1 %>
         <div class="btn-group-toggle d-inline" data-toggle="buttons">
           <label class="btn btn-outline-primary m-2 element-checkboxes <%= active %>">
-            <%= binding.pry %>
             <%= association_fields.check_box :_destroy, {checked: existing, include_hidden: false}, checked_value = 0, unchecked_value = 1  %>
             <%= element.name %>
           </label>
