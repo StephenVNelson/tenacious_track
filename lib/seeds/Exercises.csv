@@ -1,3 +1,113 @@
-name,Body Position,Angle,Tool,Support,Resistance Type,Distraction,Accessory Movement,Mode of Movement,R+L,Resistance,Reps Bool,Resistance Bool,Duration Bool,Work/Rest Bool,GIF link
-Prone Elbow Knee Knee Extended Single Hip Extension(R+L),Prone,,,Elbow,,,"[Knee Extended,
-Single Leg]",Hip Extension,,,,,,,
+﻿name,Body Position,Angle,Tool,Support,Resistance Type,Distraction,Accessory Movement,Mode of Movement,R+L,right_left_bool,reps_bool,resistance_bool,duration_bool,work_rest_bool,GIF link,,,,,,,,,,,
+Prone Elbow Knee Knee Extended Single Hip Extension(R+L),Prone,,,Elbow,,,"Knee Extended
+Single Leg",Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+Prone Elbow Single Leg Knee Extended Hip Abduction(R+L),Prone,,,Elbow,,,"Single Leg
+Knee Extended",Hip Abduction,(R+L),,TRUE,,,,,,,,,,,,,,,
+Prone Elbow Knee Flexed @ 90°  Single Leg Hip Extension(R+L),Prone,,,Elbow,,,"Knee Flexed @ 90°
+Single Leg",Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+"Prone Elbow Knee Flexed @ 90°  ""Wet Cat""(R+L)",Prone,,,Elbow,,,Knee Flexed @ 90°,Wet Cat,(R+L),,TRUE,,,,,,,,,,,,,,,
+"Prone Elbow Mini Band""90,45,180"" Hip Extension Series",Prone,,,Elbow,Mini Band,,"""90,45,180"" Hip Extension Series",Hip Extension,,,TRUE,,,,,,,,,,,,,,,
+Prone BOSU (dome side up) Elbow Hip Extension Series,Prone,,BOSU (Dome Up),Elbow,,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Prone BOSU(dome up)Elbow Mini Band""90,45,180"" Hip Extension Series",Prone,,BOSU (Dome Up),Elbow,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Prone BOSU(dome up) Elbow Mini Band Hip Extension Series + Lateral Band Distraction (Waist),Prone,,BOSU (Dome Up),Elbow,Mini Band,Lateral Band Distraction (Waist),,,,,TRUE,,,,,,,,,,,,,,,
+"Prone BOSU(dome up)Elbow Mini Band""90,45,180"" Knee Extneded Hip Extension Series + Lateral Distraction",Prone,,BOSU (Dome Up),Elbow,Mini Band,Lateral Distraction,"""90,45,180"" Hip Extension Series 
+Knee Extended",Hip Extension Series,,,TRUE,,,,,,,,,,,,,,,
+Prone Straigt Arm Hip Extension Series,Prone,,,Straight Arm,,,,,,,TRUE,,,,,,,,,,,,,,,
+Prone Straight Arm Knee Knee Extended Single Hip Extension(R+L),Prone,,,Straight Arm,,,"Knee Extended
+Single Leg",Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+Prone Straight Arm Single Leg Knee Extended Hip Abduction(R+L),Prone,,,Straight Arm,,,Leg Knee Extended,Hip Abduction,,,TRUE,,,,,,,,,,,,,,,
+Prone Straight Arm Knee Flexed @ 90° Single Leg Hip Extension(R+L),Prone,,,Straight Arm,,,"Knee Flexed @ 90°
+Single Leg",Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+"Prone Neutral Grip (Stands) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,,Push Up Stand Surface,"Neutral Grip 
+Straight Arm",Mini Band,,,,,,TRUE,,,,,,,,,,,,,,,
+Prone Neutral Grip (Stands) Straight Arm Knee Extended Straight Leg Eccentric Hip Extension (5 sec.) (R+L),Prone,,Push Up Stand Surface,Straight Arm,,,"Knee Extended
+Straight Leg 
+Essentric Seconds",Eccentric Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+Prone BOSU(dome down) Straight Arm Hip Extension Series,Prone,,BOSU (dome down),Straight Arm,,,,Hip Extension Series,,,TRUE,,,,,,,,,,,,,,,
+"Prone BOSU(dome down) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,,BOSU (dome down),Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Prone BOSU(dome down) Straight Arm Mini Band Hip Extension Series + Lateral Band Distraction (Waist),Prone,,BOSU (dome down),Straight Arm,Mini Band,Lateral Band Distraction (Waist),,,,,TRUE,,,,,,,,,,,,,,,
+Prone Neutral Grip (Stands) Straight Arm Mini Band Resisted (Ankles) Knee Extended Straight Leg Eccentric Hip Extension (5 sec.) (R+L),Prone,,Push Up Stand Surface,Straight Arm,Mini Band Resisted (Ankles),,"Knee Extended
+Straight Leg",Eccentric Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+Incline Elbow Knee Knee Extended Single Hip Extension(R+L),Prone,Incline,,Elbow,,,,,(R+L),,TRUE,,,,,,,,,,,,,,,
+Incline Elbow Single Leg Knee Extended Hip Abduction(R+L),Prone,Incline,,Elbow,,,"Single Leg
+Knee Extended",Hip Abduction,(R+L),,TRUE,,,,,,,,,,,,,,,
+Incline Elbow Knee Flexed @ 90° Single Leg Hip Extension(R+L),Prone,Incline,,Elbow,,,"Knee Flexed @ 90°
+Single Leg",Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+"Incline Elbow Knee Flexed @ 90° ""Wet Cat""(R+L)",Prone,Incline,,Elbow,,,Knee Flexed @ 90°,Wet Cat,(R+L),,TRUE,,,,,,,,,,,,,,,
+"Incline Elbow Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,,Elbow,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline BOSU (dome side up) Elbow Hip Extension Series,Prone,Incline,BOSU (Dome Up),Elbow,,,,,,,TRUE,,,,,,,,,,,,,,,
+"Incline BOSU(dome up)Elbow Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,BOSU (Dome Up),Elbow,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Prone Incline BOSU(dome up) Elbow Mini Band Knee Extended Hip Extension Series + Lateral Band Distraction (Waist),Prone,Incline,BOSU (Dome Up),Elbow,Mini Band,Lateral Band Distraction (Waist),Knee Extended (Knee Straight),Hip Extension Series,,,TRUE,,,,,,,,,,,,,,,
+"Incline BOSU(dome up)Elbow Mini Band""90,45,180"" Hip Extension Series + Lateral Distraction",Prone,Incline,BOSU (Dome Up),Elbow,Mini Band,Lateral Distraction,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) Elbow Straight Leg Hip Extension Series,Prone,Incline,Medicine Ball (Feet Elevated),Elbow,,,Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) Elbow Straight Leg Hip Extension Series+ Lateral Band Distraction (Waist),Prone,Incline,Medicine Ball (Feet Elevated),Elbow,,Lateral Band Distraction (Waist),Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Elbow Mini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,Medicine Ball (Feet Elevated),Elbow,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Elbow Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,Medicine Ball (Feet Elevated),Elbow,Mini Band,,,,,,TRUE,,,,,,,,,,,,,,,
+"Prone Decline (Feet Elevated on Medicine Ball) Elbow Mini Band""90,45,180"" Knee Extended Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Decline,Medicine Ball (Feet Elevated),Elbow,Mini Band,Lateral Band Distraction (Waist),Knee Extended (Knee Straight),Hip Extension Series,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) BOSU(dome up)Elbow Straight Leg Hip Extension Series,Prone,Incline,"BOSU (Dome Up)
+Medicine Ball (Feet Elevated)",Elbow,,,Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) BOSU(dome up)Elbow Straight Leg Hip Extension Series+ Lateral Band Distraction (Waist),Prone,Incline,"BOSU (Dome Up)
+Medicine Ball (Feet Elevated)",Elbow,,Lateral Band Distraction (Waist),Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) BOSU(dome up)Elbow Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,"BOSU (Dome Up)
+Medicine Ball (Feet Elevated)",Elbow,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) BOSU(dome up)Elbow Mini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,"BOSU (Dome Up)
+Medicine Ball (Feet Elevated)",Elbow,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Box) BOSU(dome up)Elbow Straight Leg Hip Extension Series,Prone,Incline,"Box (Feet Elevated)
+BOSU (Dome Up)",Elbow,,,Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Box) BOSU(dome up)Elbow Straight Leg Hip Extension Series + Lateral Band Distraction (Waist),Prone,Incline,"Box (Feet Elevated)
+BOSU (Dome Up)",Elbow,,Lateral Band Distraction (Waist),Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) BOSU(dome up)Elbow Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,"Medicine Ball (feet elevated)
+BOSU (Dome Up)",Elbow,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) BOSU(dome up)Elbow Mini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,"Medicine Ball (feet elevated)
+BOSU (Dome Up)",Elbow,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline Straight Arm Knee Extended Single Hip Extension(R+L),Prone,Incline,,Straight Arm,,,Single Leg,Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+Incline Straight Arm Single Leg Knee Extended Hip Abduction(R+L),Prone,Incline,,Straight Arm,,,"Single Leg
+Knee Extended",,(R+L),,TRUE,,,,,,,,,,,,,,,
+Incline Straight Arm Knee Flexed @ 90° Single Leg Hip Extension(R+L),Prone,Incline,,Straight Arm,,,Knee Flexed @ 90°,,(R+L),,TRUE,,,,,,,,,,,,,,,
+"Incline Straight Arm Knee Flexed @ 90° ""Wet Cat""(R+L)",Prone,Incline,,Straight Arm,,,Knee Flexed @ 90°,Wet Cat,(R+L),,TRUE,,,,,,,,,,,,,,,
+"Incline Neutral Grip (Stands) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,Push Up Stand Surface,Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Prone Neutral Grip (Stands) Straight Arm Knee Extended Straight Leg Eccentric Hip Extension (5 sec.) (R+L),Prone,Incline,Push Up Stand Surface,Straight Arm,,,"Knee Extended
+Straight leg",Eccentric Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+Incline BOSU(dome down) Straight Arm Hip Extension Series,Prone,Incline,BOSU (dome down),Straight Arm,,,,,,,TRUE,,,,,,,,,,,,,,,
+"Incline BOSU(dome down) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,BOSU (dome down),Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline BOSU(dome down) Straight Arm Mini Band Hip Extension Series + Lateral Band Distraction (Waist),Prone,Incline,BOSU (dome down),Straight Arm,,Lateral Band Distraction (Waist),,,,,TRUE,,,,,,,,,,,,,,,
+Prone Neutral Grip (Stands) Straight Arm Mini Band Resisted (Ankles) Knee Extended Straight Leg Eccentric Hip Extension (5 sec.) (R+L),Prone,Incline,,Straight Arm,Mini Band Resisted (Ankles),,"Knee Extended
+Straight Leg",Eccentric Hip Extension,(R+L),,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) Straight Arm Straight Leg Hip Extension Series,Prone,Incline,Medicine Ball (feet elevated),Straight Arm,,,Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) Straight Arm Straight Leg Hip Extension Series+ Lateral Band Distraction (Waist),Prone,Incline,Medicine Ball (feet elevated),Straight Arm,,Lateral Band Distraction (Waist),Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,Medicine Ball (feet elevated),Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Straight Arm Mini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,Medicine Ball (feet elevated),Straight Arm,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,Medicine Ball (feet elevated),Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Straight Arm Mini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,Medicine Ball (feet elevated),Straight Arm,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) Neutral Grip (Stands) Straight Arm Straight Leg Hip Extension Series,Prone,Incline,"Medicine Ball (feet elevated)
+Neutral Grip (Stands)",Straight Arm,,,Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) Neutral Grip (Stands) Straight Arm Straight Leg Hip Extension Series+ Lateral Band Distraction (Waist),Prone,Incline,"Medicine Ball (feet elevated)
+Neutral Grip (Stands)",Straight Arm,,Lateral Band Distraction (Waist),Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball)Neutral Grip (Stands) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,"Medicine Ball (feet elevated)
+Neutral Grip (Stands)",Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Neutral Grip (Stands) Straight Arm Mini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,"Medicine Ball (feet elevated)
+Neutral Grip (Stands)",Straight Arm,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Box) Neutral Grip (Stands) Straight Arm Straight Leg Hip Extension Series,Prone,Incline,"Neutral Grip (Stands)
+Box (feet elevated)",Straight Arm,,,Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Box) Neutral Grip (Stands) Straight Arm Straight Leg Hip Extension Series + Lateral Band Distraction (Waist),Prone,Incline,"Neutral Grip (Stands)
+Box (feet elevated)",Straight Arm,,Lateral Band Distraction (Waist),Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Neutral Grip (Stands) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,"Medicine Ball (feet elevated)
+Neutral Grip (Stands)",Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) Neutral Grip (Stands) Straight ArmMini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,"Medicine Ball (feet elevated)
+Neutral Grip (Stands)",Straight Arm,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) BOSU(dome down) Straight Arm Straight Leg Hip Extension Series,Prone,Incline,"Medicine Ball (feet elevated)
+BOSU (dome down)",Straight Arm,,,Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Medicine Ball) BOSU(dome down) Straight Arm Straight Leg Hip Extension Series+ Lateral Band Distraction (Waist),Prone,Incline,"Medicine Ball (feet elevated)
+BOSU (dome down)",Straight Arm,,Lateral Band Distraction (Waist),Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) BOSU(dome down) Straight Arm Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,"Medicine Ball (feet elevated)
+BOSU (dome down)",Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) BOSU(dome down) Straight Arm Mini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,"Medicine Ball (feet elevated)
+BOSU (dome down)",Straight Arm,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Box) BOSU(dome down) Straight Arm Straight Leg Hip Extension Series,Prone,Incline,"BOSU (dome down)
+Box (feet elevated)",Straight Arm,,,Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+Incline (Feet Elevated on Box) BOSU(dome down) Straight Arm Straight Leg Hip Extension Series + Lateral Band Distraction (Waist),Prone,Incline,"BOSU (dome down)
+Box (feet elevated)",Straight Arm,,Lateral Band Distraction (Waist),Straight Leg,,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) BOSU(dome down) Straight Arm)Elbow Mini Band""90,45,180"" Hip Extension Series",Prone,Incline,"Medicine Ball (feet elevated)
+BOSU (dome down)",Straight Arm,Mini Band,,"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,
+"Incline (Feet Elevated on Medicine Ball) BOSU(dome down) Straight Arm Mini Band""90,45,180"" Hip Extension Series + Lateral Band Distraction (Waist)",Prone,Incline,"Medicine Ball (feet elevated)
+BOSU (dome down)",Straight Arm,Mini Band,Lateral Band Distraction (Waist),"""90,45,180"" Hip Extension Series",,,,TRUE,,,,,,,,,,,,,,,

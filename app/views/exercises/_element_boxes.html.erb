@@ -7,13 +7,13 @@
   <div class="card-body py-1">
     <% Element.category_elements(category_name).each do |element| %>
 
-      <% association = @exercise.exercise_elements.find { |m| m.element_id == element.id } %>
+      <% association = exercise.exercise_elements.find { |m| m.element_id == element.id } %>
 
       <% if association %>
         <% existing = true %>
         <% active = "active" %>
       <% else %>
-        <% association = @exercise.exercise_elements.build(element: element) %>
+        <% association = exercise.exercise_elements.build(element: element) %>
         <% existing = false %>
         <%= active = "" %>
       <% end %>
