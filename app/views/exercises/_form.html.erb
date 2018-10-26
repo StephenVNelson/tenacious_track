@@ -38,7 +38,7 @@
     <% Element.category_list.each_slice(2) do |slice| %>
       <div class="card-deck">
         <% slice.each do |category| %>
-          <%= render 'element_boxes', form: form, category_name: category, card_width: set_element_card_display_width(slice) %>
+          <%= render 'element_boxes', form: form, category_name: category, card_width: set_element_card_display_width(slice), exercise: exercise%>
         <% end %>
       </div>
     <% end %>

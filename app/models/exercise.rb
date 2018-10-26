@@ -18,7 +18,8 @@ class Exercise < ApplicationRecord
   def full_name
     name = ""
     if !elements.empty?
-      elements.each_with_index do |element, idx|
+      elements_sorted = elements.sort_by {|object| object.element_category.sort}
+      elements_sorted.each_with_index do |element, idx|
         name << " " unless idx == 0
         name << "#{element.name}"
       end

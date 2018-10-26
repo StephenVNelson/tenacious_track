@@ -1,33 +1,44 @@
-name,element_category_id,Series Name,,,,,,,
-Supine,1,Body Position,,,,,,,In email send prioritization of exercise order term/elements
-Prone,1,Body Position,,,,,,,
-Incline,2,Angle,,,,,,,
-Decline,2,Angle,,,,,,,
-Lateral Band Distraction (Waist),6,Distraction,,,,,,,
-Lateral Distraction,6,Distraction,,,,,,,
-BOSU (dome Up),4,Support,,,,,,,
-BOSU (dome down),4,Support,,,,,,,
-Push Up (stand surface),4,Support,,,,,,,
-Push Up (neautral grip stands),4,Support,,,,,,,
-Mini Band,5,Resistance Type,,,,,,,
-Mini Band (around ankles),5,Resistance Type,,,,,,,
-Mini Band Resisted (ankles),5,Resistance Type,,,,,,,
-Resistance Band,5,Resistance Type,,,,,,,
-Resistance Tube,5,Resistance Type,,,,,,,
-glider,5,Resistance Type,,,,,,,
-dumbells,5,Resistance Type,,,,,,,
-Kettle Bells,5,Resistance Type,,,,,,,
-barbells,5,Resistance Type,,,,,,,
-TRX,5,Resistance Type,,,,,,,
-Knee Extended,5,Resistance Type,,,,,,,
-Single Leg,7,Accessory Movement,,,,,,,
-Knee Flexed @ 90°,7,Accessory Movement,,,,,,,
-"""90,45,180"" Hip Extension Series",7,Accessory Movement,,,,,,,
-Hip Extension Series ???,7,Accessory Movement,,,,,,,
-"""90,45,180"" Knee Extended",7,Accessory Movement,,,,,,,
-Knee Knee Extended,7,Accessory Movement,,,,,,,
-Leg Knee Extended,7,Accessory Movement,,,,,,,
-Hip Extension,8,Mode of Movement,,,,,,,
-Hip Abduction(R+L),8,Mode of Movement,,,,,,,
-Hip Extension Series?,8,Mode of Movement,,,,,,,
-Eccentric Hip Extension?,8,Mode of Movement,,,,,,,
+﻿Name,element_category_id,Series Name
+Prone,1,Body Position
+Supine,1,Body Position
+Decline,2,Angle
+Incline,2,Angle
+Neutral Grip (Stands),3,Tool
+Medicine Ball (Feet Elevated),3,Tool
+Box (Feet Elevated),3,Tool
+Bosu (Dome Down),3,Tool
+Bosu (Dome Up),3,Tool
+Push Up (neutral grip stands),3,Tool
+Push Up (stand surface),3,Tool
+Push Up Stand Surface,3,Tool
+Elbow,4,Support
+Neutral Grip,4,Support
+Straight Arm,4,Support
+barbells,5,Resistance Type
+dumbells,5,Resistance Type
+glider,5,Resistance Type
+Kettle Bells,5,Resistance Type
+Mini Band,5,Resistance Type
+Mini Band (around ankles),5,Resistance Type
+Mini Band Resisted (Ankles),5,Resistance Type
+Resistance Band,5,Resistance Type
+Resistance Tube,5,Resistance Type
+TRX,5,Resistance Type
+Lateral Band Distraction (Waist),6,Distraction
+Lateral Distraction,6,Distraction
+"""90,45,180"" Hip Extension Series",7,Accessory Movement
+"""90,45,180"" Knee Extended",7,Accessory Movement
+Essentric Seconds,7,Accessory Movement
+Hip Extension Series,7,Accessory Movement
+Knee Extended,7,Accessory Movement
+Knee Extended (Knee Straight),7,Accessory Movement
+Knee Flexed @ 90°,7,Accessory Movement
+Leg Knee Extended,7,Accessory Movement
+Single Leg,7,Accessory Movement
+Straight Leg,7,Accessory Movement
+Eccentric Hip Extension,8,Mode of Movement
+Hip Abduction,8,Mode of Movement
+Hip Extension,8,Mode of Movement
+Hip Extension Series,8,Mode of Movement
+Wet Cat,8,Mode of Movement
+(R+L),9,R+L

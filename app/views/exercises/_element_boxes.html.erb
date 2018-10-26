@@ -7,13 +7,13 @@
   <div class="card-body py-1">
     <% Element.category_elements(category_name).each do |element| %>
 
-      <% association = @exercise.exercise_elements.find { |m| m.element_id == element.id } %>
+      <% association = exercise.exercise_elements.find { |m| m.element_id == element.id } %>
 
       <% if association %>
         <% existing = true %>
         <% active = "active" %>
       <% else %>
-        <% association = @exercise.exercise_elements.build(element: element) %>
+        <% association = exercise.exercise_elements.build(element: element) %>
         <% existing = false %>
         <%= active = "" %>
       <% end %>
@@ -23,7 +23,6 @@
         <%= association_fields.hidden_field :_destroy, value: 1 %>
         <div class="btn-group-toggle d-inline" data-toggle="buttons">
           <label class="btn btn-outline-primary m-2 element-checkboxes <%= active %>">
-            <%= binding.pry %>
             <%= association_fields.check_box :_destroy, {checked: existing, include_hidden: false}, checked_value = 0, unchecked_value = 1  %>
             <%= element.name %>
           </label>

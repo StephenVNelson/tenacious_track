@@ -5,6 +5,8 @@
   <%= link_to 'Create new exercise', new_exercise_path %>
 <% end %>
 
+<!-- #TODO:20 Add search function -->
+
 <%= will_paginate @exercises %>
 
 <table class="table">
@@ -28,8 +30,8 @@
     <% @exercises.each do |exercise| %>
       <tr>
         <th scope="row"><%= exercise.full_name %></td>
-        <td><%= link_to 'Edit', edit_exercise_path(exercise), class: "edit-link" %></td>
-        <td><%= link_to '–', exercise, method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-link" %></td>
+        <td><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_exercise_path(exercise), class: "edit-link" %></td>
+        <td><%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, exercise, method: :delete, data: { confirm: 'Are you sure?' }%></td>
       </tr>
     <% end %>
   </tbody>
