@@ -17,7 +17,8 @@
       "XXX",
       "IDEA",
       "NOTE",
-      "REVIEW"
+      "REVIEW",
+      "HELP"
     ]
   },
   "lists": [
@@ -28,6 +29,10 @@
     {
       "name": "DONE",
       "hidden": true
+    },
+    {
+      "name": "HELP",
+      "hidden": false
     }
   ],
   "marked": {
