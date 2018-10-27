@@ -2,8 +2,8 @@ class Exercise < ApplicationRecord
   has_many :exercise_elements, dependent: :destroy
   has_many :elements, through: :exercise_elements
   accepts_nested_attributes_for :exercise_elements, allow_destroy: true
-
   validates_with MeasurementValidator
+
 
   def self.with_elements(element_name)
     Exercise.joins(:elements).where(:elements => {name: element_name})

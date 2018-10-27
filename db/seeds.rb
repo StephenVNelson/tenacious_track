@@ -1,7 +1,6 @@
 require 'csv'
 require 'pry'
 
-# TODO:10 write tests for seed file
 
 def load_file(filename)
   categories = File.read(Rails.root.join('lib', 'seeds', filename)).sub("\xEF\xBB\xBF", '')

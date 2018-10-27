@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181018181435) do
+ActiveRecord::Schema.define(version: 20181027162042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,14 +42,14 @@ ActiveRecord::Schema.define(version: 20181018181435) do
   end
 
   create_table "exercises", force: :cascade do |t|
-    t.boolean "right_left_bool"
-    t.boolean "reps_bool"
-    t.boolean "resistance_bool"
-    t.boolean "duration_bool"
+    t.boolean "right_left_bool", default: false
+    t.boolean "reps_bool", default: false
+    t.boolean "resistance_bool", default: false
+    t.boolean "duration_bool", default: false
     t.string "gif_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "work_rest_bool"
+    t.boolean "work_rest_bool", default: false
   end
 
   create_table "users", force: :cascade do |t|

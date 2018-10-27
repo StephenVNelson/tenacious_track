@@ -1,8 +1,11 @@
-<h1>Editing Exercise</h1>
+<!-- #TODO:0 Add dynamic title so you can see what exercise you're editing -->
+
+<h2><%= @exercise.full_name %></h2>
 <%= render 'shared/error_messages', object: @exercise %>
 
 <%= render 'form', exercise: @exercise %>
 
+<!-- #TODO:10 fix boolean preselect for the exercise edit page -->
 
 <% if false %>
   <%= form_for @exercise do |f| %>
