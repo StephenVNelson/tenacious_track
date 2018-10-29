@@ -28,7 +28,7 @@
     },
     {
       "name": "DONE",
-      "hidden": true
+      "hidden": false
     },
     {
       "name": "HELP",

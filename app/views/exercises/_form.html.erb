@@ -4,7 +4,7 @@
   <%= form_for(exercise) do |form| %>
     <%= render 'shared/error_messages', object: exercise %>
 
-    <!-- #TODO:20 Decide if you want right-left to be a measurement or an element -->
+    <!-- #TODO:60 Decide if you want right-left to be a measurement or an element -->
 
 
     <!-- Category selectors -->
@@ -49,13 +49,13 @@
 
 
     <!-- Element Selectors -->
-    <% Element.category_list.each_slice(2) do |slice| %>
-      <div class="card-deck">
-        <% slice.each do |category| %>
-          <%= render 'element_boxes', form: form, category_name: category, card_width: set_element_card_display_width(slice), exercise: exercise%>
-        <% end %>
+    <div class="card-columns">
+      <% Element.category_list.each do |category| %>
+      <div class="">
+        <%= render 'element_boxes', form: form, category_name: category, exercise: exercise%>
       </div>
-    <% end %>
+      <% end %>
+    </div>
 
     <!-- Measurement Selectors -->
     <table class="table table-card-style-green">
@@ -96,8 +96,8 @@
   <% end %>
 </div>
 
-<!-- #DONE:0 fix boolean preselect for the exercise edit page -->
+<!-- #DONE:30 fix boolean preselect for the exercise edit page -->
 
-<!--#DONE:10 fix the way the booleans look-->
+<!--#DONE:40 fix the way the booleans look-->
 
-<!-- #DONE:0 See if you can't preselect categories in edit view -->
+<!-- #DONE:20 See if you can't preselect categories in edit view -->
