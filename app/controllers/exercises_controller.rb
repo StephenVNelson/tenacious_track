@@ -72,9 +72,8 @@ class ExercisesController < ApplicationController
   private
 
   def elements_filtered
-    @exercises = Exercise.all.paginate(page: params[:page], per_page: 30)
+    @exercises = Exercise.element_search(params[:query]).paginate(page: params[:page], per_page: 30)
   end
-
 
   # Use callbacks to share common setup or constraints between actions.
   def set_exercise

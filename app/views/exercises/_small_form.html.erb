@@ -4,7 +4,7 @@
       <%= f.fields_for :exercise_elements do |elements|%>
         <%=
           elements.select :element_id,
-            grouped_options_for_select(Element.elements_grouped_by_categories),
+            grouped_options_for_select(Element.element_names_and_ids_grouped_by_categories),
             {},
             class: 'js-example-basic-multiple',
             multiple: true

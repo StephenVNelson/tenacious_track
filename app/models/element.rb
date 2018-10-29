@@ -50,9 +50,14 @@ class Element < ApplicationRecord
     element_names.map {|element| [element.name , element.id]}
   end
 
-  def self.elements_grouped_by_categories
+  def self.element_names_and_ids_grouped_by_categories
     categories = Element.category_list
     categories.map {|category| [category, Element.category_element_names_and_ids(category)]}
+  end
+
+  def self.element_names_grouped_by_categories
+    categories = Element.category_list
+    categories.map {|category| [category, Element.category_element_names(category)]}
   end
 
 end

@@ -1,3 +1,7 @@
+$(document).on("turbolinks:before-cache", function() {
+  $('.js-example-basic-multiple').select2('destroy');
+});
+
 document.addEventListener("turbolinks:load", function() {
 
   // Change font size for series elements
@@ -36,6 +40,32 @@ document.addEventListener("turbolinks:load", function() {
 
     });
   });
+
+  $('.js-example-basic-multiple').select2({
+    placeholder: 'Search Elements',
+    width: '100%',
+    // theme: "bootstrap",
+  });
+  // $('#query').select2({
+  //   placeholder:'Filter by elements',
+  //   width: '100%',
+  //   templateResult: function (data) {
+  //     // We only really care if there is an element to pull classes from
+  //     if (!data.element) {
+  //       return data.text;
+  //     }
+  //
+  //     var $element = $(data.element);
+  //
+  //     var $wrapper = $('<span></span>');
+  //     $wrapper.addClass($element[0].className);
+  //
+  //     $wrapper.text(data.text);
+  //
+  //     return $wrapper;
+  //   }
+  //
+  // });
 
 
 });

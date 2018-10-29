@@ -1,8 +1,24 @@
 class Exercise < ApplicationRecord
+  include PgSearch
+
   has_many :exercise_elements, dependent: :destroy
   has_many :elements, through: :exercise_elements
   accepts_nested_attributes_for :exercise_elements, allow_destroy: true
   validates_with MeasurementValidator
+
+  pg_search_scope :search_by_exercise_reps_bool,
+    using: {tsearch: {dictionary: "english"}},
+    associated_against: {elements: :name}
+
+  # TODO:80 Figure out what you want to do about duplicate exercises
+
+  def self.element_search(query)
+    if query.present?
+      search_by_exercise_reps_bool(query)
+    else
+      Exercise.all.sort_by {|object| object.full_name}
+    end
+  end
 
 
   def self.with_elements(element_name)

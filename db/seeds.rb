@@ -47,7 +47,7 @@ end
 def add_boolean_val_or_association(t, row, header, row_index)
   formatted_cell_data = row[header].titleize.split("\n").each{|p| p.strip!}
   if header.downcase.include?("bool")
-    t.send("#{header}=", row[header] == true.to_s)
+    t.send("#{header}=", row[header].downcase == true.to_s)
   else
     associate_element_or_alert(t, formatted_cell_data, header, row_index)
   end
@@ -62,7 +62,7 @@ load_file('Exercises.csv').each_with_index do |row,idx|
     end
   end
   t.save
-  # puts "#{t.elements.names} saved"
+  puts "#{t.elements.names} saved"
 end
 
 
