@@ -11,12 +11,12 @@
     <% association = exercise.exercise_elements.find { |m| m.element_id == element.id } %>
 
     <% if association %>
-    <% existing = true %>
-    <% active = "active" %>
+      <% existing = true %>
+      <% active = "active" %>
     <% else %>
-    <% association = exercise.exercise_elements.build(element: element) %>
-    <% existing = false %>
-    <%= active = "" %>
+      <% association = exercise.exercise_elements.build(element: element) %>
+      <% existing = false %>
+      <%= active = "" %>
     <% end %>
 
     <%= form.fields_for :exercise_elements, association do |association_fields| %>

@@ -5,7 +5,7 @@
   <%= link_to 'Create new exercise', new_exercise_path %>
 <% end %>
 
-<!-- #TODO:70 Add search function -->
+<!-- #TODO:0 Add search function -->
 
 <%= will_paginate @exercises %>
 
@@ -29,7 +29,7 @@
     </tr>
     <% @exercises.each do |exercise| %>
       <tr>
-        <th scope="row"><%= exercise.full_name %></td>
+        <td scope="row"><%= exercise.full_name %></td>
         <td><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_exercise_path(exercise), class: "edit-link" %></td>
         <td><%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, exercise, method: :delete, data: { confirm: 'Are you sure?' }%></td>
       </tr>
