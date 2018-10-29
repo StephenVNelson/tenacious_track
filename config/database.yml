@@ -41,7 +41,7 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-# TODO:50 figure out how to access adatabase through Postico app
+# TODO:60 figure out how to access adatabase through Postico app
 default: &default
   adapter: postgresql
   encoding: unicode

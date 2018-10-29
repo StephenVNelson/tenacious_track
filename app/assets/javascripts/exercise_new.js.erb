@@ -1,24 +1,4 @@
 document.addEventListener("turbolinks:load", function() {
-  $(function(){
-    // changing check boxes
-    var checkboxs = $('input[type=checkbox].check-change');
-
-    checkboxs.each(function(){
-      $(this).wrap('<div class="customCheckbox"></div>');
-      $(this).before('<span>&#10004;</span>');
-    });
-
-    checkboxs.change(function(){
-      if($(this).is(':checked')){
-        $(this).parent().addClass('customCheckboxChecked');
-      } else {
-        $(this).parent().removeClass('customCheckboxChecked');
-      }
-    });
-
-
-  });
-
 
   // Change font size for series elements
   $(function(){

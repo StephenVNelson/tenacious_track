@@ -14,6 +14,11 @@ class Exercise < ApplicationRecord
     booleans.keys
   end
 
+  def self.bool_humanize(boolean_name)
+    debooled = boolean_name.gsub("bool","")
+    debooled.titleize
+  end
+
   #Creates string of element names
   def full_name
     name = ""

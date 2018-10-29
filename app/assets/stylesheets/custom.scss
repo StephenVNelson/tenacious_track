@@ -26,67 +26,6 @@ $gray-medium-light: #eaeaea;
 
 //CHECKBOXES
 
-// Check change
-input[type=checkbox].check-change
-{
-  /* Double-sized Checkboxes */
-  -ms-transform: scale(4); /* IE */
-  -moz-transform: scale(4); /* FF */
-  -webkit-transform: scale(4); /* Safari and Chrome */
-  -o-transform: scale(4); /* Opera */
-  padding: 10px;
-}
-
-.customCheckbox {
-  float: center;
-  position: relative;
-  width: 40px;
-  height: 40px;
-  background: #FFFCF9;
-  border-radius: 2px;
-  border: 2px solid #d2d2d2;
-  box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  vertical-align: middle;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  align: center;
-}
-
-.customCheckbox.customCheckboxChecked {
-  background: #FFFCF9;
-  border: 1px solid #95A472;
-}
-
-.customCheckbox input {
-  opacity: 0;
-  cursor: pointer;
-  z-index: 5;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.customCheckbox span {
-  display: none;
-  text-align: center;
-  line-height: 40px;
-  font-size: 90%;
-  color: #222;
-}
-
-.customCheckbox.customCheckboxChecked span {
-  display: block;
-}
-
-.customCheckbox.customCheckboxDisabled {
-  background: #9AABB1;
-}
-
 .element-checkboxes{
   border: 2.5px solid;
   // white-space:normal !important;
@@ -155,6 +94,15 @@ input {
   color: white;
 }
 
+.btn-outline-success {
+  &.active {
+    color: white !important;
+  }
+  &:hover {
+    color: white;
+  }
+}
+
 .fun-thing {
   background-color: red;
 }
@@ -172,6 +120,11 @@ input {
 // General
 h1 {
   color: #636D73;
+}
+
+.exercise-header {
+  color: #636D73;
+  font-family: "Lucida Sans";
 }
 
 
@@ -272,19 +225,6 @@ table.table-card-style-primary {
 
 .button-width {
   min-width: 70px;
-}
-
-//TEXT CHECKBOX
-input[type="text"].numbers {
-    line-height: 35px;
-    width: 40px;
-    font-size:24px;
-    text-align: center;
-    color: #95A472;
-    background: #FFFCF9;
-    border-radius: 2px;
-    border: 1px solid #d2d2d2;
-    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 

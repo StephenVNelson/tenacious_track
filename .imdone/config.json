@@ -24,15 +24,15 @@
   "lists": [
     {
       "name": "TODO",
-      "hidden": false
-    },
-    {
-      "name": "DONE",
       "hidden": true
     },
     {
-      "name": "HELP",
+      "name": "DONE",
       "hidden": false
+    },
+    {
+      "name": "HELP",
+      "hidden": true
     }
   ],
   "marked": {

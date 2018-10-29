@@ -4,7 +4,9 @@
   <%= form_for(exercise) do |form| %>
     <%= render 'shared/error_messages', object: exercise %>
 
-    <!-- Series selectors -->
+    <!-- #TODO: Decide if you want right-left to be a measurement of an element -->
+
+    <!-- Category selectors -->
     <table class="table table-card-style-primary all-edges-rounded">
       <thead class="thead-dark primary-color" >
         <tr>
@@ -43,33 +45,37 @@
       </div>
     <% end %>
 
+    <!-- Measurement Selectors -->
     <table class="table table-card-style-green">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Reps</th>
-          <th scope="col">(R+L)</th>
-          <th scope="col">Resistance</th>
-          <th scope="col">Duration</th>
-          <th scope="col">Work/Rest</th>
+          <th colspan="<%= Exercise.booleans.count.to_s %>"> <h3>Exercise Measurements</h1> </th>
         </tr>
       </thead>
       <tbody>
         <tr class="table-light">
-          <td>
-            <%= form.check_box(:reps_bool, {class: "check-change"}, "true", "false") %>
-          </td>
-          <td>
-            <%= form.check_box(:right_left_bool, {class: "check-change"}, "true", "false") %>
-          </td>
-          <td>
-            <%= form.check_box(:resistance_bool, {class: "check-change"}, "true", "false") %>
-          </td>
-          <td>
-            <%= form.check_box(:duration_bool, {class: "check-change"}, "true", "false") %>
-          </td>
-          <td>
-            <%= form.check_box(:work_rest_bool, {class: "check-change"}, "true", "false") %>
-          </td>
+          <% Exercise.booleans.each do |bool| %>
+            <% checked = exercise.send(bool) == true %>
+
+            <% if checked %>
+              <% existing = true %>
+              <% active = "active" %>
+            <% else %>
+              <% existing = false %>
+              <%= active = "" %>
+            <% end %>
+
+
+            <td style="text-align: center;">
+              <%= form.hidden_field bool, value: false %>
+              <div class="btn-group-toggle d-inline" data-toggle="buttons">
+                <label id="<%= bool %>" class="btn btn-outline-success series-checkboxes resizer p-1 <%= active %>">
+                  <%= form.check_box bool, {checked: existing, include_hidden: false}, true, false %>
+                    <%= Exercise.bool_humanize(bool)%>
+                </label>
+              </div>
+            </td>
+          <% end %>
         </tr>
       </tbody>
     </table>
@@ -77,3 +83,6 @@
 
   <% end %>
 </div>
+
+<!-- #DONE:0 fix boolean preselect for the exercise edit page -->
+<!--#DONE:10 fix the way the booleans look-->
