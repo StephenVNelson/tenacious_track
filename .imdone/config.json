@@ -24,11 +24,11 @@
   "lists": [
     {
       "name": "TODO",
-      "hidden": true
+      "hidden": false
     },
     {
       "name": "DONE",
-      "hidden": false
+      "hidden": true
     },
     {
       "name": "HELP",

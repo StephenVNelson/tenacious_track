@@ -4,7 +4,8 @@
   <%= form_for(exercise) do |form| %>
     <%= render 'shared/error_messages', object: exercise %>
 
-    <!-- #TODO: Decide if you want right-left to be a measurement of an element -->
+    <!-- #TODO:20 Decide if you want right-left to be a measurement or an element -->
+
 
     <!-- Category selectors -->
     <table class="table table-card-style-primary all-edges-rounded">
@@ -16,15 +17,26 @@
         </tr>
       </thead>
       <tbody>
-        <% Element.category_list.each_slice(4) do |slice| %>
+        <% exercise.category_element_association_count.each_slice(4) do |slice| %>
           <tr>
-            <% slice.each do |series| %>
+            <% slice.each do |category, amt| %>
+
+              <% checked = amt > 0 %>
+
+              <% if checked %>
+                <% existing = true %>
+                <% active = "active" %>
+              <% else %>
+                <% existing = false %>
+                <%= active = "" %>
+              <% end %>
+
               <td style="text-align: center;">
                 <div class="btn-group-toggle d-inline element-picker" data-toggle="buttons">
-                  <label id="<%= series %>" class="btn btn-outline-primary series-checkboxes resizer p-1">
-                    <%= check_box_tag :series_name, {class: ""} %>
+                  <label id="<%= category %>" class="btn btn-outline-primary series-checkboxes resizer p-1 <%= active %>">
+                    <%= check_box_tag :category, {checked: existing} %>
                     <span>
-                      <%= series %>
+                      <%= category %>
                     </span>
                   </label>
                 </div>
@@ -85,4 +97,7 @@
 </div>
 
 <!-- #DONE:0 fix boolean preselect for the exercise edit page -->
+
 <!--#DONE:10 fix the way the booleans look-->
+
+<!-- #DONE:0 See if you can't preselect categories in edit view -->

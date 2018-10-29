@@ -19,6 +19,16 @@ class Exercise < ApplicationRecord
     debooled.titleize
   end
 
+  #Return a hash with a list of cetegories and whether or not they have more than one element association for a specific exercise
+  def category_element_association_count
+    category_and_count_hash = {}
+    Element.category_list.each {|p| category_and_count_hash[p] = 0}
+    self.elements.each do |element|
+      category_and_count_hash[element.element_category.category_name] += 1
+    end
+    category_and_count_hash
+  end
+
   #Creates string of element names
   def full_name
     name = ""
