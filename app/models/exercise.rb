@@ -7,8 +7,12 @@ class Exercise < ApplicationRecord
   validates_with MeasurementValidator
 
   pg_search_scope :search_by_exercise_reps_bool,
-    using: {tsearch: {dictionary: "english"}},
-    associated_against: {elements: :name}
+    using: {
+        :tsearch => {:dictionary => "simple"}
+      },
+    associated_against: {
+      elements: :name
+    }
 
   # TODO:80 Figure out what you want to do about duplicate exercises
 

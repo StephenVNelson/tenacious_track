@@ -18,12 +18,12 @@
   </div>
 <% end %>
 
-<div class="row mt-5 mb-1">
-  <div class="col col-auto">
+<div class="row justify-content-between mt-5 mb-3">
+  <div class="col col-auto mr-4">
     <%= will_paginate @exercises %>
   </div>
-  <div class="col col-3">
-    <%= button_tag type: 'button', class: 'btn btn-secondary' do %>
+  <div class="col col-3 mr-3 p-0 d-flex justify-content-end">
+    <%= button_tag type: 'button', class: 'btn btn-secondary', style: 'height: 40px;' do %>
     <%= link_to 'Create new exercise', new_exercise_path %>
     <% end %>
   </div>
