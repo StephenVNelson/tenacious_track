@@ -8,4 +8,4 @@ class ChangeBooleanDefaultValuesInExerciseModel < ActiveRecord::Migration[5.1]
   end
 end
 
-  #DONE:30 Created default to false to avoid three state boolean problem https://robots.thoughtbot.com/avoid-the-threestate-boolean-problem
+  #DONE:40 Created default to false to avoid three state boolean problem https://robots.thoughtbot.com/avoid-the-threestate-boolean-problem

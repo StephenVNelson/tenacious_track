@@ -5,6 +5,7 @@ class Exercise < ApplicationRecord
   has_many :elements, through: :exercise_elements
   accepts_nested_attributes_for :exercise_elements, allow_destroy: true
   validates_with MeasurementValidator
+  validate :element_uniqueness
 
   pg_search_scope :search_by_exercise_reps_bool,
     using: {
@@ -13,8 +14,6 @@ class Exercise < ApplicationRecord
     associated_against: {
       elements: :name
     }
-
-  # TODO:80 Figure out what you want to do about duplicate exercises
 
   def self.element_search(query)
     if query.present?
@@ -27,6 +26,10 @@ class Exercise < ApplicationRecord
 
   def self.with_elements(element_name)
     Exercise.joins(:elements).where(:elements => {name: element_name})
+  end
+
+  def elements_names
+    self.elements.map(&:name)
   end
 
   def self.booleans
@@ -49,6 +52,14 @@ class Exercise < ApplicationRecord
     category_and_count_hash
   end
 
+  def element_uniqueness
+    all_exercises = Exercise.all.map(&:elements_names)
+    this_exercise = exercise_elements.map(&:element).map(&:name)
+    if all_exercises.include?(this_exercise)
+      errors.add(:exercise, "already exists")
+    end
+  end
+
   #Creates string of element names
   def full_name
     name = ""
@@ -64,3 +75,5 @@ class Exercise < ApplicationRecord
     end
   end
 end
+
+# DONE:100 Figure out what you want to do about duplicate exercises

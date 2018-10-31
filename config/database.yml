@@ -41,7 +41,6 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-# TODO:110 figure out how to access adatabase through Postico app
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -111,3 +110,5 @@ production:
   database: postgres_test_production
   username: postgres_test
   password: <%= ENV['POSTGRES_TEST_DATABASE_PASSWORD'] %>
+
+# DONE:0 figure out how to access adatabase through Postico app
