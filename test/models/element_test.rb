@@ -4,25 +4,21 @@ require 'pry'
 class ElementTest < ActiveSupport::TestCase
 
   def setup
-    @element = Element.create(series_name: "Body Position", name: "Not Prone")
+    @category1 = element_categories(:one)
+    @element = Element.create(element_category: @category1, name: "Not Prone")
   end
 
   test "should be valid" do
     assert @element.valid?
   end
 
-  test "series name should be present" do
-    @element.series_name = "       "
+  test "category should be present" do
+    @element.element_category = nil
     assert_not @element.valid?
   end
 
-  test "email should be present" do
+  test "name should be present" do
     @element.name = "     "
-    assert_not @element.valid?
-  end
-
-  test "series name should not be too long" do
-    @element.series_name = "a"*51
     assert_not @element.valid?
   end
 
@@ -30,7 +26,7 @@ class ElementTest < ActiveSupport::TestCase
     @element.name = "a"*51 + "@example.com"
     assert_not @element.valid?
   end
-
+  
   test "element name should be unique" do
     element2 = Element.new(@element.attributes)
     assert_not element2.valid?
