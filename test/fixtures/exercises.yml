@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  right_left_bool: false
-  reps_bool: false
+  reps_bool: true
   resistance_bool: false
   duration_bool: false
   gif_link: MyString
 
 two:
-  right_left_bool: false
   reps_bool: false
   resistance_bool: false
-  duration_bool: false
+  duration_bool: true
+  gif_link: MyString
+
+three:
+  reps_bool: false
+  resistance_bool: true
+  duration_bool: true
   gif_link: MyString

@@ -2,15 +2,15 @@
 
 
 one:
-  series_name: Body Position
   name: Prone
+  element_category: one
 
 two:
-  series_name: Angle
   name: Incline
+  element_category: two
 
 <% 30.times do |n|%>
 element_<%= n %>:
-  series_name: <%= ["Body Position", "Angle", "Distraction", "Support Tool", "Resistance Type", "Accessory Movement Description", "Mode of Movement", "Test"].sample %>
+  element_category_id: <%= ElementCategory.all.sample.id %>
   name: <%= "name_#{n}" %>
 <% end %>

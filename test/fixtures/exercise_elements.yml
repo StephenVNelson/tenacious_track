@@ -1,1 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+one:
+  exercise: one
+  element: one
+
+two:
+  exercise: one
+  element: element_1
+
+three:
+  exercise: two
+  element: one
