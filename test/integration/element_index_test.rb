@@ -7,21 +7,23 @@ class ElementIndexTest < ActionDispatch::IntegrationTest
     @non_admin = users(:archer)
     @element1 = elements(:one)
     @element2 = elements(:two)
+    @category1 = element_categories(:one)
+    @category2 = element_categories(:two)
   end
 
-  test "delete returns user to filtered page" do
+  test "filtering results" do
     log_in_as(@admin)
     get elements_path
     assert_template 'elements/index'
     assert_select 'ul.pagination'
-    assert_select 'a', text: 'delete'
-    assert_select 'a', text: 'edit'
-    first_page_of_elements = Element.where(series_name: "Body Position").paginate(page: 1, :per_page => 15)
-    first_page_of_elements.each do |element|
-      assert element.series_name, "Body Position"
-    end
-    delete element_path(@element1.id, series: "Body Position")
-    assert_redirected_to elements_path(series: "Body Position")
+    assert_select 'i', class: 'fa-trash-alt'
+    assert_select 'i', class: 'fa-edit'
+    assert_select 'td', text: @category1.category_name
+    get elements_path, params: {
+      query: [@category2.category_name]
+    }
+    assert_select 'td', text: @category1.category_name, count: 0
+    assert_select 'td', text: @category2.category_name
   end
 
   test "non-admins cannot see delete or edit elements" do
@@ -29,8 +31,8 @@ class ElementIndexTest < ActionDispatch::IntegrationTest
     assert current_user?(@non_admin)
     assert_not @non_admin.admin?
     get elements_path
-    assert_select 'a', text: 'delete', count: 0
-    assert_select 'a', text: 'edit', count: 0
+    assert_select 'i', class: 'fa-trash-alt', count: 0
+    assert_select 'i', class: 'fa-edit', count: 0
   end
 
 
