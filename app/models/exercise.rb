@@ -76,4 +76,4 @@ class Exercise < ApplicationRecord
   end
 end
 
-# DONE:100 Figure out what you want to do about duplicate exercises
+# DONE: Figure out what you want to do about duplicate exercises id:6
