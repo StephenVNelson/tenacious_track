@@ -18,6 +18,7 @@
       "IDEA",
       "NOTE",
       "REVIEW",
+      "MARK",
       "HELP"
     ]
   },
@@ -42,5 +43,10 @@
     "pedantic": false,
     "smartLists": true,
     "langPrefix": "language-"
+  },
+  "sync": {
+    "id": "5bd1e162b9abeb3ae06eec16",
+    "name": "StephenVNelson/tenacious_track",
+    "useImdoneioForPriority": true
   }
 }
