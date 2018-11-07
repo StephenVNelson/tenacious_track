@@ -3,31 +3,24 @@ class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
   before_action :set_elements, only: [:show, :edit, :update, :destroy]
 
-  # GET /exercises
-  # GET /exercises.json
   def index
     elements_filtered
     @new_exercise = Exercise.new
     @new_exercise.exercise_elements.build
   end
 
-  # GET /exercises/1
-  # GET /exercises/1.json
   def show
   end
 
-  # GET /exercises/new
   def new
     @new_exercise = Exercise.new
     @new_exercise.exercise_elements.build
   end
 
-  # GET /exercises/1/edit
   def edit
   end
 
-  # POST /exercises
-  # POST /exercises.json
+  # TODO: Make it so it returns back to the page it just came from after you create a new exercise
   def create
     @new_exercise = Exercise.new(exercise_params)
 
@@ -43,9 +36,8 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /exercises/1
-  # PATCH/PUT /exercises/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @exercise.update(exercise_params)
         flash[:info] = 'Exercise was successfully updated.'
@@ -58,8 +50,6 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # DELETE /exercises/1
-  # DELETE /exercises/1.json
   def destroy
     @exercise.destroy
     respond_to do |format|
@@ -91,12 +81,6 @@ class ExercisesController < ApplicationController
 
   # changes params layout in case multiselect is used
   def reformat_multiselect_params_format
-    # you might be able to just map exercise_elements_params["0"][:element_id]
-    # reformatted_params = {}
-    # exercise_elements_params["0"][:element_id].map |a|
-    #   reformatted_params << { element_id: id }
-    # end
-    # exercise_elements_params = reformatted_params
     exercise_elements_params["0"][:element_id].each_with_index do |id, idx|
       if id.present?
         exercise_elements_params[(idx + 1).to_s] = { element_id: id }

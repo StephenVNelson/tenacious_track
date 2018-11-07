@@ -30,10 +30,10 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <% if logged_in? %>
-            <%= link_to "Element Categories", element_categories_path, class: "dropdown-item" unless !current_user.admin?%>
+            <%= link_to "Categories", element_categories_path, class: "dropdown-item" unless !current_user.admin?%>
           <% end %>
-          <%= link_to "Exercise Elements", elements_path, class: "dropdown-item" %>
-          <%= link_to "All Exercises", exercises_path, class: "dropdown-item" %>
+          <%= link_to "Elements", elements_path, class: "dropdown-item" %>
+          <%= link_to "Exercises", exercises_path, class: "dropdown-item" %>
         </div>
       </li>
       <li class="mx-5">&nbsp;</li>

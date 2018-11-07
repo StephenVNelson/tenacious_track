@@ -36,6 +36,9 @@ group :development do
   gem 'spring-watcher-listen', '2.0.1'
   gem 'awesome_print', :require => 'ap'
   gem 'pry-rails'
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-nav'
 end
 
 group :test do

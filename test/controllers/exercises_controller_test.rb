@@ -3,6 +3,8 @@ require 'test_helper'
 class ExercisesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @exercise = exercises(:one)
+    @element1 = elements(:one)
+    @element2 = elements(:two)
   end
 
   test "should get index" do
@@ -17,10 +19,31 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create exercise" do
     assert_difference('Exercise.count') do
-      post exercises_url, params: { exercise: {  } }
+      post exercises_path, params: {
+        exercise: {
+          reps_bool: true,
+          exercise_elements_attributes: {"0": {element_id: @element1.id.to_s},
+                                        "1": {element_id: @element2.id.to_s}
+          }
+        }
+      }
     end
+    assert_redirected_to exercises_path
+  end
 
-    assert_redirected_to exercise_url(Exercise.last)
+  test "should create exercise when submitted through multiselect" do
+    assert_difference('Exercise.count') do
+      post exercises_path, params: {
+        exercise: {
+          reps_bool: true,
+          exercise_elements_attributes:
+            {"0":
+              {element_id: ["" ,@element1.id.to_s, @element2.id.to_s]}
+          }
+        }
+      }
+    end
+    assert_redirected_to exercises_path
   end
 
   test "should show exercise" do
@@ -33,9 +56,26 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # TODO: Add these fake params tests to Exercise.rb and add the code snippet that Gino send you over Slack to this test
+
   test "should update exercise" do
-    patch exercise_url(@exercise), params: { exercise: {  } }
-    assert_redirected_to exercise_url(@exercise)
+    patch exercise_path(@exercise), params: {
+      exercise: {
+        reps_bool: true,
+        exercise_elements_attributes: {
+          "0": {
+            element_id: @element1.id.to_s, "_destroy": "0"
+          },
+          "1": {
+            element_id: @element2.id.to_s, "_destroy": "0"
+          },
+          "2": {
+            element_id: elements(:element_1).id.to_s, "_destroy": "0"
+          }
+        }
+      }
+    }
+    assert_redirected_to exercises_path
   end
 
   test "should destroy exercise" do
@@ -43,6 +83,6 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
       delete exercise_url(@exercise)
     end
 
-    assert_redirected_to exercises_url
+    assert_redirected_to exercises_path
   end
 end

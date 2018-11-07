@@ -29,7 +29,8 @@ class Exercise < ApplicationRecord
   end
 
   def elements_names
-    self.elements.map(&:name)
+    array = self.elements.map(&:name)
+    array.sort
   end
 
   def self.booleans
@@ -54,7 +55,7 @@ class Exercise < ApplicationRecord
 
   def element_uniqueness
     all_exercises = Exercise.all.map(&:elements_names)
-    this_exercise = exercise_elements.map(&:element).map(&:name)
+    this_exercise = exercise_elements.map(&:element).map(&:name).sort
     if all_exercises.include?(this_exercise)
       errors.add(:exercise, "already exists")
     end
