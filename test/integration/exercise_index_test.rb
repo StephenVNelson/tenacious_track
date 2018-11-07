@@ -1,6 +1,6 @@
 require 'test_helper'
 
-# TODO: Create test for filtering
+# TODO: Create test for filtering id:20
 
 class ExerciseIndexTest < ActionDispatch::IntegrationTest
   test "should return filtered results" do
