@@ -24,6 +24,7 @@ gem 'jbuilder',                '2.7.0'
 gem 'bootstrap', '~> 4.1.3'
 gem 'pg_search'
 gem "select2-rails"
+gem 'bumbler', '~> 0.3.2'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri
