@@ -5,7 +5,7 @@ gem 'rails',                   '5.1.4'
 gem 'pg',                      '0.18'
 gem 'bcrypt',                  '3.1.12'
 gem 'faker',                   '1.7.3'
-gem 'carrierwave',             '1.2.2'
+gem 'carrierwave',             '1.2.2' ,  require: false
 gem 'mini_magick',             '4.7.0'
 gem 'will_paginate',           '3.1.6'
 gem 'bootstrap-will_paginate'
@@ -40,9 +40,9 @@ group :development do
   gem 'spring-watcher-listen', '2.0.1'
   gem 'awesome_print', :require => 'ap'
   gem 'pry-rails'
-  gem 'pry'
-  gem 'pry-remote'
-  gem 'pry-nav'
+  gem 'pry'          ,  require: false
+  gem 'pry-remote'   ,  require: false
+  gem 'pry-nav'      ,  require: false
 
 end
 
