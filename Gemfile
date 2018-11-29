@@ -28,8 +28,9 @@ gem "select2-rails"
 gem 'bumbler', '~> 0.3.2'
 
 group :development, :test do
-  gem 'byebug',  '9.0.6', platform: :mri
+  gem 'byebug',  '9.0.6', platform: :mri, require: false
   gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -42,14 +43,19 @@ group :development do
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
+
 end
 
 group :test do
   gem 'rails-controller-testing', '1.0.2'
-  gem 'minitest',                 '5.10.3'
-  gem 'minitest-reporters',       '1.1.14'
-  gem 'guard',                    '2.14.1'
-  gem 'guard-minitest',           '2.4.6'
+  gem 'minitest',                 '5.10.3', require: false
+  gem 'minitest-reporters',       '1.1.14', require: false
+  gem 'guard',                    '2.14.1', require: false
+  gem 'guard-minitest',           '2.4.6', require: false
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
 group :production do
