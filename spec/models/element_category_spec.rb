@@ -2,52 +2,40 @@ require 'rails_helper'
 
 RSpec.describe ElementCategory, type: :model do
 
-  it "is valid with category name and sort number" do
-    category = ElementCategory.new(
-                                  category_name: "Movements",
-                                  sort: 20)
-    expect(category).to be_valid
+  it "has a valid factory" do
+    expect(build(:element_category)).to be_valid
   end
 
   it "is not valid without #category_name" do
-    category = ElementCategory.new(
-                                  category_name: nil,
-                                  sort: 20)
+    category = build(:element_category ,category_name: nil)
     category.valid?
     expect(category.errors[:category_name]).to include("can't be blank")
   end
 
-  it "must have sort order" do
-    category = ElementCategory.new(
-                                      category_name: "Movement",
-                                      sort: nil
-    )
+  it "is not valid without #sort" do
+    category = build(:element_category, sort: nil)
     category.valid?
     expect(category.errors[:sort]).to include("can't be blank")
   end
 
   describe "category attributes must be unique" do
-    before(:example) do
-      ElementCategory.create(
-                                        category_name: "Movement",
-                                        sort: 1
-      )
-    end
+    # before(:example) do
+    #   ElementCategory.create(
+    #                                     category_name: "Movement",
+    #                                     sort: 1
+    #   )
+    # end
 
     it "is not valid if #category_name is already used" do
-      category = ElementCategory.new(
-                                        category_name: "Movement",
-                                        sort: 2
-      )
+      create( :element_category, category_name: "Movement")
+      category = build( :element_category, category_name: "Movement")
       category.valid?
       expect(category.errors[:category_name]).to include("has already been taken")
     end
 
     it 'not valid if category sort number is already used' do
-      category = ElementCategory.new(
-                                        category_name: "Tool",
-                                        sort: 1
-      )
+      create( :element_category, sort: 2)
+      category = build( :element_category, sort: 2)
       category.valid?
       expect(category.errors[:sort]).to include("has already been taken")
     end
@@ -55,15 +43,15 @@ RSpec.describe ElementCategory, type: :model do
   end
 
   it "must be listed in sort order" do
-    category1 = ElementCategory.create(
+    category1 = create(:element_category,
       category_name: "First",
       sort: 4
     )
-    category2 = ElementCategory.create(
+    category2 = create(:element_category,
       category_name: "Second",
       sort: 5
     )
-    category3 = ElementCategory.create(
+    category3 = create(:element_category,
       category_name: "Third",
       sort: 3
     )
