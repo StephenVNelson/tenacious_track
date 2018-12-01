@@ -1,6 +1,10 @@
 FactoryBot.define do
   factory :element_category do
-    category_name {"Movement"}
-    sort {1}
+    category_name {"Body Position"}
+    sequence(:sort)
+
+    factory :angle do
+      category_name {"Angle"}
+    end
   end
 end
