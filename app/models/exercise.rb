@@ -53,6 +53,7 @@ class Exercise < ApplicationRecord
     category_and_count_hash
   end
 
+  #validate unique exercise
   def element_uniqueness
     all_exercises = Exercise.all.map(&:elements_names)
     this_exercise = exercise_elements.map(&:element).map(&:name).sort
