@@ -19,10 +19,10 @@ RSpec.describe ExerciseElement, type: :model do
     expect(exercise_element.errors[:exercise_id]).to include("has already been taken")
   end
 
-  skip "has an exercise and an element" do
+  it "has an exercise and an element" do
     exercise_element = build(:exercise_element)
-    expect(exercise_element.exercise).to be_kind(Exercise)
-    expect(exercise_element.element).to be_kind(Element)
+    expect(exercise_element.exercise).to be_kind_of(Exercise)
+    expect(exercise_element.element).to be_kind_of(Element)
   end
 
 

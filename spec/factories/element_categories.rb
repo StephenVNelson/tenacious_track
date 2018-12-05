@@ -10,5 +10,9 @@ FactoryBot.define do
     factory :body_position do
       category_name {"Body Position"}
     end
+
+    factory :invalid_category do
+      category_name {nil}
+    end
   end
 end
