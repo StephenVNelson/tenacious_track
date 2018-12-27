@@ -24,8 +24,6 @@ gem 'jbuilder',                '2.7.0'
 gem 'bootstrap', '~> 4.1.3'
 gem 'pg_search'
 gem "select2-rails"
-#bumbler will check which gems are taking the longest to load with the command bumbler --initializers
-gem 'bumbler', '~> 0.3.2'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri, require: false
@@ -38,6 +36,7 @@ group :development do
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
+  gem 'spring-commands-rspec'
   gem 'awesome_print', :require => 'ap'
   gem 'pry-rails'
   gem 'pry'          ,  require: false
@@ -56,6 +55,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end
 
 group :production do

@@ -2,7 +2,7 @@
   <td><%= element_category(element.element_category_id) %></th>
   <td><%= element.name %></th>
   <% if current_user.admin?%>
-    <td><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_element_path(element) %></td>
-    <td><%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, element_path(element.id, series: @series), method: :delete, data: { confirm: "You sure?", }  %></td>
+    <td><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_element_path(element), class: "edit-icon" %></td>
+    <td><%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, element_path(element.id, series: @series), method: :delete, data: { confirm: "You sure?", }, class: "trash-icon"  %></td>
   <% end %>
 </tr>

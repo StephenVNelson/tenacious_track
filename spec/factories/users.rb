@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :user do
     name {Faker::Name.name}
     email {Faker::Internet.email}
+    password {"password"}
     password_digest {User.digest('password')}
     hire_date {Date.today}
     activated {true}
