@@ -1,8 +1,8 @@
 require 'rails_helper'
 RSpec.feature "Elements", type: :feature do
-  
+
   scenario "creates and deletes a new element", js: true do
-    FactoryBot.create(:element_category)
+    FactoryBot.create(:body_position)
     user = FactoryBot.create(:admin)
 
     visit root_path

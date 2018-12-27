@@ -19,12 +19,6 @@ RSpec.describe ElementCategory, type: :model do
   end
 
   describe "category attributes must be unique" do
-    # before(:example) do
-    #   ElementCategory.create(
-    #                                     category_name: "Movement",
-    #                                     sort: 1
-    #   )
-    # end
 
     it "is not valid if #category_name is already used" do
       create( :element_category, category_name: "Movement")

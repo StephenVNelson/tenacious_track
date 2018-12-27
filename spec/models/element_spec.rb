@@ -20,7 +20,7 @@ RSpec.describe Element, type: :model do
   end
 
   before(:context) do
-    @category1 = create(:element_category)
+    @category1 = create(:body_position)
     @category2 = create(:angle)
     @element1 = create(:element, name: "Supine")
     @element2 = create(:element, name: "Prone")

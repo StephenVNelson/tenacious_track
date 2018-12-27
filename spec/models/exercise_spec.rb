@@ -28,7 +28,7 @@ RSpec.describe Exercise, type: :model do
     before(:context) do
       @element1 = create(:element_angle, name: "First Element")
       @element2 = create(:element_angle, name: "Second Element")
-      @element3 = create(:element, name: "Third Element")
+      @element3 = create(:element_body_position, name: "Third Element")
       @exercise1 = create(:exercise)
       [@element1,@element2].each {|e| @exercise1.elements << e}
       @exercise2 = create(:exercise)

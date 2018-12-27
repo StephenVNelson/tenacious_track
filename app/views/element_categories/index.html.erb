@@ -12,11 +12,11 @@
     </div>
     <div class="card-body category-card">
       <ol class="sortable list-group">
-        <% @element_categories.each_with_index do |category, idx| %>
-          <li id="<%= category.sortable_id %>" class="element_categories list-group-item">
+        <% @element_categories.each_with_sortable_id do |category, sortable_id| %>
+          <li id="<%= sortable_id %>" class="element_categories list-group-item">
             <div class="row">
               <div class="col-1 m-0 p-0">
-                <%= idx+1 %>
+                <%= category.sort %>
               </div>
               <div class="col">
                 <%= link_to category.category_name, edit_element_category_path(category.id) %>
