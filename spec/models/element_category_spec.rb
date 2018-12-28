@@ -26,14 +26,6 @@ RSpec.describe ElementCategory, type: :model do
       category.valid?
       expect(category.errors[:category_name]).to include("has already been taken")
     end
-
-    it 'not valid if category sort number is already used' do
-      create( :element_category, sort: 2)
-      category = build( :element_category, sort: 2)
-      category.valid?
-      expect(category.errors[:sort]).to include("has already been taken")
-    end
-
   end
 
   it "must be listed in sort order" do
