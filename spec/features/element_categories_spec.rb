@@ -10,10 +10,6 @@ RSpec.feature "ElementCategories", type: :feature do
     user = FactoryBot.create(:admin)
     login user
     visit '/element_categories'
-    page.driver.browser.navigate.refresh
-    # sleep 3
-    # expect(ElementCategory.find_by(sort: 1)).to eq(target_category)
-    # expect(ElementCategory.find_by(sort: 5)).to eq(source_category)
     source = page.find("##{source_category.sortable_id}").find('i.fas.fa-grip-vertical')
     target = page.find("##{target_category.sortable_id}").find('i.fas.fa-grip-vertical')
     source.drag_to(target)
@@ -30,5 +26,18 @@ RSpec.feature "ElementCategories", type: :feature do
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_current_path("/element_categories")
     }.to change(ElementCategory, :count).by(-1)
+  end
+
+  scenario "limited access for trainers and those who aren't logged in" do
+    user = FactoryBot.create(:user)
+    login user
+    visit '/element_categories'
+    expect(page).to have_current_path("/users/#{user.id}")
+    click_link("Account")
+    click_link("Log out")
+    expect(page).to have_current_path("/")
+    visit '/element_categories'
+    expect(page).to have_current_path(login_path)
+    expect(page).to have_text("Please log in.")
   end
 end
