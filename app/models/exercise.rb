@@ -3,9 +3,11 @@ class Exercise < ApplicationRecord
 
   has_many :exercise_elements, dependent: :destroy
   has_many :elements, through: :exercise_elements
-  accepts_nested_attributes_for :exercise_elements, allow_destroy: true
+  accepts_nested_attributes_for :exercise_elements, allow_destroy: true, reject_if: :unique_element_combo
   validates_with MeasurementValidator
-  validate :element_uniqueness
+  # validates_associated :exercise_elements
+  # validate :element_uniqueness, if: :elements_unique?, on: :update
+  # validate :unique_element_combo
 
   pg_search_scope :search_by_exercise_reps_bool,
     using: {
@@ -16,6 +18,7 @@ class Exercise < ApplicationRecord
     }
 
   def self.element_search(query)
+    # binding.pry
     if query.present?
       search_by_exercise_reps_bool(query)
     else
@@ -53,12 +56,28 @@ class Exercise < ApplicationRecord
     category_and_count_hash
   end
 
-  #validate unique exercise
-  def element_uniqueness
-    all_exercises = Exercise.all.map(&:elements_names)
-    this_exercise = exercise_elements.map(&:element).map(&:name).sort
-    if all_exercises.include?(this_exercise)
-      errors.add(:exercise, "already exists")
+  # def elements_unique?
+  #   all_exercises_but_self = Exercise.where.not(id: self.id)
+  #   all_exercises = all_exercises_but_self.map(&:elements)
+  #   all_sorted = all_exercises.each.sort
+  #   this_exercise = self.elements.sort
+  #   all_sorted.include?(this_exercise) ? true : false
+  # end
+  #
+  # #validate unique exercise
+  # def element_uniqueness
+  #   if elements_unique?
+  #     self.errors[:base] << "Exercise already exists, consider adding different elements"
+  #   end
+  # end
+
+  def unique_element_combo(attributes)
+    binding.pry
+    Exercise.all.each do |e|
+      # binding.pry if Exercise.count >= 2 && self == Exercise.first
+      if (e.elements.ids - self.elements.ids).empty?
+        errors.add(:exercises, :uniqueness)
+      end
     end
   end
 

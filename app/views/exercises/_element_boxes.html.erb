@@ -22,7 +22,7 @@
     <%= form.fields_for :exercise_elements, association do |association_fields| %>
     <%= association_fields.hidden_field :element_id %>
     <%= association_fields.hidden_field :_destroy, value: 1 %>
-    <div class="btn-group-toggle d-inline-block" data-toggle="buttons">
+    <div class="btn-group-toggle d-inline-block" data-toggle="buttons" id="<%= element.name %>">
       <label class="btn btn-outline-primary m-1 element-checkboxes <%= active %>">
         <%= association_fields.check_box :_destroy, {checked: existing, include_hidden: false}, checked_value = 0, unchecked_value = 1  %>
         <%= element.name %>
@@ -32,5 +32,3 @@
     <% end %>
   </div>
 </div>
-
-<!-- #DONE: Create cards that with width that already fits the content inside them --> id:7

@@ -37,7 +37,6 @@ class ExercisesController < ApplicationController
   end
 
   def update
-    binding.pry
     respond_to do |format|
       if @exercise.update(exercise_params)
         flash[:info] = 'Exercise was successfully updated.'

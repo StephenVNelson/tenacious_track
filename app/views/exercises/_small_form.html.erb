@@ -14,7 +14,7 @@
     <div class="form-group col-md-5">
       <% Exercise.booleans.each do |boolean| %>
         <div class="btn-group-toggle d-inline" data-toggle="buttons">
-          <%= label_tag '', class:'btn btn-secondary btn-sm m-1' do %>
+          <%= label_tag '', class:'btn btn-secondary btn-sm m-1', id: boolean.to_s do %>
           <input type="checkbox" value="true" name=<%= "exercise[#{boolean}]" %> id=<%= "exercise_#{boolean}" %>>
           <%= boolean.gsub('_',' ').gsub(' bool','').titleize %>
           <% end %>

@@ -24,6 +24,29 @@ RSpec.describe Exercise, type: :model do
     expect(exercise.errors[:measurements]).to include("At least one measurement must be selected")
   end
 
+  it "is unique" do
+    # TODO: turn on validation and adjust test for validation
+    exercise1 = FactoryBot.create(:exercise, :with_3_elements)
+    exercise2 = FactoryBot.create(:exercise)
+    # expect{
+      exercise2.elements.push([Element.first, Element.last])
+    # }.to raise_exception(ActiveRecord::RecordInvalid, "Exercise already exists, consider adding different elements")
+    # binding.pry
+
+    # exercise1.elements.each do |element|
+    #   exercise2.elements << element
+    # end
+    exercise2.valid?
+    expect(exercise2.errors[:base]).to include("Exercise already exists, consider adding different elements")
+    expect(exercise1.elements).to eq(exercise2.elements)
+    expect(exercise2.element_uniqueness).to eq(["already exists"])
+    exercise2.elements.delete(exercise1.elements.first)
+    expect(exercise1.elements).not_to eq(exercise2.elements)
+    expect(exercise2).to be_valid
+    exercise2.elements << exercise1.elements.first
+    expect(exercise2.element_uniqueness).to eq(["already exists"])
+  end
+
   describe 'Working with elements' do
     before(:context) do
       @element1 = create(:element_angle, name: "First Element")
@@ -100,5 +123,6 @@ RSpec.describe Exercise, type: :model do
     end
 
   end
+
 
 end

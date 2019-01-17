@@ -8,8 +8,9 @@
       <%=
         select_tag :query,
           grouped_options_for_select(Element.element_names_grouped_by_categories),
-          class: 'js-example-basic-multiple',
-          multiple: true
+          multiple: true,
+          name: "query[]",
+          class: 'js-example-basic-multiple'
       %>
     </div>
     <div class="col col-sm-2 my-1">
@@ -61,9 +62,3 @@
 <%= will_paginate @exercises %>
 
 <br>
-
-<!-- #DONE: Change order to alphabetical --> id:15
-
-<!-- #DONE: Add search functionality. id:11
-- [x] Fix issue where it duplicates when you press back
--->

@@ -56,8 +56,6 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # TODO: Add these fake params tests to Exercise.rb and add the code snippet that Gino send you over Slack to this test
-
   test "should update exercise" do
     patch exercise_path(@exercise), params: {
       exercise: {
