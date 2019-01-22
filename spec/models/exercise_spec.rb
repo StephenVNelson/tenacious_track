@@ -28,7 +28,7 @@ RSpec.describe Exercise, type: :model do
     exercise1 = FactoryBot.create(:exercise, :with_3_elements)
     exercise2 = FactoryBot.create(:exercise)
     Element.all.each {|e| exercise2.elements << e}
-    expect(exercise1.elements).to eq(exercise2.elements)
+    expect(exercise1.elements.reload).to eq(exercise2.elements)
     expect(exercise2.is_not_unique?).to be_truthy
   end
 
@@ -47,18 +47,6 @@ RSpec.describe Exercise, type: :model do
       [Element,ElementCategory,Exercise,ExerciseElement].each do |c|
         c.all.each {|e| e.delete}
       end
-    end
-
-    it "Is invalid with same elements" do
-      exercise1 = create(:exercise)
-      exercise2 = build(:exercise)
-      [exercise1,exercise2].each do |exercise|
-        [@element1, @element2, @element3].each do |element|
-          exercise.elements << element
-        end
-      end
-      exercise2.valid?
-      expect(exercise2.errors[:exercise]).to include("already exists")
     end
 
     it "Returns only exercises with .elements_search" do

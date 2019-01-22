@@ -2,7 +2,7 @@ class Exercise < ApplicationRecord
   include PgSearch
 
   has_many :exercise_elements, dependent: :destroy
-  has_many :elements, through: :exercise_elements#, after_add: :track_added, after_remove: :track_removed
+  has_many :elements, through: :exercise_elements
   accepts_nested_attributes_for :exercise_elements, allow_destroy: true
   validates_with MeasurementValidator
   before_save :record_elements
@@ -16,7 +16,6 @@ class Exercise < ApplicationRecord
     # uniqueness checker will check to see if the set already exists, if it does then it will delete the added and add the deleted and add an error to the base of the object
 
   @@elements_before_save = []
-
   def record_elements
     @@elements_before_save.clear
     # binding.pry unless ExerciseElement.count < 6
