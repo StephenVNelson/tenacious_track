@@ -1,5 +1,5 @@
 
-<div id="<%= category_name %> Card" class="card border-primary all-edges-rounded my-3" style="display: none;">
+<div id="<%= category_name.parameterize.underscore %> Card" class="card border-primary all-edges-rounded my-3" style="display: none;">
   <div class="card-header bg-primary text-white text-center p-0 top-edges-rounded">
     <h5 class="pt-2">
       <%= category_name %>
@@ -22,7 +22,7 @@
     <%= form.fields_for :exercise_elements, association do |association_fields| %>
     <%= association_fields.hidden_field :element_id %>
     <%= association_fields.hidden_field :_destroy, value: 1 %>
-    <div class="btn-group-toggle d-inline-block" data-toggle="buttons" id="<%= element.name %>">
+    <div class="btn-group-toggle d-inline-block" data-toggle="buttons" id="<%= element.name.parameterize.underscore %>">
       <label class="btn btn-outline-primary m-1 element-checkboxes <%= active %>">
         <%= association_fields.check_box :_destroy, {checked: existing, include_hidden: false}, checked_value = 0, unchecked_value = 1  %>
         <%= element.name %>

@@ -30,7 +30,7 @@
 
               <td style="text-align: center;">
                 <div class="btn-group-toggle d-inline element-picker" data-toggle="buttons">
-                  <label id="<%= category %>" class="btn btn-outline-primary series-checkboxes resizer p-1 <%= active %>">
+                  <label id="<%= category.parameterize.underscore %>" class="btn btn-outline-primary series-checkboxes resizer p-1 <%= active %>">
                     <%= check_box_tag :category, {checked: existing} %>
                     <span>
                       <%= category %>

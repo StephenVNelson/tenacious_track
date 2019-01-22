@@ -2,12 +2,27 @@ class Exercise < ApplicationRecord
   include PgSearch
 
   has_many :exercise_elements, dependent: :destroy
-  has_many :elements, through: :exercise_elements
-  accepts_nested_attributes_for :exercise_elements, allow_destroy: true, reject_if: :unique_element_combo
+  has_many :elements, through: :exercise_elements#, after_add: :track_added, after_remove: :track_removed
+  accepts_nested_attributes_for :exercise_elements, allow_destroy: true
   validates_with MeasurementValidator
-  # validates_associated :exercise_elements
-  # validate :element_uniqueness, if: :elements_unique?, on: :update
-  # validate :unique_element_combo
+  before_save :record_elements
+  #create
+    # add if save and custom "validation" which check uniqueness to the save
+    # if it doesn't pass uniqueness delete all of the associations and add an error to the build.
+  #update
+    # have a before save action that clears the class variables that keep track of what was added or destroyed
+    # create before add and before destroy actions that keep track of what was added and destroyed
+    # add to controller update action if save and custom validation which check for uniqueness
+    # uniqueness checker will check to see if the set already exists, if it does then it will delete the added and add the deleted and add an error to the base of the object
+
+  @@elements_before_save = []
+
+  def record_elements
+    @@elements_before_save.clear
+    # binding.pry unless ExerciseElement.count < 6
+    @@elements_before_save.concat(elements)
+  end
+
 
   pg_search_scope :search_by_exercise_reps_bool,
     using: {
@@ -18,7 +33,6 @@ class Exercise < ApplicationRecord
     }
 
   def self.element_search(query)
-    # binding.pry
     if query.present?
       search_by_exercise_reps_bool(query)
     else
@@ -56,30 +70,24 @@ class Exercise < ApplicationRecord
     category_and_count_hash
   end
 
-  # def elements_unique?
-  #   all_exercises_but_self = Exercise.where.not(id: self.id)
-  #   all_exercises = all_exercises_but_self.map(&:elements)
-  #   all_sorted = all_exercises.each.sort
-  #   this_exercise = self.elements.sort
-  #   all_sorted.include?(this_exercise) ? true : false
-  # end
-  #
-  # #validate unique exercise
-  # def element_uniqueness
-  #   if elements_unique?
-  #     self.errors[:base] << "Exercise already exists, consider adding different elements"
-  #   end
-  # end
 
-  def unique_element_combo(attributes)
-    binding.pry
-    Exercise.all.each do |e|
-      # binding.pry if Exercise.count >= 2 && self == Exercise.first
-      if (e.elements.ids - self.elements.ids).empty?
-        errors.add(:exercises, :uniqueness)
-      end
-    end
+  def is_not_unique?
+    elements.reload
+    sorted_exercises = Exercise.where.not(id: self.id).map {|e| e.element_ids.sort}
+    sorted_exercises.include?(self.element_ids.sort)
   end
+
+  def abort_creation
+    self.destroy
+  end
+
+  def abort_update
+    self.elements.clear
+    # binding.pry
+    self.elements.concat(@@elements_before_save)
+    self.elements.reload
+  end
+
 
   #Creates string of element names
   def full_name

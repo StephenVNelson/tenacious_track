@@ -16,7 +16,8 @@ document.addEventListener("turbolinks:load", function() {
     element_picker.each( function() {
       category_active = $(this).children('label').hasClass('active');
       category = $(this).children('label').attr('id');
-      category_card = $("div[id='"+category+" Card']");
+      formatted_category = category.toLowerCase().split(' ').join('_')
+      category_card = $("div[id='"+formatted_category+" Card']");
       if (category_active == true) {
         category_card.show()
       }

@@ -26,9 +26,15 @@ class ExercisesController < ApplicationController
 
     respond_to do |format|
       if @new_exercise.save
-        flash[:info] = 'Exercise was successfully created.'
-        format.html {redirect_to exercises_path}
-        format.json {render :index, status: :created}
+        if @new_exercise.is_not_unique?
+          @new_exercise.abort_creation
+          flash[:danger] = 'Exercise did not save because an identical exercise already exists.'
+          format.html {redirect_to exercises_path}
+        else
+          flash[:info] = 'Exercise was successfully created.'
+          format.html {redirect_to exercises_path}
+          format.json {render :index, status: :created}
+        end
       else
         format.html {render :new}
         format.json {render json: @new_exercise.errors}
@@ -39,9 +45,15 @@ class ExercisesController < ApplicationController
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
-        flash[:info] = 'Exercise was successfully updated.'
-        format.html {redirect_to exercises_path}
-        format.json {render :index, status: :created}
+        if @exercise.is_not_unique?
+          @exercise.abort_update
+          flash[:danger] = 'Edits did not save because an identical exercise already exists.'
+          format.html {redirect_to exercises_path}
+        else
+          flash[:info] = 'Exercise was successfully updated.'
+          format.html {redirect_to exercises_path}
+          format.json {render :index, status: :created}
+        end
       else
         format.html {render :edit}
         format.json {render json: @exercise.errors, status: :unprocessable_entity}

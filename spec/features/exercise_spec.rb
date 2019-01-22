@@ -5,6 +5,8 @@ RSpec.feature "Exercises", type: :feature do
     before(:example) do
       @exercise_1 = FactoryBot.create(:exercise, :with_3_elements)
       @exercise_2 = FactoryBot.create(:exercise, :with_3_elements)
+      @exercise_1.reload
+      @exercise_2.reload
       @exercise_1.elements << FactoryBot.create(:element, name: "First element")
       @exercise_2.elements << FactoryBot.create(:element, name: "Second element")
     end
@@ -41,15 +43,53 @@ RSpec.feature "Exercises", type: :feature do
       }.to change(Exercise, :count).by(1)
     end
 
+    scenario "Deletes exercises that are not unique", js:true do
+      visit exercises_path
+      expect{
+        form = "exercise[exercise_elements_attributes][0][element_id][]"
+        find('#add-element', :text => 'Quick add exercise').click
+        select "#{@exercise_1.elements.first.name}", from: form
+        select "#{@exercise_1.elements.second.name}", from: form
+        select "#{@exercise_1.elements.third.name}", from: form
+        find("#reps_bool").click
+        click_button "Create"
+        expect(page).to have_current_path(exercises_path)
+        expect(page).to have_text("Exercise did not save because an identical exercise already exists.")
+      }.to change(Exercise, :count).by(0)
+    end
+
+    scenario "Undoes saved changes on update if exercise is not unique", js:true do
+      visit exercises_path
+      click_link "edit_#{@exercise_1.id}"
+      find("##{ElementCategory.third.category_name.downcase}").click
+      find("##{ElementCategory.fourth.category_name.downcase}").click
+      find("##{ElementCategory.offset(5).limit(1)[0].category_name.downcase}").click
+      find("#first_element").click
+      find("##{Element.first.name}").click
+      find("##{Element.second.name}").click
+      find("##{Element.third.name}").click
+      find("##{Element.fourth.name}").click
+      find("#second_element").click
+      click_button "Submit"
+      expect(@exercise_1.elements.reload).to eq([
+        Element.find_by(name: "#{Element.first.name}"),
+        Element.find_by(name: "#{Element.second.name}"),
+        Element.find_by(name: "First element")
+        ])
+      expect(page).to have_current_path(exercises_path)
+      expect(page).to have_text("Edits did not save because an identical exercise already exists.")
+      expect(page).not_to have_text("Exercise was successfully updated.")
+    end
+
     scenario "Creates new exercise", js: true  do
       visit exercises_path
-      expect(page).to have_current_path("/exercises/new")
+      expect(page).to have_current_path("/exercises")
       expect{
         click_button "Create new exercise"
-        find("#Category_1").click
-        find("#element_1").click
-        find("#Category_2").click
-        find("#element_2").click
+        find("##{ElementCategory.first.category_name.downcase}").click
+        find("##{Element.first.name}").click
+        find("##{ElementCategory.second.category_name.downcase}").click
+        find("##{Element.second.name}").click
         find("#reps_bool").click
         click_button "Submit"
       }.to change(Exercise, :count).by(1)
@@ -58,35 +98,22 @@ RSpec.feature "Exercises", type: :feature do
 
     scenario "Edits new exercise", js: true do
       visit exercises_path
-      sleep 5
       expect{
         first(:css, 'i.fas.fa-edit').click
         expect(page).to have_current_path("/exercises/#{@exercise_1.id}/edit")
-        find("#element_1").click
-        find("#element_2").click
+        find("##{Element.first.name}").click
+        find("##{Element.second.name}").click
         click_button "Submit"
-      }.to change(@exercise_1, :full_name).from("element_1 element_2 First element").to("First element")
+        @exercise_1.reload
+      }.to change(@exercise_1, :full_name).from("#{Element.first.name} #{Element.second.name} First element").to("First element")
     end
-
-    scenario "Keeps exercises unique", js: true do
-      visit exercises_path
-      first(:css, 'i.fas.fa-edit').click
-      expect(page).to have_current_path("/exercises/#{@exercise_1.id}/edit")
-      find("#element_1").click
-      find("#element_2").click
-      find("#Category_3").click
-      find("#Category_4").click
-      find("#Category_6").click
-      find("#element_3").click
-      find("#element_4").click
-      find_by_id("First element").click
-      find_by_id("Second element").click
-      click_button "Submit"
-
-    end
-
-    scenario "Deletes an exercise"
   end
 
-  scenario "Limits access for trainers"
+  scenario "Limits access for trainers" do
+    @exercise_1 = FactoryBot.create(:exercise)
+    trainer = FactoryBot.create(:user)
+    login trainer
+    expect(page).not_to have_css("i.fas.fa-edit")
+    expect(page).not_to have_link("Create new exercise")
+  end
 end
