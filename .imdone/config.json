@@ -1,0 +1,53 @@
+{
+  "exclude": [
+    "^(node_modules|bower_components|\\.imdone|target|build|dist|logs|flow-typed|imdone-export.json)[\\/\\\\]?|\\.(git|svn|hg|npmignore)|\\~$|\\.(jpg|png|gif|swp|ttf|otf)$"
+  ],
+  "watcher": true,
+  "keepEmptyPriority": true,
+  "code": {
+    "include_lists": [
+      "TODO",
+      "DOING",
+      "DONE",
+      "PLANNING",
+      "FIXME",
+      "ARCHIVE",
+      "HACK",
+      "CHANGED",
+      "XXX",
+      "IDEA",
+      "NOTE",
+      "REVIEW",
+      "MARK",
+      "HELP"
+    ]
+  },
+  "lists": [
+    {
+      "name": "HELP",
+      "hidden": false
+    },
+    {
+      "hidden": false,
+      "name": "DONE"
+    },
+    {
+      "name": "TODO",
+      "hidden": false
+    }
+  ],
+  "marked": {
+    "gfm": true,
+    "tables": true,
+    "breaks": false,
+    "pedantic": false,
+    "smartLists": true,
+    "langPrefix": "language-"
+  },
+  "sync": {
+    "id": "5bd1e162b9abeb3ae06eec16",
+    "name": "StephenVNelson/tenacious_track",
+    "useImdoneioForPriority": true
+  },
+  "noHelp": true
+}

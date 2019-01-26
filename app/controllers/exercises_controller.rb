@@ -20,7 +20,7 @@ class ExercisesController < ApplicationController
   def edit
   end
 
-  # TODO: Make it so it returns back to the page it just came from after you create a new exercise
+  # TODO: Make it so it returns back to the page it just came from after you create a new exercise id:24
   def create
     @new_exercise = Exercise.new(exercise_params)
 
