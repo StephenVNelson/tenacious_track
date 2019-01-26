@@ -1,17 +1,12 @@
 FactoryBot.define do
   factory :workout do
-    trainer_id { 1 }
-    client { "" }
+    trainer
+    client
     scheduled_date { "2019-01-24" }
     logged_date { "2019-01-24 17:18:47" }
-    phase_number { 1 }
-    week_number { 1 }
-    day_number { 1 }
+    phase_number { rand(1..8) }
+    week_number { rand(1..4) }
+    day_number { rand(1..2) }
     workout_focus { "MyString" }
-    sets { 1 }
-    reps { 1 }
-    resistance { "MyString" }
-    duration_min { 1 }
-    duration_sec { 1 }
   end
 end

@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Workout, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validations" do
+    it "has a working factory" do
+      workout = FactoryBot.create(:workout)
+      expect(workout).to be_valid
+    end
+  end
 end
