@@ -6,14 +6,7 @@ class Exercise < ApplicationRecord
   accepts_nested_attributes_for :exercise_elements, allow_destroy: true
   validates_with MeasurementValidator
   before_save :record_elements
-  #create
-    # add if save and custom "validation" which check uniqueness to the save
-    # if it doesn't pass uniqueness delete all of the associations and add an error to the build.
-  #update
-    # have a before save action that clears the class variables that keep track of what was added or destroyed
-    # create before add and before destroy actions that keep track of what was added and destroyed
-    # add to controller update action if save and custom validation which check for uniqueness
-    # uniqueness checker will check to see if the set already exists, if it does then it will delete the added and add the deleted and add an error to the base of the object
+
 
   @@elements_before_save = []
   def record_elements

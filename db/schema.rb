@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 20190125011847) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "work_rest_bool", default: false
-    t.string "name"
   end
 
   create_table "users", force: :cascade do |t|

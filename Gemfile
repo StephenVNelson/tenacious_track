@@ -24,6 +24,8 @@ gem 'jbuilder',                '2.7.0'
 gem 'bootstrap', '~> 4.1.3'
 gem 'pg_search'
 gem "select2-rails"
+#gem that fixed my readline problems in the terminal
+gem 'rb-readline'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri, require: false
