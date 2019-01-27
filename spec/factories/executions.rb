@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :execution do
-    exercise_id { nil }
-    workout_id { nil }
-    sets { 1 }
-    reps { 1 }
-    resistance { "MyString" }
-    seconds { 1 }
+    exercise
+    workout
+    sets { rand(1..3) }
+    reps { [10, 15, 20].sample }
+    resistance { %w(red green blue).sample }
+    seconds { [nil, nil, nil, nil, 1].sample }
   end
 end
