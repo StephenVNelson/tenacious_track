@@ -1,0 +1,26 @@
+<h1>All Workouts</h1>
+<%= link_to "New Workout", new_workout_path %>
+<table>
+  <tr>
+    <td>Workout</td>
+    <td>Trainer</td>
+    <td>Scheduled</td>
+    <td>Logged</td>
+  </tr>
+  <% @workouts.each do |workout| %>
+    <tr>
+      <td>
+        <%= link_to workout.name, workout_path(workout), id: "workout_#{workout.id}"  %>
+      </td>
+      <td>
+        <%= workout.trainer.name %>
+      </td>
+      <td>
+        <%= workout.scheduled_date %>
+      </td>
+      <td>
+        <%= workout.logged_date %>
+      </td>
+    </tr>
+  <% end %>
+</table>
