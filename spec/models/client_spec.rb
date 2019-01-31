@@ -69,6 +69,13 @@ RSpec.describe Client, type: :model do
   end
 
   describe "Associations" do
-
+    it "Associates with a workout" do
+      client = FactoryBot.create(:client)
+      workout = FactoryBot.create(:workout)
+      expect{
+        client.workouts << Workout.first
+      }.to change{client.workouts.count}.from(0).to(1)
+    end
   end
+  #TODO: create an error for clients if they have a missing workout. like evaluate if the last workout is at phase 5 that they have all the phases previous to 5 etc. same with week and day 
 end

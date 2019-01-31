@@ -20,8 +20,9 @@ Rails.application.routes.draw do
   resources :exercises
   resources :elements
   resources :element_categories,  only: [:index, :create, :edit, :update, :destroy]
-  resources :workouts, only: [:index, :show]
+  resources :workouts, only: [:index, :show, :create]
   get 'workouts/new/:client', to: 'workouts#new', as: :new_workout
+  resources :clients
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
