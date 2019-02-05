@@ -19,6 +19,7 @@ RSpec.feature "Clients", type: :feature do
     visit '/clients/new'
     expect(page).to have_current_path(user_path(non_admin))
   end
+
   scenario "Creates new client and a new workout attached to that client", js:true do
     visit '/clients'
     expect{
@@ -31,17 +32,25 @@ RSpec.feature "Clients", type: :feature do
     }.to change{Client.count}.by(1)
     expect(page).to have_current_path("/clients/#{Client.last.id}")
     expect(page).to have_text('Client was successfully created.')
+    client = Client.first
+    client.workouts << FactoryBot.create(:workout,
+      client_id: client.id,
+      phase_number: 6,
+      week_number: 3,
+      day_number: 3
+    )
     click_link 'New Workout'
     expect(page).to have_current_path("/workouts/new/#{Client.last.id}")
-    # TODO: 3 design a visual helper for the traier to be able to see the Client's workout history
-    # TODO: 2 make these tests a little more complicated by adding workouts for this client through FactoryBot before you can select a phase week and day. make sure "out of range numbers are not an option"
-    select "Phase 1", from: "workout[phase_number]"
-    select "Week 1", from: "workout[week_number]"
+    # TODO: 3 design a visual helper for the trainer to be able to see the Client's workout history
+    expect(page).not_to have_text('Phase 2')
+    expect(page).not_to have_text('Phase 2')
+    select "Phase 6", from: "workout[phase_number]"
+    select "Week 2", from: "workout[week_number]"
     select "Day 1", from: "workout[day_number]"
     click_button "Create Workout"
     expect(page).to have_current_path("/workouts/#{Workout.last.id}")
     expect(page).to have_text("Workout created. Now pick a template to start with.")
-    expect(page).to have_text("Roger Rabbit – Phase 1, Week 1, Day 1")
+    expect(page).to have_text("Roger Rabbit – Phase 6, Week 2, Day 1")
     # click_link 'Back'
   end
 end

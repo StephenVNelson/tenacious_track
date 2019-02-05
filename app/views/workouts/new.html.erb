@@ -1,8 +1,8 @@
 <h5>Choose phase, week, and day of workout.</h5>
 <%= form_with(model: @workout, local: true) do |form| %>
-  <%= form.select :phase_number, options_for_select(Workout.select_arrays(@client, 'Phase'))%>
-  <%= form.select :week_number, options_for_select(Workout.select_arrays(@client, 'Week'))%>
-  <%= form.select :day_number, options_for_select(Workout.select_arrays(@client, 'Day'))%>
+  <%= form.select :phase_number, options_for_select(Workout.phase_week_day_form_selectors(@client, 'Phase'))%>
+  <%= form.select :week_number, options_for_select(Workout.phase_week_day_form_selectors(@client, 'Week'))%>
+  <%= form.select :day_number, options_for_select(Workout.phase_week_day_form_selectors(@client, 'Day'))%>
   <%= form.hidden_field :client_id, :value => params[:client] %>
   <%= form.hidden_field :trainer_id, :value => current_user.id %>
   <%= form.submit "Create Workout"%>

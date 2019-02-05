@@ -2,11 +2,17 @@ FactoryBot.define do
   factory :workout do
     trainer
     client
-    scheduled_date { "2019-01-24" }
-    logged_date { "2019-01-24 17:18:47" }
-    phase_number { rand(1..8) }
-    week_number { rand(1..4) }
-    day_number { rand(1..2) }
+    sequence :scheduled_date do |n|
+      Date.new(2019,2,5).days_ago(365-(3*n))
+    end
+    # scheduled_date { "2019-01-24" }
+    # logged_date { "2019-01-24 17:18:47" }
+    sequence :logged_date do |n|
+      Date.new(2019,2,5).days_ago(365-(3*n))
+    end
+    sequence(:phase_number) { |n| (n/4)+1 }
+    sequence(:week_number) { |n| ((n/2)%4)+1 }
+    sequence(:day_number) { |n| (n%2)+1 }
     workout_focus { "MyString" }
   end
 end
