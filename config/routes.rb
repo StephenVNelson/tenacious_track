@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :workouts, only: [:index, :show, :create]
   get 'workouts/new/:client', to: 'workouts#new', as: :new_workout
   get 'workouts/select_client/new', to: 'workouts#select_client', as: :select_workout_client
+  get 'workouts/apply-template/:workout', to: 'workouts#select_template', as: :select_workout_template
   resources :clients
 
   get '/signup', to: 'users#new'

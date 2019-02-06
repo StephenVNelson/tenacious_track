@@ -11,6 +11,10 @@ class WorkoutsController < ApplicationController
     @clients = Client.order_by_scheduled_workouts
   end
 
+  def select_template
+    @workout = Workout.find(params[:workout])
+  end
+
   def new
     @workout = Workout.new
     @client = Client.find(params[:client])
@@ -21,7 +25,7 @@ class WorkoutsController < ApplicationController
     @client = Client.find(params[:workout][:client_id])
     if @workout.save
       flash[:info] = "Workout created. Now pick a template to start with."
-      redirect_to workout_path(@workout)
+      redirect_to select_workout_template_path(@workout)
     else
       render :new, location: new_workout_url(@client)
     end

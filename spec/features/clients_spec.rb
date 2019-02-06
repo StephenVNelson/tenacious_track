@@ -20,7 +20,7 @@ RSpec.feature "Clients", type: :feature do
     expect(page).to have_current_path(user_path(non_admin))
   end
 
-  scenario "Creates new client and a new workout attached to that client", js:true do
+  scenario "Creates new client and a new workout attached to that client" do
     visit '/clients'
     expect{
       click_link 'New Client'
@@ -41,17 +41,16 @@ RSpec.feature "Clients", type: :feature do
     )
     click_link 'New Workout'
     expect(page).to have_current_path("/workouts/new/#{Client.last.id}")
-    # TODO: 3 design a visual helper for the trainer to be able to see the Client's workout history
     expect(page).not_to have_text('Phase 2')
     expect(page).not_to have_text('Phase 2')
-    # binding.pry
     select "Phase 6", from: "workout[phase_number]"
     select "Week 2", from: "workout[week_number]"
     select "Day 1", from: "workout[day_number]"
     click_button "Create Workout"
-    expect(page).to have_current_path("/workouts/#{Workout.last.id}")
+    expect(page).to have_current_path("/workouts/apply-template/#{Workout.last.id}")
     expect(page).to have_text("Workout created. Now pick a template to start with.")
+    click_link("blank-template")
+    expect(page).to have_current_path("/workouts/#{Workout.last.id}")
     expect(page).to have_text("Roger Rabbit – Phase 6, Week 2, Day 1")
-    # click_link 'Back'
   end
 end
