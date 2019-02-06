@@ -12,7 +12,8 @@
           Workouts
         </button>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Log workout</a>
+          <%= link_to "All Workouts", workouts_path, class: "dropdown-item" %>
+          <%= link_to "Log Workout", select_workout_client_path, class: "dropdown-item" %>
         </div>
       </li>
       <li class="nav-item dropdown mt-2 mb-1">
@@ -20,8 +21,7 @@
           Clients
         </button>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Client list</a>
-          <a class="dropdown-item" href="#">Workout Review</a>
+          <%= link_to "Client List", clients_path, class: "dropdown-item"%>
         </div>
       </li>
       <li class="nav-item dropdown mt-2 mb-2">

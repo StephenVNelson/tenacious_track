@@ -13,7 +13,7 @@
         <%= link_to workout.name, workout_path(workout), id: "workout_#{workout.id}"  %>
       </td>
       <td>
-        <%= workout.trainer.name %>
+        <%= workout.trainer.name if workout.trainer %>
       </td>
       <td>
         <%= workout.scheduled_date %>
