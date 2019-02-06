@@ -1,4 +1,30 @@
-<%= link_to 'New Workout', new_workout_path(@client) %>
+<h1><%= @client.name %></h1>
+<p class="p-0 my-1">Email: <%= @client.email %></p>
+<p class="p-0 my-1">Phone: <%= @client.phone %></p>
+<p class="p-0 my-1">Weekly Commitment: <%= @client.weekly_commitment %></p>
+
+<p class="mt-5">
+  <%= link_to 'Create New Workout', new_workout_path(@client) %>
+</p>
+<table class="table">
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Sheduled</th>
+    <th>Logged</th>
+  </tr>
+  <% @client.workouts.each do |workout| %>
+    <tr>
+      <td>Phase <%= workout.phase_number %></td>
+      <td>Week <%= workout.week_number %></td>
+      <td>Day <%= workout.day_number %></td>
+      <td><%= workout.scheduled_date.strftime("%m/%d/%Y") %></td>
+      <td><%= workout.logged_date.strftime("%m/%d/%Y") if workout.logged_date %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
 
 <%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>

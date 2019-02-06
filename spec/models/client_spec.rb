@@ -96,6 +96,8 @@ RSpec.describe Client, type: :model do
         expect(Workout.time_span_between(Workout.third, Workout.fourth)).to eq("1 Month, 3 Weeks, 2 Days.")
         expect(Workout.time_span_between(Workout.first, Workout.second)).to eq("2 Days.")
         expect(Workout.time_span_between(Workout.fourth, Workout.last)).to eq("1 Week, 3 Days.")
+        FactoryBot.create(:workout, client_id: @client.id, scheduled_date: 8.days.from_now.to_date)
+        expect(Workout.time_span_between(Workout.last)).to eq("Workout pending.")
 
       end
 

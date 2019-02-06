@@ -52,6 +52,6 @@ class Workout < ApplicationRecord
     if days > 0
       time_span += "#{pluralize(days, 'Day')}"
     end
-    day_span > 0 ? time_span += "." :  time_span += "Workout pending."
+    day_span > 0 ? time_span :  time_span = "Pending Completion"
   end
 end
