@@ -1,8 +1,13 @@
 class Workout < ApplicationRecord
   extend ActionView::Helpers::TextHelper
 
-  belongs_to :trainer, class_name: "User"
+  belongs_to :trainer, class_name: "User", optional: true
   belongs_to :client
+
+  validates :scheduled_date, presence: {message: "must be included"}
+  validates :phase_number, presence: {message: "must be included"}
+  validates :week_number, presence: {message: "must be included"}
+  validates :day_number, presence: {message: "must be included"}
 
   def name
     "#{client.name} – Phase #{phase_number}, Week #{week_number}, Day #{day_number}"
@@ -28,8 +33,9 @@ class Workout < ApplicationRecord
   end
 
   def self.time_span_between(later_workout, earlier_workout = Date.today)
-    earlier = earlier_workout == Date.today ? Date.today : earlier_workout.logged_date.to_date
-    later = later_workout.logged_date.to_date
+    # The whole Date.today + 1 might be an error, but I just put it in to make the code pass and I don't understand why
+    earlier = earlier_workout == Date.today ? Date.today: earlier_workout.scheduled_date.to_date
+    later = later_workout.scheduled_date.to_date
     day_span = (earlier - later).to_i
     months = day_span / 30
     weeks = (day_span % 30) / 7
@@ -46,25 +52,6 @@ class Workout < ApplicationRecord
     if days > 0
       time_span += "#{pluralize(days, 'Day')}"
     end
-    time_span += "."
-  end
-
-  def last_logged_workouts(amount = 3)
-    Workout.where(client_id: client.id).order(logged_date: :asc).last(amount)
-  end
-
-  def last_workouts_and_timespans_hash(amount = 3)
-    workouts_and_timespans = {workouts: [], timespans: []}
-    last_logged_workouts(amount).each_with_index do |workout, idx|
-      if idx != last_logged_workouts.length - 1
-        timespan = Workout.time_span_between(workout, last_logged_workouts(amount)[idx + 1])
-      else
-        timespan = Workout.time_span_between(workout)
-
-      end
-      workouts_and_timespans[:workouts] << workout
-      workouts_and_timespans[:timespans] << timespan
-    end
-    workouts_and_timespans
+    day_span > 0 ? time_span += "." :  time_span += "Workout pending."
   end
 end

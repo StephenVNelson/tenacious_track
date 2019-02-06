@@ -6,6 +6,42 @@ RSpec.describe Workout, type: :model do
       workout = FactoryBot.create(:workout)
       expect(workout).to be_valid
     end
+
+    it "is invalid without a client" do
+      workout = FactoryBot.build(:workout, client: nil)
+      workout.valid?
+      expect(workout.errors[:client]).to include("must exist")
+    end
+
+    it "is valid without trainer" do
+      workout = FactoryBot.build(:workout, trainer_id: nil)
+      workout.valid?
+      expect(workout.errors[:trainer]).to eq([])
+    end
+
+    it "is invalid without a phase_number" do
+      workout = FactoryBot.build(:workout, phase_number: nil)
+      workout.valid?
+      expect(workout.errors[:phase_number]).to include("must be included")
+    end
+
+    it "is invalid without a week_number" do
+      workout = FactoryBot.build(:workout, week_number: nil)
+      workout.valid?
+      expect(workout.errors[:week_number]).to include("must be included")
+    end
+
+    it "is invalid without a day_number" do
+      workout = FactoryBot.build(:workout, day_number: nil)
+      workout.valid?
+      expect(workout.errors[:day_number]).to include("must be included")
+    end
+
+    it "is invalid without scheduled_date" do
+      workout = FactoryBot.build(:workout, scheduled_date: nil)
+      workout.valid?
+      expect(workout.errors[:scheduled_date]).to include("must be included")
+    end
   end
 
   describe "methods" do
@@ -70,48 +106,6 @@ RSpec.describe Workout, type: :model do
         ['Day 6', '6'],
         ['Day 7', '7']
         ])
-    end
-
-    describe "workout preview methods" do
-      before(:example) do
-        @client = FactoryBot.create(:client)
-        @days_ago = [80,78,68,15,5]
-        @days_ago.each do |n|
-          FactoryBot.create(:workout,
-            client_id: @client.id,
-            logged_date: n.days.ago
-          )
-        end
-        @workout = Workout.last
-      end
-
-      it "returns #last_logged_workouts" do
-        @days_ago.last(3).each_with_index do |n, idx|
-          expect(@workout.last_logged_workouts(3)[idx].logged_date.to_date).to eq(n.days.ago.to_date)
-        end
-      end
-
-      it "returns the .time_span_between" do
-        expect(Workout.time_span_between(Workout.third, Workout.fourth)).to eq("1 Month, 3 Weeks, 2 Days.")
-        expect(Workout.time_span_between(Workout.first, Workout.second)).to eq("2 Days.")
-        expect(Workout.time_span_between(Workout.fourth, Workout.last)).to eq("1 Week, 3 Days.")
-
-      end
-
-      it "returns #last_workouts_and_times_hash" do
-        expect(@workout.last_workouts_and_timespans_hash).to eq({
-          workouts: [
-            Workout.third,
-            Workout.fourth,
-            Workout.fifth
-          ],
-          timespans: [
-            "1 Month, 3 Weeks, 2 Days.",
-            "1 Week, 3 Days.",
-            "5 Days."
-          ]
-        })
-      end
     end
   end
 

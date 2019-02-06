@@ -1,0 +1,7 @@
+<h3>Choose Client</h3>
+
+<% @clients.each do |client| %>
+  <p>
+    <%= link_to client.name, new_workout_path(client.id) %>
+  </p>
+<% end %>

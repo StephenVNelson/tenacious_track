@@ -44,6 +44,7 @@ RSpec.feature "Clients", type: :feature do
     # TODO: 3 design a visual helper for the trainer to be able to see the Client's workout history
     expect(page).not_to have_text('Phase 2')
     expect(page).not_to have_text('Phase 2')
+    # binding.pry
     select "Phase 6", from: "workout[phase_number]"
     select "Week 2", from: "workout[week_number]"
     select "Day 1", from: "workout[day_number]"

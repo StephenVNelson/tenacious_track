@@ -1,10 +1,16 @@
+
+<%= render 'past_workouts', client: @client %>
+
 <h5>Choose phase, week, and day of workout.</h5>
+
 <%= form_with(model: @workout, local: true) do |form| %>
+  <%= render 'shared/error_messages', object: @workout %>
   <%= form.select :phase_number, options_for_select(Workout.phase_week_day_form_selectors(@client, 'Phase'))%>
   <%= form.select :week_number, options_for_select(Workout.phase_week_day_form_selectors(@client, 'Week'))%>
   <%= form.select :day_number, options_for_select(Workout.phase_week_day_form_selectors(@client, 'Day'))%>
+  <%= form.label :scheduled_date %>
+  <%= form.date_select( :scheduled_date, :order => [:month, :day, :year]) %>
   <%= form.hidden_field :client_id, :value => params[:client] %>
-  <%= form.hidden_field :trainer_id, :value => current_user.id %>
   <%= form.submit "Create Workout"%>
 <% end %>
 <h5>Choose expected date of workout</h5>

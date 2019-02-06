@@ -68,6 +68,82 @@ RSpec.describe Client, type: :model do
 
   end
 
+  describe "Methods" do
+    describe "workout preview methods" do
+      before(:example) do
+        @client = FactoryBot.create(:client)
+        @days_ago = [80,78,68,15,5]
+        @days_ago.each do |n|
+          FactoryBot.create(:workout,
+            client_id: @client.id,
+            scheduled_date: n.days.ago
+          )
+        end
+      end
+
+      it "returns #last_scheduled_workouts" do
+        @days_ago.last(3).each_with_index do |n, idx|
+          expect(@client.last_scheduled_workouts(3)[idx].scheduled_date.to_date).to eq(n.days.ago.to_date)
+        end
+        Workout.all.each {|w| w.delete}
+        expect(Workout.count).to eq(0)
+        FactoryBot.create(:workout, client_id: @client.id)
+        expect(@client.workouts.count).to eq(1)
+        expect(@client.last_scheduled_workouts.length).to eq(1)
+      end
+
+      it "returns the .time_span_between" do
+        expect(Workout.time_span_between(Workout.third, Workout.fourth)).to eq("1 Month, 3 Weeks, 2 Days.")
+        expect(Workout.time_span_between(Workout.first, Workout.second)).to eq("2 Days.")
+        expect(Workout.time_span_between(Workout.fourth, Workout.last)).to eq("1 Week, 3 Days.")
+
+      end
+
+      it "returns #last_workouts_and_times_hash" do
+        expect(@client.last_workouts_and_timespans_hash).to eq({
+          Workout.third => "1 Month, 3 Weeks, 2 Days.",
+          Workout.fourth => "1 Week, 3 Days.",
+          Workout.fifth =>  "5 Days."
+        })
+        @client.workouts.clear
+        expect(@client.workouts).to eq([])
+        FactoryBot.create(:workout, client_id: @client.id, scheduled_date: 80.days.ago.to_date)
+        expect(@client.last_workouts_and_timespans_hash).to eq({
+          Workout.first => "2 Months, 2 Weeks, 6 Days."
+        })
+      end
+    end
+
+    describe "latest client methods" do
+      before(:example) do
+        3.times {FactoryBot.create(:client)}
+        expect(Client.count).to eq(3)
+        FactoryBot.create(:workout, scheduled_date: 1.days.ago.to_date, client_id: Client.third.id)
+        FactoryBot.create(:workout, scheduled_date: 3.days.ago.to_date, client_id: Client.first.id)
+        FactoryBot.create(:workout, scheduled_date: 6.days.ago.to_date, client_id: Client.second.id)
+
+      end
+
+      it "returns the nearest_scheduled_workout for a client" do
+        workouts = Client.second.workouts
+        nearest_workout = FactoryBot.create(:workout, scheduled_date: 5.days.ago.to_date)
+        workouts << nearest_workout
+        5.times {|n| workouts << FactoryBot.create(:workout, scheduled_date: (6*(n+1)).days.ago.to_date)}
+        expect(Client.second.nearest_scheduled_workout).to eq(nearest_workout.scheduled_date)
+      end
+
+      it "returns clients in #order_by_scheduled_workouts" do
+        # binding.pry
+        expect(Client.order_by_scheduled_workouts).to eq([
+          Client.third,
+          Client.first,
+          Client.second
+          ])
+      end
+    end
+
+  end
+
   describe "Associations" do
     it "Associates with a workout" do
       client = FactoryBot.create(:client)
@@ -77,5 +153,5 @@ RSpec.describe Client, type: :model do
       }.to change{client.workouts.count}.from(0).to(1)
     end
   end
-  #TODO: create an error for clients if they have a missing workout. like evaluate if the last workout is at phase 5 that they have all the phases previous to 5 etc. same with week and day 
+  #TODO: create an error for clients if they have a missing workout. like evaluate if the last workout is at phase 5 that they have all the phases previous to 5 etc. same with week and day
 end

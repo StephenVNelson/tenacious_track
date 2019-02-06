@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.feature "Workouts", type: :feature do
   before(:context) do
-    user = FactoryBot.create(:admin)
-    login user
+    @user = FactoryBot.create(:admin)
+    login @user
   end
   scenario "it lists all the workouts" do
 
@@ -23,8 +23,10 @@ RSpec.feature "Workouts", type: :feature do
     expect(page).to have_current_path("/workouts")
   end
 
-  scenario "it allows you to create new workout" do
+  skip "it allows you to create new workout", js: true do
     visit '/workouts'
-    click_link 'new_workout'
+    click_link 'New Workout'
+    sleep 4
+    click_link "<%= #{@user.name} %>"
   end
 end

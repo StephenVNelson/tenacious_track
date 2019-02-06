@@ -19,7 +19,5 @@ RSpec.describe Execution, type: :model do
       expect(execution.errors[:workout_id]).to include("Execution must include a workout")
     end
 
-    it "must"
-
   end
 end

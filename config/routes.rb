@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'workouts/index'
-
-  get 'workouts/show'
+  # get 'workouts/index'
+  #
+  # get 'workouts/show'
 
   get 'password_resets/new'
 
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :element_categories,  only: [:index, :create, :edit, :update, :destroy]
   resources :workouts, only: [:index, :show, :create]
   get 'workouts/new/:client', to: 'workouts#new', as: :new_workout
+  get 'workouts/select_client/new', to: 'workouts#select_client', as: :select_workout_client
   resources :clients
 
   get '/signup', to: 'users#new'

@@ -1,0 +1,30 @@
+<!-- preview of earlier workouts -->
+<h3><%= "This is the first workout for #{client.name}" if client.workouts.length < 1 %></h3>
+
+  <div class="card text-center mb-4">
+    <div class="card-header">
+      <h5 class="p-0 m-1">Recent Workout History</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <% client.last_workouts_and_timespans_hash.each do |k, v| %>
+          <div class="col-sm-2">
+            <div class="card">
+              <div class="card-header">
+                <%= k.scheduled_date.strftime("%^b %-d") %>
+              </div>
+              <div class="card-body p-1">
+                <p class="card-text m-0">Phase <%= k.phase_number %></p>
+                <p class="card-text m-0">Week <%= k.week_number %></p>
+                <p class="card-text m-0">Day <%= k.day_number %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2 pt-3 text-center">
+            <h2 class="p-0 m-0">----------</h2>
+            <h5 class="p-0 m-0"><%= v %></h5>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
