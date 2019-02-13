@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190131004206) do
+ActiveRecord::Schema.define(version: 20190211234833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 20190131004206) do
     t.index ["name"], name: "index_elements_on_name", unique: true
   end
 
+  create_table "execution_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "executions", force: :cascade do |t|
     t.bigint "exercise_id"
     t.bigint "workout_id"
@@ -50,6 +56,8 @@ ActiveRecord::Schema.define(version: 20190131004206) do
     t.integer "seconds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "execution_category_id"
+    t.index ["execution_category_id"], name: "index_executions_on_execution_category_id"
     t.index ["exercise_id"], name: "index_executions_on_exercise_id"
     t.index ["workout_id"], name: "index_executions_on_workout_id"
   end
@@ -106,6 +114,7 @@ ActiveRecord::Schema.define(version: 20190131004206) do
   end
 
   add_foreign_key "elements", "element_categories"
+  add_foreign_key "executions", "execution_categories"
   add_foreign_key "executions", "exercises"
   add_foreign_key "executions", "workouts"
 end

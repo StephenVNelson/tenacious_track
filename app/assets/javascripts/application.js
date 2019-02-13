@@ -14,6 +14,7 @@
 //= require jquery.textfill
 //= require rails-ujs
 //= require jquery-ui/widgets/sortable
+//= require jquery-ui
 //= require rails_sortable
 //= require select2
 //= require popper

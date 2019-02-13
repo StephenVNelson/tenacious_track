@@ -51,7 +51,7 @@
     </tr>
     <% @exercises.each do |exercise| %>
       <tr>
-        <td scope="row"><%= exercise.full_name %></td>
+        <td scope="row"><%= exercise.current_name %></td>
         <td><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_exercise_path(exercise), class: "edit-link", id: "edit_#{exercise.id}" %></td>
         <td><%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, exercise, method: :delete, data: { confirm: 'Are you sure?' }%></td>
       </tr>

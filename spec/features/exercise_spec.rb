@@ -23,11 +23,11 @@ RSpec.feature "Exercises", type: :feature do
       visit exercises_path
       select "First", from: "query"
       click_button "Filter"
-      expect(page).to have_text(@exercise_1.full_name.to_s)
-      expect(page).not_to have_text(@exercise_2.full_name.to_s)
+      expect(page).to have_text(@exercise_1.name)
+      expect(page).not_to have_text(@exercise_2.name)
       click_button "Filter"
-      expect(page).to have_text(@exercise_1.full_name.to_s)
-      expect(page).to have_text(@exercise_2.full_name.to_s)
+      expect(page).to have_text(@exercise_1.name)
+      expect(page).to have_text(@exercise_2.name)
     end
 
     scenario "Quick adds exercise from index page", js: true do
@@ -44,6 +44,7 @@ RSpec.feature "Exercises", type: :feature do
     end
 
     scenario "Deletes exercises that are not unique", js:true do
+      expect(@exercise_1.name).to eq("Element 1, Element 2, First Element")
       visit exercises_path
       expect{
         form = "exercise[exercise_elements_attributes][0][element_id][]"
@@ -56,10 +57,16 @@ RSpec.feature "Exercises", type: :feature do
         expect(page).to have_current_path(exercises_path)
         expect(page).to have_text("Exercise did not save because an identical exercise already exists.")
       }.to change(Exercise, :count).by(0)
+      expect(@exercise_1.name).to eq("Element 1, Element 2, First Element")
     end
 
     scenario "Undoes saved changes on update if exercise is not unique", js:true do
       visit exercises_path
+      expect(@exercise_1.elements).to eq([
+        Element.find_by(name: "#{Element.first.name}"),
+        Element.find_by(name: "#{Element.second.name}"),
+        Element.find_by(name: "First element")
+        ])
       click_link "edit_#{@exercise_1.id}"
       find("##{ElementCategory.third.category_name.downcase}").click
       find("##{ElementCategory.fourth.category_name.downcase}").click
@@ -76,7 +83,8 @@ RSpec.feature "Exercises", type: :feature do
         Element.find_by(name: "#{Element.second.name}"),
         Element.find_by(name: "First element")
         ])
-      expect(page).to have_current_path(exercises_path)
+      binding.pry
+      expect(page).to have_current_path(edit_exercise_path(@exercise_1))
       expect(page).to have_text("Edits did not save because an identical exercise already exists.")
       expect(page).not_to have_text("Exercise was successfully updated.")
     end
@@ -96,7 +104,7 @@ RSpec.feature "Exercises", type: :feature do
       expect(page).to have_text("Exercise was successfully created.")
     end
 
-    scenario "Edits new exercise", js: true do
+    scenario "Edits new exercise", js:true do
       visit exercises_path
       expect{
         first(:css, 'i.fas.fa-edit').click
@@ -105,7 +113,7 @@ RSpec.feature "Exercises", type: :feature do
         find("##{Element.second.name}").click
         click_button "Submit"
         @exercise_1.reload
-      }.to change(@exercise_1, :full_name).from("#{Element.first.name} #{Element.second.name} First element").to("First element")
+      }.to change(@exercise_1, :name).from("#{Element.first.name.titleize}, #{Element.second.name.titleize}, First Element").to("First Element")
     end
   end
 
@@ -116,4 +124,6 @@ RSpec.feature "Exercises", type: :feature do
     expect(page).not_to have_css("i.fas.fa-edit")
     expect(page).not_to have_link("Create new exercise")
   end
+
+  #TODO: Make sure only logged in users can access
 end

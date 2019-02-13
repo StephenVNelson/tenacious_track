@@ -2,7 +2,7 @@ class Exercise < ApplicationRecord
   include PgSearch
 
   has_many :exercise_elements, dependent: :destroy
-  has_many :elements, through: :exercise_elements
+  has_many :elements, through: :exercise_elements, after_add: :ass_change_name_update, after_remove: :ass_change_name_update
   accepts_nested_attributes_for :exercise_elements, allow_destroy: true
   validates_with MeasurementValidator
   before_save :record_elements
@@ -11,10 +11,8 @@ class Exercise < ApplicationRecord
   @@elements_before_save = []
   def record_elements
     @@elements_before_save.clear
-    # binding.pry unless ExerciseElement.count < 6
     @@elements_before_save.concat(elements)
   end
-
 
   pg_search_scope :search_by_exercise_reps_bool,
     using: {
@@ -28,7 +26,7 @@ class Exercise < ApplicationRecord
     if query.present?
       search_by_exercise_reps_bool(query)
     else
-      Exercise.all.sort_by {|object| object.full_name}
+      Exercise.all.sort_by {|object| object.current_name}
     end
   end
 
@@ -75,24 +73,35 @@ class Exercise < ApplicationRecord
 
   def abort_update
     self.elements.clear
-    # binding.pry
     self.elements.concat(@@elements_before_save)
     self.elements.reload
   end
 
+  def current_name
+    self.ass_change_name_update if self.name.nil?
+    name
+  end
 
-  #Creates string of element names
-  def full_name
-    name = ""
+  def ass_change_name_update(*element)
     if !elements.empty?
       elements_sorted = elements.sort_by {|object| object.element_category.sort}
-      elements_sorted.each_with_index do |element, idx|
-        name << " " unless idx == 0
-        name << "#{element.name}"
-      end
-      name
+      element_names = elements_sorted.map {|e| e.name.titleize}
+      self.name = element_names.join(', ')
     else
-      "(no elements for this exercise)"
+      self.name = "(no elements for this exercise)"
+    end
+  end
+
+  #Creates string of element names
+  def full_name(element)
+    if !element.empty?
+      new_name = []
+      element.each do |idx|
+        new_name << Element.find(idx).name.titleize
+      end
+      self.name = new_name.join(', ')
+    else
+      self.name = "(no elements for this exercise)"
     end
   end
 end

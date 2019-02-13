@@ -9,6 +9,10 @@ class ExercisesController < ApplicationController
     @new_exercise.exercise_elements.build
   end
 
+  def autocomplete
+    #@exercises =
+  end
+
   def show
   end
 
@@ -43,19 +47,14 @@ class ExercisesController < ApplicationController
   end
 
   def update
+    valid_ass = AssociationBatchCheck.new(@exercise, exercise_elements_params).valid?
     respond_to do |format|
-      if @exercise.update(exercise_params)
-        if @exercise.is_not_unique?
-          @exercise.abort_update
-          flash[:danger] = 'Edits did not save because an identical exercise already exists.'
-          format.html {redirect_to exercises_path}
-        else
-          flash[:info] = 'Exercise was successfully updated.'
-          format.html {redirect_to exercises_path}
-          format.json {render :index, status: :created}
-        end
+      if valid_ass && @exercise.update(exercise_params)
+        flash[:info] = 'Exercise was successfully updated.'
+        format.html {redirect_to exercises_path}
+        format.json {render :index, status: :created}
       else
-        format.html {render :edit}
+        format.html {redirect_to edit_exercise_path(@exercise)}
         format.json {render json: @exercise.errors, status: :unprocessable_entity}
       end
     end
@@ -108,6 +107,7 @@ class ExercisesController < ApplicationController
       :resistance_bool,
       :duration_bool,
       :work_rest_bool,
+      :name,
       exercise_elements_attributes: [:element_id, :id, :_destroy]
     )
   end

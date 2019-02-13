@@ -32,22 +32,38 @@ RSpec.describe Exercise, type: :model do
     expect(exercise2.is_not_unique?).to be_truthy
   end
 
+
+
   describe 'Working with elements' do
     before(:context) do
-      @element1 = create(:element_angle, name: "First Element")
-      @element2 = create(:element_angle, name: "Second Element")
-      @element3 = create(:element_body_position, name: "Third Element")
+      @element1 = create(:element_angle, name: "first element")
+      @element2 = create(:element_angle, name: "second element")
+      @element3 = create(:element_body_position, name: "third element")
       @exercise1 = create(:exercise)
-      [@element1,@element2].each {|e| @exercise1.elements << e}
+      @exercise1.elements.concat([ @element1, @element2 ])
       @exercise2 = create(:exercise)
-      [@element3,@element2].each {|e| @exercise2.elements << e}
-
+      @exercise2.elements.concat([ @element3, @element2 ])
     end
     after(:context) do
       [Element,ElementCategory,Exercise,ExerciseElement].each do |c|
-        c.all.each {|e| e.delete}
+        c.delete_all
       end
     end
+
+    it "Returns String of all associated element names as exercise #name" do
+      exercise_name = @exercise1.name
+      expect(exercise_name).to eq("First Element Second Element")
+    end
+
+    it "updates #name whenever associations are added or edited" do
+      element = create(:element_body_position, name: "new name" )
+      expect(@exercise1.name).to eq("First Element, Second Element")
+      @exercise1.elements << element
+      expect(@exercise1.name).to eq("First Element, Second Element, New Name")
+      @exercise1.elements.delete(*[@element1, element])
+      expect(@exercise1.name).to eq("Second Element")
+    end
+
 
     it "Returns only exercises with .elements_search" do
       expect(Exercise.element_search("Second")).to include(@exercise1, @exercise2)
@@ -74,11 +90,6 @@ RSpec.describe Exercise, type: :model do
         cat_ele = @exercise1.category_element_association_count
         hash = {"Body Position" => 0, "Angle" => 2}
         expect(cat_ele).to eq(hash)
-      end
-
-      it "Returns String of all associated element names as exercise #full_name" do
-        exercise_name = @exercise1.full_name
-        expect(exercise_name).to eq("First Element Second Element")
       end
     end
 

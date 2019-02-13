@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :execution do
     exercise
     workout
+    execution_category
     sets { rand(1..3) }
     reps { [10, 15, 20].sample }
     resistance { %w(red green blue).sample }

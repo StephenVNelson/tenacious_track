@@ -5,6 +5,7 @@ class WorkoutsController < ApplicationController
 
   def show
     @workout = Workout.find(params[:id])
+    @execution = Execution.new
   end
 
   def select_client

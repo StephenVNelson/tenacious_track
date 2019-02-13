@@ -1,5 +1,5 @@
 
-<h2 class="exercise-header">Exercise <%= @exercise.id %>: <%= @exercise.full_name %></h2>
+<h2 class="exercise-header">Exercise <%= @exercise.id %>: <%= @exercise.name %></h2>
 <%= render 'shared/error_messages', object: @exercise %>
 
 <%= render 'form', exercise: @exercise %>

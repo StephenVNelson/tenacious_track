@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  # get 'workouts/index'
-  #
-  # get 'workouts/show'
-
   get 'password_resets/new'
 
   get 'password_resets/edit'
@@ -17,7 +13,9 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :exercises
+  resources :exercises do
+    get 'autocomplete', on: :collection
+  end
   resources :elements
   resources :element_categories,  only: [:index, :create, :edit, :update, :destroy]
   resources :workouts, only: [:index, :show, :create]
@@ -25,6 +23,8 @@ Rails.application.routes.draw do
   get 'workouts/select_client/new', to: 'workouts#select_client', as: :select_workout_client
   get 'workouts/apply-template/:workout', to: 'workouts#select_template', as: :select_workout_template
   resources :clients
+  resources :executions, only: [:create, :edit, :destroy]
+  get 'workouts/:id/executions/new', to: 'executions#new'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
