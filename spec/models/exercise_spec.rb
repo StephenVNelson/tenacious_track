@@ -24,6 +24,7 @@ RSpec.describe Exercise, type: :model do
     expect(exercise.errors[:measurements]).to include("At least one measurement must be selected")
   end
 
+  #TODO: Update this to not use .is_not_unique
   it "is_not_unique?" do
     exercise1 = FactoryBot.create(:exercise, :with_3_elements)
     exercise2 = FactoryBot.create(:exercise)

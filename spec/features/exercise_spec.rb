@@ -39,6 +39,7 @@ RSpec.feature "Exercises", type: :feature do
         select "Second element", from: form
         find("#reps_bool").click
         click_button "Create"
+        # binding.pry
         expect(page).to have_current_path(exercises_path)
       }.to change(Exercise, :count).by(1)
     end
@@ -57,7 +58,7 @@ RSpec.feature "Exercises", type: :feature do
         find("#reps_bool").click
         click_button "Create"
         expect(page).to have_current_path(exercises_path)
-        expect(page).to have_text("Exercise did not save because an identical exercise already exists.")
+        expect(page).to have_text("Did not save because an identical exercise already exists.")
       }.to change(Exercise, :count).by(0)
       expect(@exercise_1.name).to eq("#{element1}, #{element2}, First Element")
     end
@@ -87,7 +88,7 @@ RSpec.feature "Exercises", type: :feature do
         ])
       # TODO: someday figure out why this redirects to the show page instead of the edit page
       expect(page).to have_current_path(exercise_path(@exercise_1))
-      expect(page).to have_text("Edits did not save because an identical exercise already exists.")
+      expect(page).to have_text("Did not save because an identical exercise already exists.")
       expect(page).not_to have_text("Exercise was successfully updated.")
     end
 

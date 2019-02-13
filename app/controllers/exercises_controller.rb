@@ -28,18 +28,12 @@ class ExercisesController < ApplicationController
   # TODO: Make it so it returns back to the page it just came from after you create a new exercise
   def create
     @new_exercise = Exercise.new(exercise_params)
-
+    valid_associations = AssociationBatchCheck.new(@new_exercise, exercise_elements_params).valid?
     respond_to do |format|
-      if @new_exercise.save
-        if @new_exercise.is_not_unique?
-          @new_exercise.abort_creation
-          flash[:danger] = 'Exercise did not save because an identical exercise already exists.'
-          format.html {redirect_to exercises_path}
-        else
-          flash[:info] = 'Exercise was successfully created.'
-          format.html {redirect_to exercises_path}
-          format.json {render :index, status: :created}
-        end
+      if valid_associations && @new_exercise.save
+        flash[:info] = 'Exercise was successfully created.'
+        format.html {redirect_to exercises_path}
+        format.json {render :index, status: :created}
       else
         format.html {render :new}
         format.json {render json: @new_exercise.errors}
@@ -48,9 +42,9 @@ class ExercisesController < ApplicationController
   end
 
   def update
-    valid_ass = AssociationBatchCheck.new(@exercise, exercise_elements_params).valid?
+    valid_association = AssociationBatchCheck.new(@exercise, exercise_elements_params).valid?
     respond_to do |format|
-      if valid_ass && @exercise.update(exercise_params)
+      if valid_association && @exercise.update(exercise_params)
         flash[:info] = 'Exercise was successfully updated.'
         format.html {redirect_to exercises_path}
         format.json {render :index, status: :created}
@@ -86,23 +80,8 @@ class ExercisesController < ApplicationController
     @elements = Element.all
   end
 
-  def multiselect_present?
-    params[:exercise].key?(:exercise_elements_attributes) &&
-      exercise_elements_params["0"][:element_id].is_a?(Array)
-  end
-
-  # changes params layout in case multiselect is used
-  def reformat_multiselect_params_format
-    exercise_elements_params["0"][:element_id].each_with_index do |id, idx|
-      if id.present?
-        exercise_elements_params[(idx + 1).to_s] = { element_id: id }
-      end
-    end
-    exercise_elements_params.delete("0")
-  end
-
   def exercise_params
-    reformat_multiselect_params_format if multiselect_present?
+    exercise_elements_params
     params.require(:exercise).permit(
       :reps_bool,
       :right_left_bool,
@@ -115,6 +94,7 @@ class ExercisesController < ApplicationController
   end
 
   def exercise_elements_params
-    params[:exercise][:exercise_elements_attributes]
+    original_params = params[:exercise][:exercise_elements_attributes]
+    original_params = AssociationBatchCheck.new(original_params).convert_params
   end
 end

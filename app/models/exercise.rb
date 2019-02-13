@@ -2,7 +2,7 @@ class Exercise < ApplicationRecord
   include PgSearch
 
   has_many :exercise_elements, dependent: :destroy
-  has_many :elements, through: :exercise_elements, after_add: :ass_change_name_update, after_remove: :ass_change_name_update
+  has_many :elements, through: :exercise_elements, after_add: :update_name, after_remove: :update_name
   accepts_nested_attributes_for :exercise_elements, allow_destroy: true
   validates_with MeasurementValidator
   before_save :record_elements
@@ -77,11 +77,11 @@ class Exercise < ApplicationRecord
   end
 
   def current_name
-    self.ass_change_name_update if self.name.nil?
+    self.update_name if self.name.nil?
     name
   end
 
-  def ass_change_name_update(*element)
+  def update_name(*element)
     if !elements.empty?
       elements_sorted = elements.sort_by {|object| object.element_category.sort}
       element_names = elements_sorted.map {|e| e.name.titleize}
