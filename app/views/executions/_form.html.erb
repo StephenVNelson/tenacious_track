@@ -1,4 +1,4 @@
 <%= form_with model: @execution do |f| %>
   <%= f.select :execution_category, options_for_select(ExecutionCategory.all_names), {}, id: "category_option" %>
-  <%= f.text_field :exercise, id: "exercise-lookup" %>
+  <%= f.text_field :exercise, id: "term" %>
 <% end %>

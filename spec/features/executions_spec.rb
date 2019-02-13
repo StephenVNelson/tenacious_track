@@ -18,12 +18,17 @@ RSpec.feature "Executions", type: :feature do
       )}
     end
 
-    scenario "Creates new execution" do
+    scenario "Creates new execution", js:true do
+      element1 = create(:element)
+      element2 = create(:element)
+      exercise = create(:exercise)
+      exercise.elements.concat([element1, element2])
       visit "/workouts/#{workout.id}/executions/new"
       expect(page).to have_current_path("/workouts/#{workout.id}/executions/new")
       expect {
         select "Movement Prep", from: "category_option"
-        select "#{exercise.name}", from: "exercise_option"
+        fill_in "term", with: "Element"
+        binding.pry
         click_button "Create Execution"
       }.to change{Execution.count}.by(1)
       expect(page).to have_current_path("/workouts/#{workout.id}")

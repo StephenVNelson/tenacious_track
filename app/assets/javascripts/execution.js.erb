@@ -1,9 +1,9 @@
 document.addEventListener("turbolinks:load", function() {
-  $('#exercise-lookup').autocomplete({
+  $('#term').autocomplete({
     source: "exercise/autocomplete",
     minLength: 4,
     select: function (event, ui) {
-      $('#exercise-lookup').val(ui.item.value);
+      $('#term').val(ui.item.value);
     }
   });
 });

@@ -13,9 +13,8 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :exercises do
-    get 'autocomplete', on: :collection
-  end
+  resources :exercises
+  get '/workouts/:id/executions/exercise/autocomplete', to: 'exercises#autocomplete'
   resources :elements
   resources :element_categories,  only: [:index, :create, :edit, :update, :destroy]
   resources :workouts, only: [:index, :show, :create]

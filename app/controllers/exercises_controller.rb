@@ -10,7 +10,8 @@ class ExercisesController < ApplicationController
   end
 
   def autocomplete
-    #@exercises =
+    @exercises = Exercise.search_by_exercise_reps_bool(params[:term])
+    render json: @exercises.map {|exercise| {id: exercise.id, value: exercise.name}}
   end
 
   def show
@@ -54,7 +55,8 @@ class ExercisesController < ApplicationController
         format.html {redirect_to exercises_path}
         format.json {render :index, status: :created}
       else
-        format.html {redirect_to edit_exercise_path(@exercise)}
+        # flash[:danger] = @exercise.errors.full_messages.join(", ")
+        format.html {render 'exercises/edit'}
         format.json {render json: @exercise.errors, status: :unprocessable_entity}
       end
     end

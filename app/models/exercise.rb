@@ -30,7 +30,6 @@ class Exercise < ApplicationRecord
     end
   end
 
-
   def self.with_elements(element_name)
     Exercise.joins(:elements).where(:elements => {name: element_name})
   end
@@ -86,9 +85,13 @@ class Exercise < ApplicationRecord
     if !elements.empty?
       elements_sorted = elements.sort_by {|object| object.element_category.sort}
       element_names = elements_sorted.map {|e| e.name.titleize}
-      self.name = element_names.join(', ')
+      self.name = element_names.join(', ') #TODO: figure out if you need to add self.save to this thing?
+      self.save
+      self.name
     else
       self.name = "(no elements for this exercise)"
+      self.save
+      self.name
     end
   end
 
