@@ -27,18 +27,14 @@ RSpec.feature "Executions", type: :feature do
       expect(page).to have_current_path("/workouts/#{workout.id}/executions/new")
       expect {
         select "Movement Prep", from: "category_option"
-        fill_in "term", with: "Element"
-        binding.pry
+        find(".select2").click
+        find(".select2-search__field").set("Element")
+        find(".select2-results__option--highlighted").click
         click_button "Create Execution"
+        sleep 0.01
       }.to change{Execution.count}.by(1)
       expect(page).to have_current_path("/workouts/#{workout.id}")
     end
-
-    # scenario "Edits new execution" do
-    #   execution = FactoryBot.create(:execution)
-    #   visit "/executions/#{execution.id}/edit"
-    #   expect(page).to have_current_path('/executions/new')
-    # end
   end
 
 end

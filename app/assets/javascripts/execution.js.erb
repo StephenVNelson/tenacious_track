@@ -1,9 +1,38 @@
 document.addEventListener("turbolinks:load", function() {
-  $('#term').autocomplete({
-    source: "exercise/autocomplete",
-    minLength: 4,
-    select: function (event, ui) {
-      $('#term').val(ui.item.value);
-    }
+  // $('#term').autocomplete({
+  //   source: "exercise/autocomplete",
+  //   minLength: 4,
+  //   select: function (event, ui) {
+  //     $('#term').val(ui.item.value);
+  //   }
+  // });
+
+  $( "#exercise_option" ).select2({
+    theme: "bootstrap",
+    ajax: {
+      url: "exercise/autocomplete",
+      data(params) {
+        return {
+          term: params.term
+        };
+      },
+      dataType: 'json',
+      delay: 500,
+      processResults(data, params) {
+        return {
+          results: data.map((el) =>
+            ({
+              id: el.id,
+              name: el.value
+            })
+          )
+        };
+      },
+      cache: true
+    },
+    escapeMarkup(markup) { return markup; },
+    minimumInputLength: 4,
+    templateResult(item) { return item.name; },
+    // templateSelection(item) { return item.name; }
   });
 });

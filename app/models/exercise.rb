@@ -59,7 +59,11 @@ class Exercise < ApplicationRecord
     category_and_count_hash
   end
 
+  def self.names_for_select
+    Exercise.all.map {|e| [e.name, e.id]}
+  end
 
+  #TODO: get rid of this stuff you're no longer useing
   def is_not_unique?
     elements.reload
     sorted_exercises = Exercise.where.not(id: self.id).map {|e| e.element_ids.sort}

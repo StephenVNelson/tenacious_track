@@ -1,4 +1,6 @@
 <%= form_with model: @execution do |f| %>
-  <%= f.select :execution_category, options_for_select(ExecutionCategory.all_names), {}, id: "category_option" %>
-  <%= f.text_field :exercise, id: "term" %>
+  <%= f.select :execution_category_id, options_for_select(ExecutionCategory.all_names), {}, id: "category_option" %>
+  <%= f.select :exercise_id, options_for_select(Exercise.names_for_select), {}, id: "exercise_option" %>
+  <%= f.hidden_field :workout_id, value: @workout.id %>
+  <%= f.submit "Create Execution", class: "my-5" %>
 <% end %>
