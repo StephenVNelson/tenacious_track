@@ -34,6 +34,8 @@ RSpec.feature "Executions", type: :feature do
         sleep 0.01
       }.to change{Execution.count}.by(1)
       expect(page).to have_current_path("/workouts/#{workout.id}")
+      expect(page).to have_text("Movement Prep")
+      expect(page).to have_text("Element 1, Element 2")
     end
   end
 

@@ -1,6 +1,17 @@
 <%= form_with model: @execution do |f| %>
-  <%= f.select :execution_category_id, options_for_select(ExecutionCategory.all_names), {}, id: "category_option" %>
-  <%= f.select :exercise_id, options_for_select(Exercise.names_for_select), {}, id: "exercise_option" %>
+  <% if defined?(category) == nil %>
+    <%= f.select :execution_category_id, options_for_select(ExecutionCategory.all_names), {}, id: "category_option" %>
+  <% else %>
+    <%= f.hidden_field :execution_category_id, value: category.id %>
+  <% end %>
   <%= f.hidden_field :workout_id, value: @workout.id %>
-  <%= f.submit "Create Execution", class: "my-5" %>
+  <div class="form-row">
+    <div class="from-group col-md-9 d-inline-block">
+      <%= f.select :exercise_id, options_for_select(Exercise.names_for_select), {}, class: "exercise_option form-cotnrol" %>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="form-group col-md-2">
+      <%= f.submit yield(:submit_button), class: "form-control" %>
+    </div>
+  </div>
 <% end %>

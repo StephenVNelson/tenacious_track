@@ -36,8 +36,12 @@ RSpec.feature "Workouts", type: :feature do
       visit "/workouts/#{workout.id}"
       expect {
         find("#add_template").click
-        fill_in("new-category", with: "Movement Prep")
-        click_button("Create Category")
+        select "Movement Prep", from: "category_option"
+        find(".select2").click
+        find(".select2-search__field").set("Element")
+        find(".select2-results__option--highlighted").click
+        click_button "Create Execution"
+        sleep 0.01
       }.to change{Execution.count}.by(1)
     end
   end

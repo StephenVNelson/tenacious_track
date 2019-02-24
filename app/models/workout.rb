@@ -3,6 +3,7 @@ class Workout < ApplicationRecord
 
   belongs_to :trainer, class_name: "User", optional: true
   belongs_to :client
+  has_many :executions
 
   validates :scheduled_date, presence: {message: "must be included"}
   validates :phase_number, presence: {message: "must be included"}

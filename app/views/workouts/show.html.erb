@@ -1,3 +1,5 @@
+<% provide(:submit_button, 'Add') %>
+
 <h1><%= @workout.name %></h1>
 
 <h5 id="add_template">Add Template</h5>
@@ -5,5 +7,45 @@
 <div id="category-selector" class="row" style="display: none">
   <%= render 'executions/form' %>
 </div>
+
+<% ExecutionCategory.all.each do |category| %>
+  <div class="add-<%= category.name.cssize %>">
+    <h2><%= category.name %></h2>
+  </div>
+<% end %>
+
+<% ExecutionCategory.all.each do |category| %>
+  <table class="table table-success">
+    <tr>
+      <th colspan="2">
+        <h2>
+          <%= category.name %>
+        </h2>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Exercise
+      </th>
+      <th>
+        Edit
+      </th>
+    </tr>
+    <% @workout.executions.category(category.name).each do |execution| %>
+      <tr>
+        <td>
+          <%= execution.exercise.name %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        <div class="new-entry">
+          <%= render 'executions/form', category: category %>
+        </div>
+      </td>
+    </tr>
+  </table>
+<% end %>
 
 <%= link_to "Back", workouts_path %>

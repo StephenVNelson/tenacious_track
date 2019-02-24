@@ -7,10 +7,10 @@ document.addEventListener("turbolinks:load", function() {
   //   }
   // });
 
-  $( "#exercise_option" ).select2({
+  $( ".exercise_option" ).select2({
     theme: "bootstrap",
     ajax: {
-      url: "exercise/autocomplete",
+      url: "/exercise/autocomplete",
       data(params) {
         return {
           term: params.term

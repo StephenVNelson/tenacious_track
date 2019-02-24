@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Execution, type: :model do
+  #TODO: 1 add validation for unique category and exercise combination
   describe "validations" do
     it "has a working factory" do
       execution = FactoryBot.create(:execution)
